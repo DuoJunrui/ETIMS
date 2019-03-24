@@ -41,6 +41,7 @@ public class DruidProperties {
     @Value("${spring.datasource.minEvictableIdleTimeMillis}")
     private int minEvictableIdleTimeMillis;
 
+    @Value("${spring.datasource.use-unfair-lock}")
     private boolean useUnfairLock;
 
     @Value("${spring.datasource.validationQuery}")
@@ -55,8 +56,10 @@ public class DruidProperties {
     @Value("${spring.datasource.testOnReturn}")
     private boolean testOnReturn;
 
+    @Value("${spring.datasource.pool-prepared-statements}")
     private boolean poolPreparedStatements;
 
+    @Value("${spring.datasource.max-open-prepared-statements}")
     private int maxOpenPreparedStatements;
 
     @Value("${spring.datasource.filters}")

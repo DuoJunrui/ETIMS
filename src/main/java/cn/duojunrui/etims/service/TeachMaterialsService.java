@@ -12,9 +12,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class TeachMaterialsService implements TeachMaterialsMapper {
-    @Resource
-    private TeachMaterialsMapper tmm = null;
+public class TeachMaterialsService {
+
+    @Autowired
+    private TeachMaterialsMapper tmm;
 
     public List<TeachMaterials> findTeachFilesAll() {
         return tmm.findTeachFilesAll();

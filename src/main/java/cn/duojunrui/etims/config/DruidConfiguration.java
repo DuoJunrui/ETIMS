@@ -25,13 +25,13 @@ import com.alibaba.druid.pool.DruidDataSource;
 @MapperScan(basePackages = "cn.duojunrui.etims.mapper", sqlSessionTemplateRef = "sqlSessionTemplate")
 public class DruidConfiguration {
 
-    @Autowired
-    private DruidProperties properties;
+//    @Autowired
+//    private DruidProperties properties;
 
     //数据库连接池设置
     @Primary
     @Bean
-    public DataSource datasource(DruidProperties config) {
+    public DataSource datasource(DruidProperties config) throws SQLException {
 
         DruidDataSource dataSource=new DruidDataSource();
         dataSource.setDriverClassName(config.getDriverClassName());
@@ -94,6 +94,7 @@ public class DruidConfiguration {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
+    /*
     //静态资源过滤器
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
@@ -117,6 +118,7 @@ public class DruidConfiguration {
         //reg.addInitParameter("logSlowSql", logSlowSql);
         return reg;
     }
+    */
 
     //跨域问题
     private CorsConfiguration buildConfig() {
