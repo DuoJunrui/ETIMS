@@ -13,5 +13,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 //    @ExceptionHandler(value = Exception.class)
 //    @ResponseBody
-//    private Map<String,Object>
+//   public Result handle(Exception e) {
+//        return
+//    }
 }
