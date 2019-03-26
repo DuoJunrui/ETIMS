@@ -3,6 +3,8 @@ import cn.duojunrui.etims.entity.TeachMaterials;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.List;
 @Mapper
 @Repository
@@ -18,8 +20,8 @@ public interface TeachMaterialsMapper {
     int addTeachFiles(TeachMaterials tm);
 
     //更新、修改教学资料
-    int updateTeachFiles(@Param("teachMaterialsId") String id);
+    int updateTeachFiles(String id);
 
     //删除教学资料
-    int deleteTeachFiles(@Param("teachMaterialsId") String id);
+    int deleteTeachFiles(String id);
 }

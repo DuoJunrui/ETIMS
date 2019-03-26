@@ -20,56 +20,41 @@ public class TeachMaterialsController {
     @Autowired
     private TeachMaterialsService tms;
 
+    /**
+     * 查询所有教学资料
+     * @param tm
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "findTeachFilesAll", method = RequestMethod.GET)
     public Result findTeachFilesAll(TeachMaterials tm) {
-
-        return ResultUtil.success();
-
-        /*try{
-            List<TeachMaterials> list = tms.findTeachFilesAll();
-            if (list != null && list.size() >0) {
-                return ResultUtil.success(list);
-            } else {
-                result.setSucceed(true);
-                result.setStatusMessage("无此数据");
-                result.setStatus(InterfaceDataHandler.SUCCESSFUL);
-                result.setData(null);
-                return JSON.toJSONString(result);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (e instanceof java.sql.SQLException) {
-                result.setSucceed(false);
-                result.setStatusMessage("数据库异常，请稍后重试");
-                result.setStatus(InterfaceDataHandler.FAILED);
-                result.setData(null);
-                return JSON.toJSONString(result);
-            } else {
-                result.setSucceed(false);
-                result.setStatusMessage("系统错误，请联系管理员");
-                result.setStatus(InterfaceDataHandler.FAILED);
-                result.setData(null);
-                return JSON.toJSONString(result);
-            }
-        }*/
+        if (tm == null){
+            return ResultUtil.error(1,"数据为空");
+        }
+        return ResultUtil.success(tms.findTeachFilesAll());
 
     }
 
-    @RequestMapping(value = "addTeachFiles", method = RequestMethod.POST)
-    public Result addTeachFiles(TeachMaterials tm) {
-        tms.addTeachFiles(tm);
-        return ResultUtil.success();
-    }
-
-
+    /**
+     * 根据资料名称查询资料
+     * @param fileName
+     * @return
+     */
     @RequestMapping(value = "findFilesByName", method = RequestMethod.POST)
     public Result findFilesByName(String fileName) {
         tms.findFilesByName(fileName);
         return ResultUtil.success();
-
-           // return ResultUtil.error(0,"参数错误");
-
-        //return ResultUtil.success(TeachMaterialsService.findFilesByName(fileName));
     }
+
+    /**
+     * 添加教学资料
+     * @param tm
+     * @return
+     */
+    @RequestMapping(value = "addTeachFiles", method = RequestMethod.POST)
+    public Result addTeachFiles(TeachMaterials tm) {
+
+        return ResultUtil.success(tms.addTeachFiles(tm));
+    }
+
 }

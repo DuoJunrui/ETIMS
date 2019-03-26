@@ -5,7 +5,7 @@ import cn.duojunrui.etims.entity.Result;
 import com.alibaba.fastjson.JSON;
 
 /**
- * 结果返回情况
+ * 请求结果统一格式处理
  */
 public class ResultUtil {
 

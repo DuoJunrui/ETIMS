@@ -15,19 +15,19 @@
     <select id="findFilesByName" resultType="cn.duojunrui.etims.entity.TeachMaterials">
         SELECT *
         FROM teach_materials
-        WHERE file_name = #{fileName} AND validity=1
+        WHERE file_name = #{fileName} AND category = "教学资料" AND validity=1
     </select>
 
     <!--上传教学资料-->
-    <insert id="inputTeachFiles" parameterType="cn.duojunrui.etims.entity.TeachMaterials">
+    <insert id="addTeachFiles" parameterType="cn.duojunrui.etims.entity.TeachMaterials">
         INSERT INTO
         teach_materials(
             teach_materials_id,file_name,course_type,category,
-            uploader,file_map, create_time,update_time,validity
+            uploader,file_map,create_time,validity
         )
         VALUES (
             #{teachMaterialsId},#{fileName},#{courseType},#{category},
-            #{uploader},#{fileMap},#{createTime},#{updateTime},#{validity}
+            #{uploader},#{fileMap},#{createTime},#{validity}
         )
     </insert>
 
