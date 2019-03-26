@@ -1,4 +1,4 @@
-# ETIMS
+# 实验教学信息管理系统 (ETIMS)
 Experimental Teaching Information Management System
 
 ## 实验教学管理系统
@@ -14,4 +14,4 @@ Experimental Teaching Information Management System
 项目案例演示
 
 ## 实验室管理系统
-### 未完，待续···
+未完，待续···
