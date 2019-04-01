@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.duojunrui.etims.mapper.PracticeMaterialMapper">
+    <select id="getByName" resultType="cn.duojunrui.etims.entity.PracticeMaterial">
+        SELECT *
+        FROM practice_material
+        WHERE student_name = #{name}
+    </select>
+</mapper>
