@@ -2,7 +2,7 @@ package cn.duojunrui.etims.utils;
 
 import java.util.Random;
 
-public class RandomUtils {
+public class RandomUtil {
 
     public static final String allChar = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     public static final String letterChar = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

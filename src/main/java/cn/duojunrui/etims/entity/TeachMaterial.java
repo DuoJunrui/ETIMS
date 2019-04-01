@@ -1,40 +1,38 @@
 package cn.duojunrui.etims.entity;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
 import java.util.Date;
 
 /* *
  * 教学资料实体
  * 课件、试题、设备知识、项目资料等
  */
-public class TeachMaterials {
+public class TeachMaterial {
 
-    //教学资源表ID（主键）
-    private String teachMaterialsId;
-    //资源文件名称
+    // 教学资源表ID（主键）
+    private String id;
+    // 资源文件名称
     private String fileName;
-    //课程类别
+    // 课程类别
     private String courseType;
-    //资料分类
+    // 资料分类
     private String category;
-    //资料上传者
+    // 资料上传者
     private String uploader;
-    //文件映射路径
+    // 文件映射路径
     private String fileMap;
-    //创建时间
+    // 创建时间
     private Date createTime;
-    //更新时间
+    // 更新时间
     private Date updateTime;
-    //有效性（1为有效/在用，0为失效/删除）
-    private Integer validity;
+    // 是否删除（1表示删除/无效，0表示未删除/有效）
+    private Integer isDeleted;
 
-    public String getTeachMaterialsId() {
-        return teachMaterialsId;
+    public String getId() {
+        return id;
     }
 
-    public void setTeachMaterialsId(String teachMaterialsId) {
-        this.teachMaterialsId = teachMaterialsId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFileName() {
@@ -93,11 +91,11 @@ public class TeachMaterials {
         this.updateTime = updateTime;
     }
 
-    public Integer getValidity() {
-        return validity;
+    public Integer getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setValidity(Integer validity) {
-        this.validity = validity;
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

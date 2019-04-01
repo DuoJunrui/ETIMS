@@ -6,10 +6,10 @@ package cn.duojunrui.etims.entity;
  */
 public class Result<T> {
 
-    //错误码
+    //错误代码
     private Integer code;
     //提示信息
-    private String msg;
+    private String message;
     //封装的数据内容
     private T data;
 
@@ -21,12 +21,12 @@ public class Result<T> {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public T getData() {
