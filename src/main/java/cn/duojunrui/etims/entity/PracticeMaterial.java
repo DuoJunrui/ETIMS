@@ -1,4 +1,6 @@
 package cn.duojunrui.etims.entity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -23,9 +25,9 @@ public class PracticeMaterial {
     // 实习岗位
     private String position;
     // 实习开始时间
-    private Date startTime;
+    private Long startTime;
     // 实习结束时间
-    private Date endTime;
+    private Long endTime;
     // 企业负责人姓名
     private String principalName;
     // 企业负责人电话
@@ -35,13 +37,13 @@ public class PracticeMaterial {
     // 申请审核状态 （0表示已提交，1表示审核中，2表示审核通过，3表示审核不通过）
     private Integer applyStatus;
     // 申请提交时间
-    private Date applyTime;
+    private Long applyTime;
     // 申请反馈信息
     private String applyReply;
     // 创建时间
-    private Date createTime;
+    private Long createTime;
     // 更新时间
-    private Date updateTime;
+    private Long updateTime;
     // 是否删除（1表示删除，0表示未删除）
     private Integer isDeleted;
 
@@ -112,19 +114,19 @@ public class PracticeMaterial {
         this.position = position;
     }
 
-    public Date getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public Long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Long endTime) {
         this.endTime = endTime;
     }
 
@@ -160,11 +162,11 @@ public class PracticeMaterial {
         this.applyStatus = applyStatus;
     }
 
-    public Date getApplyTime() {
+    public Long getApplyTime() {
         return applyTime;
     }
 
-    public void setApplyTime(Date applyTime) {
+    public void setApplyTime(Long applyTime) {
         this.applyTime = applyTime;
     }
 
@@ -176,19 +178,19 @@ public class PracticeMaterial {
         this.applyReply = applyReply;
     }
 
-    public Date getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
 

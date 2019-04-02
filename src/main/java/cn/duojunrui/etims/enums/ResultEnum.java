@@ -1,4 +1,4 @@
-package cn.duojunrui.etims.constant;
+package cn.duojunrui.etims.enums;
 
 public enum ResultEnum {
     SUCCESS(1,"成功"),
