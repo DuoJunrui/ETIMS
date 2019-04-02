@@ -18,6 +18,7 @@ public class PracticeMaterialController {
 
     @RequestMapping(value = "getByName", method = RequestMethod.POST)
     public PracticeMaterial getByName(String name) {
+        System.out.println("你好！");
         return pms.getByName(name);
     }
 }
