@@ -11,4 +11,8 @@ public interface PracticeMaterialMapper {
     PracticeMaterial getByName(String name);
 
     PracticeMaterial insertPracticeMaterial(PracticeMaterial pm);
+
+    PracticeMaterial updatePracticeMaterial(String id);
+
+    PracticeMaterial deleteById(PracticeMaterial pm);
 }

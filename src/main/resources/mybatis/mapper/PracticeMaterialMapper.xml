@@ -30,4 +30,27 @@
               #{apply_status}, #{apply_time}, #{apply_reply}, #{create_time}, #{update_time}, #{is_deleted}
         )
     </insert>
+
+    <update id="updatePracticeMaterial" parameterType="cn.duojunrui.etims.entity.PracticeMaterial">
+        UPDATE practice_material
+        <set>
+            <if test="companyName!=null">company_name=#{companyName},</if>
+            <if test="companyAddress!=null">company_address=#{companyAddress},</if>
+            <if test="position!=null">`position`=#{position},</if>
+            <if test="startTime!=null">start_time=#{startTime},</if>
+            <if test="endTime!=null">end_time=#{endTime},</if>
+            <if test="principalName!=null">principal_name=#{principalName},</if>
+            <if test="principalTel!=null">principal_tel=#{principalTel},</if>
+            <if test="fileMap!=null">file_map=#{fileMap},</if>
+            <if test="applyReply!=null">apply_reply=#{applyReply},</if>
+        </set>
+        apply_status=#{applyStatus},
+        apply_time=#{applyTime},
+        update_time=#{updateTime}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteById" parameterType="cn.duojunrui.etims.entity.PracticeMaterial">
+        DELETE
+    </delete>
 </mapper>

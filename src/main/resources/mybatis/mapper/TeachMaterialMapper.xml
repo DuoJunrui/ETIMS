@@ -36,11 +36,11 @@
         UPDATE teach_material
         <set>
             <if test="fileName!=null">file_name=#{fileName},</if>
-            <if test="fileName!=null">course_type=#{fileName},</if>
-            <if test="fileName!=null">category=#{fileName},</if>
-            <if test="fileName!=null">file_map=#{fileName},</if>
-            <if test="fileName!=null">updateTime=#{fileName}</if>
+            <if test="courseType!=null">course_type=#{courseType},</if>
+            <if test="category!=null">category=#{category},</if>
+            <if test="filePath!=null">file_path=#{filePath},</if>
         </set>
+        updateTime=#{updateTime}
         WHERE id=#{id}
     </update>
 

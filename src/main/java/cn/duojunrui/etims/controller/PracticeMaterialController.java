@@ -31,7 +31,16 @@ public class PracticeMaterialController {
     @PostMapping
     public PracticeMaterial insertPracticeMaterial(PracticeMaterial pm) {
         return pms.insertPracticeMaterial(pm);
+    }
 
+    @PutMapping("/{id}")
+    public PracticeMaterial updatePracticeMaterial(String id) {
+        return pms.updatePracticeMaterial(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public PracticeMaterial deleteById(PracticeMaterial pm) {
+        return this.deleteById(pm);
     }
 
 
