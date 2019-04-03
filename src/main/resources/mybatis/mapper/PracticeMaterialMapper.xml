@@ -44,13 +44,15 @@
             <if test="fileMap!=null">file_map=#{fileMap},</if>
             <if test="applyReply!=null">apply_reply=#{applyReply},</if>
         </set>
-        apply_status=#{applyStatus},
+        apply_status=0,
         apply_time=#{applyTime},
         update_time=#{updateTime}
         WHERE id=#{id}
     </update>
 
-    <delete id="deleteById" parameterType="cn.duojunrui.etims.entity.PracticeMaterial">
-        DELETE
-    </delete>
+    <update id="deleteById" parameterType="cn.duojunrui.etims.entity.PracticeMaterial">
+        UPDATE practice_material
+        SET update_time=#{updateTime}, is_deleted=1
+        WHERE id=#{id}
+    </update>
 </mapper>
