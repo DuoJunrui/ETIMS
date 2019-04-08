@@ -1,7 +1,7 @@
 # 实验教学信息管理系统 (ETIMS)
 Experimental Teaching Information Management System
 
-## 1.实验教学管理系统
+## 1. 实验教学管理系统
 ### 教师资料管理模块
 教学资料库
 试题资料库
@@ -13,7 +13,7 @@ Experimental Teaching Information Management System
 设备知识规范
 项目案例演示
 
-## 2.系统管理子系统
+## 2. 系统管理子系统
 ### 组织机构管理
 组织管理
 角色管理
@@ -25,5 +25,5 @@ Experimental Teaching Information Management System
 缓存管理
 任务管理
 日志管理
-## 3.实验室管理系统
+## 3. 实验室管理系统
 未完，待续···
