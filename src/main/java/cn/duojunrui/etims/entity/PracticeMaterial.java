@@ -34,7 +34,7 @@ public class PracticeMaterial {
     private String principalTel;
     // 实习材料文件
     private String fileMap;
-    // 申请审核状态 （0表示已提交，1表示审核中，2表示审核通过，3表示审核不通过）
+    // 申请审核状态 （0-已提交，1-审核中，2-审核通过，3-审核不通过）
     private Integer applyStatus;
     // 申请提交时间
     private Long applyTime;

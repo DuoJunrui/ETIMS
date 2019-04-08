@@ -11,7 +11,7 @@ public class Result<T> {
     //提示信息
     private String message;
     //封装的数据内容
-    private T data;
+    private T data = null;
 
     public Integer getCode() {
         return code;

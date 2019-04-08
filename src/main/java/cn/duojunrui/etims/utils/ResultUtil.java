@@ -2,6 +2,7 @@ package cn.duojunrui.etims.utils;
 
 
 import cn.duojunrui.etims.entity.Result;
+import cn.duojunrui.etims.enums.ResultEnum;
 import com.alibaba.fastjson.JSON;
 
 /**
@@ -11,23 +12,23 @@ public class ResultUtil {
 
     public static Result success(Object data){
         Result res = new Result();
-        res.setCode(1);
-        res.setMessage("成功");
+        res.setCode(ResultEnum.SUCCESS.getCode());
+        res.setMessage(ResultEnum.SUCCESS.getMessage());
         res.setData(data);
         return res;
     }
 
     public static Result success(){
         Result res = new Result();
-        res.setCode(1);
-        res.setMessage("成功");
+        res.setCode(ResultEnum.SUCCESS.getCode());
+        res.setMessage(ResultEnum.SUCCESS.getMessage());
         return res;
     }
 
-    public static Result error(Integer code, String message){
+    public static Result error(ResultEnum resultEnum){
         Result res = new Result();
-        res.setCode(code);
-        res.setMessage(message);
+        res.setCode(resultEnum.getCode());
+        res.setMessage(resultEnum.getMessage());
         return res;
     }
 }

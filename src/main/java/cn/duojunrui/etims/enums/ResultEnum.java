@@ -1,10 +1,15 @@
 package cn.duojunrui.etims.enums;
 
 public enum ResultEnum {
-    SUCCESS(1,"成功"),
-    FAILED(0,"参数错误"),
-    UNKNOWN_ERROR(-1,"未知错误")
-    ;
+
+    SUCCESS(000,"操作成功"),
+    SUCCESS_BUT_NULL(001, "数据为空"),
+
+    FAILED(100,"参数错误"),
+    DATA_NOT_NULL(101, "数据不能为空"),
+
+
+    UNKNOWN_ERROR(999,"未知错误");
 
     private Integer code;
     private String message;

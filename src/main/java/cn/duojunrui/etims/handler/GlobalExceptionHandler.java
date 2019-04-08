@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * 异常处理类
+ * 全局系统异常处理类
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -21,12 +21,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Result handle(Exception e) {
-        if (e instanceof EtimsException) {
-            EtimsException etimsException = (EtimsException) e;
-            return ResultUtil.error(etimsException.getCode(), etimsException.getMessage());
-        } else {
-            logger.error("【程序异常】 {}", e);
-            return ResultUtil.error(-1, "未知错误");
-        }
+//        if (e instanceof EtimsException) {
+//            EtimsException etimsException = (EtimsException) e;
+//            return ResultUtil.error(etimsException.getCode(), etimsException.getMessage());
+//        } else {
+            logger.error("------------【程序异常】-----------", e);
+            return ResultUtil.error(ResultEnum.UNKNOWN_ERROR);
+//        }
     }
 }

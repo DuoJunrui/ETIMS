@@ -1,6 +1,7 @@
 package cn.duojunrui.etims.controller;
 import cn.duojunrui.etims.entity.Result;
 import cn.duojunrui.etims.entity.TeachMaterial;
+import cn.duojunrui.etims.enums.ResultEnum;
 import cn.duojunrui.etims.service.TeachMaterialService;
 import cn.duojunrui.etims.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class TeachMaterialController {
     @RequestMapping(value = "listTeachFileAll", method = RequestMethod.GET)
     public Result listTeachFileAll(TeachMaterial tm) {
         if (tm == null){
-            return ResultUtil.error(1,"数据为空");
+            return ResultUtil.error(ResultEnum.SUCCESS_BUT_NULL);
         }
         return ResultUtil.success(tms.listTeachFileAll());
 

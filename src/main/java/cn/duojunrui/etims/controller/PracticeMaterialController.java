@@ -2,12 +2,9 @@ package cn.duojunrui.etims.controller;
 
 import cn.duojunrui.etims.entity.PracticeMaterial;
 import cn.duojunrui.etims.service.PracticeMaterialService;
-import cn.duojunrui.etims.utils.ResultUtil;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 @RestController
 @RequestMapping("/practiceMaterial")

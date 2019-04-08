@@ -24,11 +24,11 @@
              `create_time`, `update_time`, `is_deleted`
              )
         VALUES (
-          #{id}, #{student_name}, #{student_department}, #{student_class},
-            #{student_number}, #{company_name}, #{company_address}, #{position},
-             #{start_time}, #{end_time}, #{principal_name}, #{principal_tel}, #{file_map},
-              #{apply_status}, #{apply_time}, #{apply_reply}, #{create_time}, #{update_time}, #{is_deleted}
-        )
+          #{id}, #{studentName}, #{studentDepartment}, #{studentClass},
+            #{studentNumber}, #{companyName}, #{companyAddress}, #{position},
+             #{startTime}, #{endTime}, #{principalName}, #{principalTel}, #{fileMap},
+              #{applyStatus}, #{applyTime}, #{applyReply}, #{createTime}, #{updateTime}, #{isDeleted}
+              )
     </insert>
 
     <update id="updatePracticeMaterial" parameterType="cn.duojunrui.etims.entity.PracticeMaterial">
