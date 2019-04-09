@@ -1,583 +1,266 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>实验教学管理系统  - 主页</title>
-
-    <meta name="keywords" content="实验教学管理系统,后台bootstrap框架,后台HTML,响应式后台">
-    <meta name="description" content="基于Bootstrap3最新版本开发的扁平化主题，采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
-
-    <!--[if lt IE 8]>
-    <meta http-equiv="refresh" content="0;ie.html" />
-    <![endif]-->
-
-    <link rel="shortcut icon" href="favicon.ico">
-    <link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
-    <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+<meta charset="utf-8">
+<title>桂林电子科技大学信息科技学院实验教学中心-首页</title>
+<link rel="stylesheet" href="css/style1.css" type="text/css" media="all"/>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+	//图片滚动 调用方法 imgscroll({speed: 30,amount: 1,dir: "up"});
+	$.fn.imgscroll = function(o){
+		var defaults = {
+			speed: 40,
+			amount: 0,
+			width: 1,
+			dir: "left"
+		};
+		o = $.extend(defaults, o);
+		
+		return this.each(function(){
+			var _li = $("li", this);
+			_li.parent().parent().css({overflow: "hidden", position: "relative"}); //div
+			_li.parent().css({margin: "0", padding: "0", overflow: "hidden", position: "relative", "list-style": "none"}); //ul
+			_li.css({position: "relative", overflow: "hidden"}); //li
+			if(o.dir == "left") _li.css({float: "left"});
+			
+			//初始大小
+			var _li_size = 0;
+			for(var i=0; i<_li.size(); i++)
+				_li_size += o.dir == "left" ? _li.eq(i).outerWidth(true) : _li.eq(i).outerHeight(true);
+			
+			//循环所需要的元素
+			if(o.dir == "left") _li.parent().css({width: (_li_size*3)+"px"});
+			_li.parent().empty().append(_li.clone()).append(_li.clone()).append(_li.clone());
+			_li = $("li", this);
+	
+			//滚动
+			var _li_scroll = 0;
+			function goto(){
+				_li_scroll += o.width;
+				if(_li_scroll > _li_size)
+				{
+					_li_scroll = 0;
+					_li.parent().css(o.dir == "left" ? { left : -_li_scroll } : { top : -_li_scroll });
+					_li_scroll += o.width;
+				}
+					_li.parent().animate(o.dir == "left" ? { left : -_li_scroll } : { top : -_li_scroll }, o.amount);
+			}
+			
+			//开始
+			var move = setInterval(function(){ goto(); }, o.speed);
+			_li.parent().hover(function(){
+				clearInterval(move);
+			},function(){
+				clearInterval(move);
+				move = setInterval(function(){ goto(); }, o.speed);
+			});
+		});
+	};
+	//友情链接下拉框跳转弹出新窗口
+	function frlink(selObj){
+	window.open(selObj.options[selObj.selectedIndex].value);}
+	
+	//用户登录
+	function userLogin() {
+		console.log("submit");
+		var user = {};
+		user.userId = $('#user_id').val();
+		user.password = $('#password').val();
+		console.log(user);
+		$.ajax({
+			async: true,
+			url: "http://116.10.187.233:18009/wy/admin/adminLogin",
+			type: "POST",
+			contentType: "application/json",
+			data: JSON.stringify(user),
+			success: function(result) {
+				console.log(result['statusMessage']);
+				var success = JSON.parse(result);
+				console.log(success['statusMessage']);
+				if(success['statusMessage'] == "登录成功!" ) {
+					window.location.href = "index.html";
+				} else {
+					alert("账号或密码错误！");
+				}
+			}
+		});
+	}
+	
+	
+</script>
 </head>
 
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
-    <div id="wrapper">
-        <!--左侧导航开始-->
-        <nav class="navbar-default navbar-static-side" role="navigation">
-            <div class="nav-close"><i class="fa fa-times-circle"></i>
-            </div>
-            <div class="sidebar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="nav-header">
-                        <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
-                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
-                                </li>
-                                <li><a class="J_menuItem" href="profile.html">个人资料</a>
-                                </li>
-                                <li><a class="J_menuItem" href="contacts.html">联系我们</a>
-                                </li>
-                                <li><a class="J_menuItem" href="mailbox.html">信箱</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="login.html">安全退出</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="logo-element"><img alt="image" class="img-circle" src="img/profile_small.jpg" width="32"/>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="home.html">
-                            <i class="fa fa-home"></i>
-                            <span class="nav-label">实验教学系统主页</span>
-                            <!--<span class="fa arrow"></span>-->
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="#">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">实验教学资源管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a class="J_menuItem" href="module/teachingMaterial/teachingFile.html">教学资料</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_flot.html">试题资料</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_morris.html">实训案例</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_rickshaw.html">文献资料</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_peity.html">设备规范</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_sparkline.html">学习交流</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        <a href="#">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">开放实验室管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a class="J_menuItem" href="module/practice/practiceApply.html">实验室预约</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="module/teachingMaterial/teachingFile.html">实验室管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="module/teachingMaterial/teachingFile.html">实验室设备管理</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        <a href="#">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">实验教学计划管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">实验课程管理 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                    	<a class="J_menuItem" href="projects.html">实验课程计划</a>
-                                    </li>
-                                    <li>
-                                    	<a class="J_menuItem" href="project_detail.html">实验教学评价</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">教师教学计划 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                    	<a class="J_menuItem" href="projects.html">实验课程计划</a>
-                                    </li>
-                                    <li>
-                                    	<a class="J_menuItem" href="project_detail.html">学生实验报告</a>
-                                    </li>
-                                    <li>
-                                    	<a class="J_menuItem" href="project_detail.html">实验成绩管理</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">学生学习计划 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                    	<a class="J_menuItem" href="projects.html">实验课程计划</a>
-                                    </li>
-                                    <li>
-                                    	<a class="J_menuItem" href="project_detail.html">实验报告管理</a>
-                                    </li>
-                                    <li>
-                                    	<a class="J_menuItem" href="project_detail.html">实验成绩查询</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        <a href="#">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">学生顶岗实习管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a class="J_menuItem" href="module/practice/practiceApply.html">企业审核</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="module/teachingMaterial/teachingFile.html">工作文件</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_morris.html">成绩评定</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        <a href="#">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">学生创业园管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a class="J_menuItem" href="module/practice/practiceApply.html">店铺信息</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="module/teachingMaterial/teachingFile.html">开店申请</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_morris.html">销店及续约</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        <a href="#">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">实验考核管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a class="J_menuItem" href="module/practice/practiceApply.html">考核规则</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="module/teachingMaterial/teachingFile.html">考核管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_morris.html">考核统计</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        <a href="#">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">公共信息管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a class="J_menuItem" href="module/practice/practiceApply.html">教师信息管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="module/teachingMaterial/teachingFile.html">学生信息管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_morris.html">企业信息管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_morris.html">管理人员信息</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        <a href="#">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">统计分析管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a class="J_menuItem" href="module/practice/practiceApply.html">实验室利用率</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="module/teachingMaterial/teachingFile.html">设备损耗统计</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_morris.html">考核成绩分析</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_morris.html">创业园数据分析</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="graph_morris.html">就业率统计分析</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                    <li>
-                        <a href="#">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">系统管理设置模块</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">组织结构管理 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                	<li>
-                                    	<a class="J_menuItem" href="projects.html">用户管理</a>
-                                    </li>
-                                    <li>
-                                    	<a class="J_menuItem" href="projects.html">部门管理</a>
-                                    </li>
-                                    <li>
-                                    	<a class="J_menuItem" href="project_detail.html">角色管理</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">权限管理 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                    	<a class="J_menuItem" href="projects.html">菜单管理</a>
-                                    </li>
-                                    <li>
-                                    	<a class="J_menuItem" href="project_detail.html">授权认证</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">监控管理 <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                    	<a class="J_menuItem" href="projects.html">日志管理</a>
-                                    </li>
-                                    <li>
-                                    	<a class="J_menuItem" href="project_detail.html">任务管理</a>
-                                    </li>
-                                    <li>
-                                    	<a class="J_menuItem" href="project_detail.html">缓存管理</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <!--左侧导航结束-->
-        <!--右侧部分开始-->
-        <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="row border-bottom">
-                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                    <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
-						<i class="fa fa-bars"></i> </a>
-                        <!-- <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
-                            <div class="form-group">
-                                <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
-                            </div>
-                        </form> -->
-                    </div>
-                    <ul class="nav navbar-top-links navbar-right">
-						<li class="dropdown hidden-xs">
-                            <a class="right-sidebar-toggle" aria-expanded="false">
-                                <i class="fa fa-tasks"></i> 主题
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="row content-tabs">
-                <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
-                </button>
-                <nav class="page-tabs J_menuTabs">
-                    <div class="page-tabs-content">
-                        <a href="javascript:;" class="active J_menuTab" data-id="home.html">首页</a>
-                    </div>
-                </nav>
-                <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
-                </button>
-                <div class="btn-group roll-nav roll-right">
-                    <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
-
-                    </button>
-                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                        <li class="J_tabShowActive"><a>定位当前选项卡</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
-                        </li>
-                        <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
-                        </li>
-                    </ul>
-                </div>
-                <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
-            </div>
-            <div class="row J_mainContent" id="content-main">
-                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="home.html?v=4.0" frameborder="0" data-id="home.html" seamless></iframe>
-            </div>
-            <div class="footer">
-                <div class="pull-right">&copy; 2017-2018 <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>
-                </div>
-            </div>
+<body>
+	<div><hr style="background-color: #004c88; margin: 0; height: 3px;"/></div>
+<div id="hearder2" class="clearfix">
+	<div class="logo">
+   	  <img src="images/logo.png">
+  </div>
+  <div class="logo-name">实验教学中心</div>
+  <div class="form-tools">
+   	  <form id="search" name="search" method="post">
+      	<!--<div class="tools-link">
+        	<a href="index2.html" target="_blank">实验教学中心</a>
+        </div>-->
+        <div class="search-box">
+            <input type="text" name="textfield" id="textfield" class="input-text" placeholder="请输入搜索关键词">
+            <input type="image" src="images/search.png" class="input-submit" />
         </div>
-        <!--右侧部分结束-->
-        <!--右侧边栏开始-->
-        <div id="right-sidebar">
-            <div class="sidebar-container">
-
-                <ul class="nav nav-tabs navs-3">
-
-                    <li class="active">
-                        <a data-toggle="tab" href="#tab-1">
-                            <i class="fa fa-gear"></i> 主题
-                        </a>
-                    </li>
-                    <li class=""><a data-toggle="tab" href="#tab-2">
-                        通知
-                    </a>
-                    </li>
-                    <li><a data-toggle="tab" href="#tab-3">
-                        项目进度
-                    </a>
-                    </li>
-                </ul>
-
-                <div class="tab-content">
-                    <div id="tab-1" class="tab-pane active">
-                        <div class="sidebar-title">
-                            <h3> <i class="fa fa-comments-o"></i> 主题设置</h3>
-                            <small><i class="fa fa-tim"></i> 你可以从这里选择和预览主题的布局和样式，这些设置会被保存在本地，下次打开的时候会直接应用这些设置。</small>
-                        </div>
-                        <div class="skin-setttings">
-                            <div class="title">主题设置</div>
-                            <div class="setings-item">
-                                <span>收起左侧菜单</span>
-                                <div class="switch">
-                                    <div class="onoffswitch">
-                                        <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="collapsemenu">
-                                        <label class="onoffswitch-label" for="collapsemenu">
-                                            <span class="onoffswitch-inner"></span>
-                                            <span class="onoffswitch-switch"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="setings-item">
-                                <span>固定顶部</span>
-
-                                <div class="switch">
-                                    <div class="onoffswitch">
-                                        <input type="checkbox" name="fixednavbar" class="onoffswitch-checkbox" id="fixednavbar">
-                                        <label class="onoffswitch-label" for="fixednavbar">
-                                            <span class="onoffswitch-inner"></span>
-                                            <span class="onoffswitch-switch"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="setings-item">
-                                <span>
-                        固定宽度
-                    </span>
-
-                                <div class="switch">
-                                    <div class="onoffswitch">
-                                        <input type="checkbox" name="boxedlayout" class="onoffswitch-checkbox" id="boxedlayout">
-                                        <label class="onoffswitch-label" for="boxedlayout">
-                                            <span class="onoffswitch-inner"></span>
-                                            <span class="onoffswitch-switch"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="title">皮肤选择</div>
-                            <div class="setings-item default-skin nb">
-                                <span class="skin-name ">
-                         <a href="#" class="s-skin-0">
-                             默认皮肤
-                         </a>
-                    </span>
-                            </div>
-                            <div class="setings-item blue-skin nb">
-                                <span class="skin-name ">
-                        <a href="#" class="s-skin-1">
-                            蓝色主题
-                        </a>
-                    </span>
-                            </div>
-                            <div class="setings-item yellow-skin nb">
-                                <span class="skin-name ">
-                        <a href="#" class="s-skin-3">
-                            黄色/紫色主题
-                        </a>
-                    </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="tab-2" class="tab-pane">
-
-                        <div class="sidebar-title">
-                            <h3> <i class="fa fa-comments-o"></i> 最新通知</h3>
-                            <small><i class="fa fa-tim"></i> 您当前有10条未读信息</small>
-                        </div>
-
-                        <div>
-
-                            <div class="sidebar-message">
-                                <a href="#">
-                                    <div class="pull-left text-center">
-                                        <img alt="image" class="img-circle message-avatar" src="img/a1.jpg">
-
-                                        <div class="m-t-xs">
-                                            <i class="fa fa-star text-warning"></i>
-                                            <i class="fa fa-star text-warning"></i>
-                                        </div>
-                                    </div>
-                                    <div class="media-body">
-
-                                        据天津日报报道：瑞海公司董事长于学伟，副董事长董社轩等10人在13日上午已被控制。
-                                        <br>
-                                        <small class="text-muted">今天 4:21</small>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="sidebar-message">
-                                <a href="#">
-                                    <div class="pull-left text-center">
-                                        <img alt="image" class="img-circle message-avatar" src="img/a2.jpg">
-                                    </div>
-                                    <div class="media-body">
-                                        HCY48之音乐大魔王会员专属皮肤已上线，快来一键换装拥有他，宣告你对华晨宇的爱吧！
-                                        <br>
-                                        <small class="text-muted">昨天 2:45</small>
-                                    </div>
-                                </a>
-                            </div>
-                            
-                        </div>
-
-                    </div>
-                    <div id="tab-3" class="tab-pane">
-
-                        <div class="sidebar-title">
-                            <h3> <i class="fa fa-cube"></i> 最新任务</h3>
-                            <small><i class="fa fa-tim"></i> 您当前有14个任务，10个已完成</small>
-                        </div>
-
-                        <ul class="sidebar-list">
-                            <li>
-                                <a href="#">
-                                    <div class="small pull-right m-t-xs">9小时以后</div>
-                                    <h4>市场调研</h4> 按要求接收教材；
-
-                                    <div class="small">已完成： 22%</div>
-                                    <div class="progress progress-mini">
-                                        <div style="width: 22%;" class="progress-bar progress-bar-warning"></div>
-                                    </div>
-                                    <div class="small text-muted m-t-xs">项目截止： 4:00 - 2015.10.01</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="small pull-right m-t-xs">9小时以后</div>
-                                    <h4>可行性报告研究报上级批准 </h4> 编写目的编写本项目进度报告的目的在于更好的控制软件开发的时间,对团队成员的 开发进度作出一个合理的比对
-
-                                    <div class="small">已完成： 48%</div>
-                                    <div class="progress progress-mini">
-                                        <div style="width: 48%;" class="progress-bar"></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="small pull-right m-t-xs">9小时以后</div>
-                                    <h4>立项阶段</h4> 东风商用车公司 采购综合综合查询分析系统项目进度阶段性报告武汉斯迪克科技有限公司
-
-                                    <div class="small">已完成： 14%</div>
-                                    <div class="progress progress-mini">
-                                        <div style="width: 14%;" class="progress-bar progress-bar-info"></div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="label label-primary pull-right">NEW</span>
-                                    <h4>设计阶段</h4>
-                                    <!--<div class="small pull-right m-t-xs">9小时以后</div>-->
-                                    项目进度报告(Project Progress Report)
-                                    <div class="small">已完成： 22%</div>
-                                    <div class="small text-muted m-t-xs">项目截止： 4:00 - 2015.10.01</div>
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!--右侧边栏结束-->
+  	  </form>
     </div>
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-    <script src="js/bootstrap.min.js?v=3.3.5"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="js/plugins/layer/layer.min.js"></script>
-    <script src="js/hplus.min.js?v=4.0.0"></script>
-    <script type="text/javascript" src="js/contabs.min.js"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
+</div>
+<div id="menu-box" class="clearfix">
+	<ul>
+    	<li><a href="index.html">首页</a></li>
+        <li><a href="detail1.html">中心概况</a></li>
+        <li><a href="list-pic1.html">师资队伍</a></li>
+        <li><a href="list-pic1.html">设备资源</a></li>
+        <li><a href="detail1.html">教学模式</a></li>
+        <li><a href="form1.html">网上教学</a></li>
+        <li><a href="list-text1.html">新闻中心</a></li>
+        <li><a href="list-text1.html">创新成果</a></li>
+        <li><a href="detail1.html">联系我们</a></li>
+    </ul>
+</div>
+<div id="slider-box" style="background:url(images/slider1.jpg) center center;"></div>
+<!-- index1-div1 -->
+<div id="index1-div1" class="clearfix">
+	<div class="index1-left675">
+    	<div class="title-box">中心简介<a href="detail1.html" class="title-more" title="查看更多"><img src="images/12.gif"></a></div>
+        <p><img src="images/p-img.jpg" align="left">桂林电子科技大学信息科技学院是2001年经国家教育部批准设立。中央、教育部和地方高度重视特区大学建设。北大援建中文、外语类学科，清华援建电子、建筑类学科，人大援建经济、法律类学科，一大批知名学者云集深圳大学。建校伊始，学校在高校管理体制,北大援建中文、外语类学科，清华援建电子、建筑类学科，人大援建经济北大援建中文、外语类学科，建筑类学科，人大援建经济北大援建中文、外语类学科，清华援建电子...<a href="detail1.html">查看更多...</a></p>
+    </div>
+    <div class="index1-right300">
+    	<div class="title-box">通知公告<a href="list-text1.html" class="title-more" title="查看更多"><img src="images/12.gif"></a></div>
+          <ul>
+              <li><a href="detail1.html">通知公告通知公告通知公告通知公告通知公告通知公告通知公告通知公告</a><span>2017-02-23</span></li>
+              <li><a href="detail1.html">通知公告通知公告通知公告通知公告通知公告通知公告通知公告通知公告</a><span>2017-02-23</span></li>
+              <li><a href="detail1.html">通知公告通知公告通知公告通知公告通知公告通知公告通知公告通知公告</a><span>2017-02-23</span></li>
+              <li><a href="detail1.html">通知公告通知公告通知公告通知公告通知公告通知公告通知公告通知公告</a><span>2017-02-23</span></li>
+          </ul>
+    </div>
+</div>
+<!-- index1-div2 -->
+<div id="index1-div2" class="clearfix">
+	<div class="index1-left675">
+    	<div class="index1-li-box">
+    	<div class="index1-left330">
+        	<div class="title-box">中心动态<a href="list-text1.html" class="title-more" title="查看更多"><img src="images/12.gif"></a></div>
+            <img src="images/c1.jpg" style="width:330px; height:140px; margin:5px 0;">
+            <ul>
+                <li><a href="detail1.html">中心动态中心动态中心动态中心动态中心动态中心动态中心动态中心动态</a><span>2017-02-23</span></li>
+                <li><a href="detail1.html">中心动态中心动态中心动态中心动态中心动态中心动态中心动态中心动态</a><span>2017-02-23</span></li>
+                <li><a href="detail1.html">中心动态中心动态中心动态中心动态中心动态中心动态中心动态中心动态</a><span>2017-02-23</span></li>
+                <li><a href="detail1.html">中心动态中心动态中心动态中心动态中心动态中心动态中心动态中心动态</a><span>2017-02-23</span></li>
+                <li><a href="detail1.html">中心动态中心动态中心动态中心动态中心动态中心动态中心动态中心动态</a><span>2017-02-23</span></li>
+            </ul>
+        </div>
+        <div class="index1-right330">
+        	<div class="title-box">创新成果<a href="list-text1.html" class="title-more" title="查看更多"><img src="images/12.gif"></a></div>
+            <img src="images/c2.jpg" style="width:330px; height:140px; margin:5px 0;">
+            <ul>
+                <li><a href="detail1.html">创新成果创新成果创新成果创新成果创新成果创新成果创新成果创新成果</a><span>2017-02-23</span></li>
+                <li><a href="detail1.html">创新成果创新成果创新成果创新成果创新成果创新成果创新成果创新成果</a><span>2017-02-23</span></li>
+                <li><a href="detail1.html">创新成果创新成果创新成果创新成果创新成果创新成果创新成果创新成果</a><span>2017-02-23</span></li>
+                <li><a href="detail1.html">创新成果创新成果创新成果创新成果创新成果创新成果创新成果创新成果</a><span>2017-02-23</span></li>
+                <li><a href="detail1.html">创新成果创新成果创新成果创新成果创新成果创新成果创新成果创新成果</a><span>2017-02-23</span></li>
+            </ul>
+        </div>
+        </div>
+        <!-- slider -->
+        <div class="index1-pic-gun">
+        	<div class="title-box">设备资源<a href="list-pic1.html" class="title-more" title="查看更多"><img src="images/12.gif"></a></div>
+            <div class="index1-scrollleft clearfix">
+                <ul>
+                    <li>
+                        <a href="detail1.html"><img alt="霍尔效应" src="images/a1.jpg"/></a>
+                        <span>霍尔效应</span>
+                    </li>
+                    <li>
+                        <a href="detail1.html"><img alt="声速测量" src="images/a2.jpg"/></a>
+                        <span>声速测量</span>
+                    </li>
+                    <li>
+                        <a href="detail1.html"><img alt="交流电梯" src="images/a3.jpg"/></a>
+                        <span>交流电梯</span>
+                    </li>
+                    <li>
+                        <a href="detail1.html"><img alt="声速测量" src="images/a2.jpg"/></a>
+                        <span>声速测量</span>
+                    </li>
+                </ul>
+            </div>
+            <script type="text/javascript">
+            $(document).ready(function(){
+            
+                $(".index1-scrollleft").imgscroll({
+                    speed: 40,    //图片滚动速度
+                    amount: 0,    //图片滚动过渡时间
+                    width: 1,     //图片滚动步数
+                    dir: "left"   // "left" 或 "up" 向左或向上滚动
+                });
+                
+            });
+            </script>
+        </div>
+        <!-- slider end -->
+    </div>
+    <div class="index1-right300">
+        <div class="index1-login-box">
+          <div class="title-box">用户登录</div>
+          <form id="form1" name="form1" method="post">
+            <input type="text" name="textfield2" id="textfield2" placeholder="学号或工号" class="index1-uname">
+            <input type="password" name="password" id="password" placeholder="账号密码" class="index1-upass">
+            <div class="index1-t-link">
+                <input type="checkbox" name="checkbox" id="checkbox" class="index1-chek">记住密码
+                <a href="forgetpass.html" target="_blank">忘记密码？</a>
+            </div>
+            <input type="submit" name="submit" id="submit" value="登录" class="index1-input-login" onclick="userLogin()">
+            <input type="button" name="button" id="button" value="注册" class="index1-input-but" onclick="window.open('register.html')">
+          </form>
+        </div>
+		<div class="index1-list-menu">
+        	<div class="title-box">网络课程</div>
+            <ul>
+            	<li><a href="detail1.html">基础类实验</a></li>
+                <li><a href="detail1.html">设计类实验</a></li>
+                <li><a href="detail1.html">综合类实验</a></li>
+                <li><a href="detail1.html">研究类实验</a></li>
+                <li><a href="detail1.html">其它类实验</a></li>
+            </ul>
+    	</div>
+    </div>
+</div>
+<!-- div5 -->
+<div id="div5" class="clearfix">
+    <div class="link-box">
+    	<span>友情链接：</span>
+        <select onChange="frlink(this)" name="select" class="select-link">
+            <option selected>--- 教育类网站 ---</option>
+            <option value="http://www.veryhuo.com">烈火网</option>
+            <option value="http://www.sina.com.cn">新浪网</option>
+            <option value="http://www.163.com">网易</option>
+        </select>
+        <select onChange="frlink(this)" name="select" class="select-link">
+            <option selected>--- 政府类网站 ---</option>
+            <option value="http://www.china.com">中华网</option>
+            <option value="http://www.sina.com.cn">新浪网</option>
+            <option value="http://www.163.com">网易</option>
+        </select>
+        <select onChange="frlink(this)" name="select" class="select-link">
+            <option selected>--- 校园类网站 ---</option>
+            <option value="http://www.veryhuo.com">烈火网</option>
+            <option value="http://www.sina.com.cn">新浪网</option>
+            <option value="http://www.163.com">网易</option>
+        </select>
+        <select onChange="frlink(this)" name="select" class="select-link">
+            <option selected>--- 其它类网站 ---</option>
+            <option value="http://www.veryhuo.com">烈火网</option>
+            <option value="http://www.sina.com.cn">新浪网</option>
+            <option value="http://www.163.com">网易</option>
+        </select>
+    </div>
+</div>
+<div id="div6">Copyright &copy; 2019 桂林电子科技大学信息科技学院实验教学中心 </div>
 </body>
-
 </html>
+

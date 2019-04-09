@@ -5,37 +5,42 @@ import cn.duojunrui.etims.entity.Userinfo;
 import cn.duojunrui.etims.enums.ResultEnum;
 import cn.duojunrui.etims.service.UserinfoService;
 import cn.duojunrui.etims.utils.ResultUtil;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping
 public class UserinfoController {
 
     @Resource
     private UserinfoService us;
 
     // 用户注册
-    /**
-     * @param userinfo
-     * @return 注册成功返回用户账号
-     */
-    @PostMapping
+    @PostMapping("/user")
     public Result insertUser(Userinfo userinfo) {
+        if (userinfo.getUserId()==null || "".equals(userinfo.getUserId()) ||
+                userinfo.getPassword()==null || "".equals(userinfo.getPassword()) ||
+                userinfo.getUserEmail()==null || "".equals(userinfo.getUserEmail()) ||
+                userinfo.getUserRole()==null || "".equals(userinfo.getUserRole()) ) {
+            return ResultUtil.error(ResultEnum.DATA_NOT_NULL);
+        }
+        return ResultUtil.success(us.insertUser(userinfo));
+    }
+
+    // 用户登录
+    @PostMapping("/login")
+    public Result userLogin(Userinfo userinfo) {
+        // 判断用户名和密码是否为空
         if (userinfo.getUserId()==null || "".equals(userinfo.getUserId()) ||
                 userinfo.getPassword()==null || "".equals(userinfo.getPassword())) {
             return ResultUtil.error(ResultEnum.DATA_NOT_NULL);
         }
-
-        return ResultUtil.success(us.insertUser(userinfo));
+        return us.userLogin(userinfo);
     }
 
     // 查询所有用户
-    @GetMapping
+    @GetMapping("/user")
     public Result listUser() {
         return ResultUtil.success(us.listUser());
     }

@@ -13,6 +13,9 @@ public interface UserinfoMapper {
     // 用户注册
     Integer insertUser(Userinfo userinfo);
 
+    // 用户登录
+    Userinfo userLogin(Userinfo userinfo);
+
     // 修改用户信息
     Integer updateUserinfo();
 

@@ -5,12 +5,17 @@
     <insert id="insertUser" parameterType="cn.duojunrui.etims.entity.Userinfo">
         INSERT INTO
         userinfo (
-        id, user_id, password, user_role,
+        id, user_id, password, user_role, user_email,
         check_status, create_time, is_deleted
         )
         VALUES (
-        #{id}, #{userId}, #{password}, #{userRole},
+        #{id}, #{userId}, #{password}, #{userRole}, #{userEmail},
         #{checkStatus}, #{createTime}, #{isDeleted}
         )
     </insert>
+
+    <select id="listUser" resultType="cn.duojunrui.etims.entity.Userinfo">
+        SELECT *
+        FROM userinfo
+    </select>
 </mapper>
