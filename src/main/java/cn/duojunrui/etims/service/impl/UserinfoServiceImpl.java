@@ -40,7 +40,7 @@ public class UserinfoServiceImpl implements UserinfoService {
     }
 
     // 用户注册
-    public Integer insertUser(Userinfo userinfo) {
+    public ServerResponse<String> userRegister(Userinfo userinfo) {
         userinfo.setId(UUIDUtil.getUUID32());
         userinfo.setCheckStatus(0);
         userinfo.setCreateTime(new Date().getTime());

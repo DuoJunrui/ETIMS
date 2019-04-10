@@ -21,7 +21,7 @@ public class UserinfoController {
 
     // 用户注册
     @PostMapping
-    public Result insertUser(Userinfo userinfo) {
+    public ServerResponse<String> userRegister(Userinfo userinfo) {
         if (userinfo.getUserId()==null || "".equals(userinfo.getUserId()) ||
                 userinfo.getPassword()==null || "".equals(userinfo.getPassword()) ||
                 userinfo.getUserEmail()==null || "".equals(userinfo.getUserEmail()) ||
@@ -40,6 +40,13 @@ public class UserinfoController {
             session.setAttribute(Constant.CURRENT_USER, response.getData());
         }
         return response;
+    }
+
+    // 用户登出 移除session
+    @GetMapping("/logout")
+    public ServerResponse<String> logout(HttpSession session) {
+        session.removeAttribute(Constant.CURRENT_USER);
+        return ServerResponse.createBySuccess();
     }
 
     // 查询所有用户
