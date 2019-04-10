@@ -1,8 +1,9 @@
-package cn.duojunrui.etims.enums;
+package cn.duojunrui.etims.common;
 
-public enum ResultEnum {
+public enum  ResponseCode {
 
     SUCCESS(000,"操作成功"),
+    ERROR(111,"创建失败"),
     SUCCESS_BUT_NULL(001, "数据为空"),
 
     FAILED(100,"参数错误"),
@@ -12,15 +13,15 @@ public enum ResultEnum {
 
     UNKNOWN_ERROR(999,"未知错误");
 
-    private int code;
-    private String desc;
+    private final int code;
+    private final String desc;
 
-    ResultEnum(int code, String desc) {
+    ResponseCode(int code, String desc) {
         this.code = code;
         this.desc = desc;
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 

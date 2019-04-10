@@ -75,13 +75,13 @@
 														</span>
 													</label>-->
                                                     <label class="inline" style="margin-right:30px;">
-	                                                    <input type="radio" name="radio" id="radio" value="3" class="ace"><span class="lbl"> 学生</span>
+	                                                    <input type="radio" name="userRole" value="3" class="ace"><span class="lbl"> 学生</span>
                                                     </label>
                                                     <label class="inline" style="margin-right:30px;">
-                                                        <input type="radio" name="radio" id="radio" value="2" class="ace" ><span class="lbl"> 教职工</span>
+                                                        <input type="radio" name="userRole" value="2" class="ace" ><span class="lbl"> 教职工</span>
                                                     </label>
                                                     <label class="inline">
-                                                        <input type="radio" name="radio" id="radio" value="1" class="ace" ><span class="lbl"> 管理员</span>
+                                                        <input type="radio" name="userRole" value="1" class="ace" ><span class="lbl"> 管理员</span>
                                                     </label>
                                                     
 													<label class="block clearfix">
@@ -195,20 +195,29 @@
 			function userRegister() {
 				console.log("进入用户注册");
 				var user = {};
-				user.userRole = $('#radio').val();
+				user.userRole = $("[name='userRole']:checked").val();
 				user.userId = $('#userId').val();
 				user.userEmail = $('#userEmail').val();
 				user.userPassword1 = $('#userPassword1').val();
 				user.userPassword2 = $('#userPassword2').val();
 				console.log(user);
+				
 				$.ajax({
 					type:"post",
-					url:"localhost:8080/etims/user",
+					url:"/etims/user",
 					async:true,
 					cache:false,
+					contentType: "application/json",
 					data:JSON.stringify(user),
+					dataType:"json",
+					location.href="index.html"
 					success:function(data) {
-						alert("注册成功");
+//						var success = JSON.parse(result);
+						if(data.code == 0) {
+							alert("注册成功,请返回登录并完善个人信息。");
+						} else {
+							alert("注册失败，"+data.message);
+						}
 					},
 					error:function() {
 						alert("注册失败");

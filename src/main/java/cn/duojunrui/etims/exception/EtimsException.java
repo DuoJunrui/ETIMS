@@ -7,7 +7,7 @@ public class EtimsException extends RuntimeException {
     private Integer code;
 
     public EtimsException(ResultEnum resultEnum) {
-        super(resultEnum.getMessage());
+        super(resultEnum.getDesc());
         this.code = resultEnum.getCode();
     }
 

@@ -1,5 +1,7 @@
 package cn.duojunrui.etims.controller;
 
+import cn.duojunrui.etims.common.Constant;
+import cn.duojunrui.etims.common.ServerResponse;
 import cn.duojunrui.etims.entity.Result;
 import cn.duojunrui.etims.entity.Userinfo;
 import cn.duojunrui.etims.enums.ResultEnum;
@@ -8,16 +10,17 @@ import cn.duojunrui.etims.utils.ResultUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping
+@RequestMapping("/user")
 public class UserinfoController {
 
     @Resource
-    private UserinfoService us;
+    private UserinfoService userinfoService;
 
     // 用户注册
-    @PostMapping("/user")
+    @PostMapping
     public Result insertUser(Userinfo userinfo) {
         if (userinfo.getUserId()==null || "".equals(userinfo.getUserId()) ||
                 userinfo.getPassword()==null || "".equals(userinfo.getPassword()) ||
@@ -25,23 +28,23 @@ public class UserinfoController {
                 userinfo.getUserRole()==null || "".equals(userinfo.getUserRole()) ) {
             return ResultUtil.error(ResultEnum.DATA_NOT_NULL);
         }
-        return ResultUtil.success(us.insertUser(userinfo));
+        return null;
     }
 
     // 用户登录
     @PostMapping("/login")
-    public Result userLogin(Userinfo userinfo) {
+    public ServerResponse<Userinfo> userLogin(String userId, String password, HttpSession session) {
         // 判断用户名和密码是否为空
-        if (userinfo.getUserId()==null || "".equals(userinfo.getUserId()) ||
-                userinfo.getPassword()==null || "".equals(userinfo.getPassword())) {
-            return ResultUtil.error(ResultEnum.DATA_NOT_NULL);
+        ServerResponse<Userinfo> response = userinfoService.userLogin(userId, password);
+        if (response.isSuccess()) {
+            session.setAttribute(Constant.CURRENT_USER, response.getData());
         }
-        return us.userLogin(userinfo);
+        return response;
     }
 
     // 查询所有用户
-    @GetMapping("/user")
+    @GetMapping
     public Result listUser() {
-        return ResultUtil.success(us.listUser());
+        return null;
     }
 }

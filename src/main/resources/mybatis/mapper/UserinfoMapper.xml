@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.duojunrui.etims.mapper.UserinfoMapper">
 
+    <!--用户注册-->
     <insert id="insertUser" parameterType="cn.duojunrui.etims.entity.Userinfo">
         INSERT INTO
         userinfo (
@@ -14,8 +15,25 @@
         )
     </insert>
 
+    <!--用户登录-->
+    <select id="userLogin" resultType="cn.duojunrui.etims.entity.Userinfo" parameterType="java.util.Map">
+        SELECT id, user_id, user_name, user_role
+        FROM userinfo
+        WHERE user_id=#{userId} AND password=#{password} AND is_deleted=0
+    </select>
+
+    <!--查询用户账号是否存在-->
+    <select id="checkUserId" resultType="int" parameterType="String">
+        SELECT COUNT(1)
+        FROM userinfo
+        WHERE user_id=#{userId} AND is_deleted=0
+    </select>
+
+    <!--无条件查询所有用户-->
     <select id="listUser" resultType="cn.duojunrui.etims.entity.Userinfo">
         SELECT *
         FROM userinfo
     </select>
+
+
 </mapper>

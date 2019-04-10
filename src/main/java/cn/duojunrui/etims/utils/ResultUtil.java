@@ -13,7 +13,7 @@ public class ResultUtil {
     public static Result success(Object data){
         Result res = new Result();
         res.setCode(ResultEnum.SUCCESS.getCode());
-        res.setMessage(ResultEnum.SUCCESS.getMessage());
+        res.setMessage(ResultEnum.SUCCESS.getDesc());
         res.setData(data);
         return res;
     }
@@ -21,14 +21,14 @@ public class ResultUtil {
     public static Result success(){
         Result res = new Result();
         res.setCode(ResultEnum.SUCCESS.getCode());
-        res.setMessage(ResultEnum.SUCCESS.getMessage());
+        res.setMessage(ResultEnum.SUCCESS.getDesc());
         return res;
     }
 
     public static Result error(ResultEnum resultEnum){
         Result res = new Result();
         res.setCode(resultEnum.getCode());
-        res.setMessage(resultEnum.getMessage());
+        res.setMessage(resultEnum.getDesc());
         return res;
     }
 }

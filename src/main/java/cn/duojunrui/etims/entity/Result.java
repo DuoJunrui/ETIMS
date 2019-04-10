@@ -1,10 +1,14 @@
 package cn.duojunrui.etims.entity;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+
+import java.io.Serializable;
+
 /**
  * http请求返回的最外层对象
  * @param <T>
  */
-public class Result<T> {
+public class Result<T> implements Serializable {
 
     //错误代码
     private Integer code;

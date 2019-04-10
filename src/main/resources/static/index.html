@@ -64,8 +64,8 @@
 	function userLogin() {
 		console.log("submit");
 		var user = {};
-		user.userId = $('#user_id').val();
-		user.password = $('#password').val();
+		user.userId = $('#userId').val();
+		user.password = $('#userPassword').val();
 		console.log(user);
 		$.ajax({
 			async: true,
@@ -208,14 +208,14 @@
         <div class="index1-login-box">
           <div class="title-box">用户登录</div>
           <form id="form1" name="form1" method="post">
-            <input type="text" name="textfield2" id="textfield2" placeholder="学号或工号" class="index1-uname">
-            <input type="password" name="password" id="password" placeholder="账号密码" class="index1-upass">
+            <input type="text" name="textfield2" id="userId" placeholder="学号或工号" class="index1-uname">
+            <input type="password" name="password" id="userPassword" placeholder="账号密码" class="index1-upass">
             <div class="index1-t-link">
                 <input type="checkbox" name="checkbox" id="checkbox" class="index1-chek">记住密码
                 <a href="forgetpass.html" target="_blank">忘记密码？</a>
             </div>
             <input type="submit" name="submit" id="submit" value="登录" class="index1-input-login" onclick="userLogin()">
-            <input type="button" name="button" id="button" value="注册" class="index1-input-but" onclick="window.open('register.html')">
+            <input type="button" name="button" id="button" value="注册" class="index1-input-but" onclick="window.location.href='register.html'">
           </form>
         </div>
 		<div class="index1-list-menu">
