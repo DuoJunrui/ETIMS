@@ -158,12 +158,68 @@ public class UserinfoServiceImpl implements UserinfoService {
             String md5Password = MD5Util.MD5EncodeUtf8(newPassword);
             int rowCount = userinfoMapper.updatePasswordByUserId(userId,md5Password);
             if (rowCount>0) {
-                return ServerResponse.createBySuccess("密码修改成功");
+                return ServerResponse.createBySuccess("密码重置成功");
             }
         } else {
             return ServerResponse.createByErrorMessage("token错误，请重新获取重置密码的token");
         }
+        return ServerResponse.createByErrorMessage("密码重置失败");
+    }
+
+    public ServerResponse<String> resetPassword(String oldPassword, String newPassword, Userinfo userinfo) {
+
+        // 防止横向越权，要验证一下这个用户的旧密码，一定要指定是这个用户，
+        // 因为我们会查询一个count(1)，如果不指定ID，那么结果就是true了，count>0
+        int resultCount = userinfoMapper.checkPassword(MD5Util.MD5EncodeUtf8(oldPassword), userinfo.getUserId());
+        if (resultCount ==0) {
+            return ServerResponse.createByErrorMessage("旧密码错误");
+        }
+
+        userinfo.setPassword(MD5Util.MD5EncodeUtf8(newPassword));
+        int updateCount = userinfoMapper.updateByPrimaryKeySelective(userinfo);
+        if (updateCount > 0) {
+            return ServerResponse.createBySuccessMessage("密码修改成功");
+        }
         return ServerResponse.createByErrorMessage("密码修改失败");
+    }
+
+    // 完善用户信息
+    public ServerResponse<Userinfo> completeInformation(Userinfo userinfo) {
+        //userId是不能被更新的
+        //email也要进行一个校验，校验新的email是不是已经存在，并且存在的email如果相同的话，不能是我们当前的这个用户的邮箱
+        int resultCount = userinfoMapper.checkEmailByUserId(userinfo.getUserEmail(), userinfo.getUserId());
+        if (resultCount > 0) {
+            return ServerResponse.createByErrorMessage("该邮箱已存在，请更换其他邮箱");
+        }
+
+        Userinfo updateUser = new Userinfo();
+        updateUser.setUserName(userinfo.getUserName());
+        updateUser.setUserSex(userinfo.getUserSex());
+        updateUser.setPhotoMap(userinfo.getPhotoMap());
+        updateUser.setUserTel(userinfo.getUserTel());
+        updateUser.setUserEmail(userinfo.getUserEmail());
+        updateUser.setCheckStatus(Constant.checkStatus.CHECK_CHECHING);
+
+        if (userinfo.getUserRole() != Constant.userRole.ROLE_STUDENT) {
+            updateUser.setStaffId(userinfo.getStaffId());
+            updateUser.setStaffPart(userinfo.getStaffPart());
+        } else {
+            updateUser.setStudentGrade(userinfo.getStudentGrade());
+            updateUser.setStudentClass(userinfo.getStudentClass());
+            updateUser.setStudentId(userinfo.getStudentId());
+            updateUser.setStudentMajor(userinfo.getStudentMajor());
+        }
+
+        updateUser.setUpdateTime(new Date().getTime());
+
+
+    }
+
+    // 更新用户次要信息
+    public ServerResponse<Userinfo> updateInformation(Userinfo userinfo) {
+
+        //userId是不能被更新的
+    return null;
     }
 
     // 查询所有用户

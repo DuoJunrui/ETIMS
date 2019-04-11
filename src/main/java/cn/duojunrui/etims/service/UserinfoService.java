@@ -21,4 +21,6 @@ public interface UserinfoService {
     ServerResponse<String> checkEmailCode(String userId, String userEmail, String emailCode);
 
     ServerResponse<String> forgetPassword(String userId, String newPassword, String emailCodeToken);
+
+    ServerResponse<String> resetPassword(String oldPassword, String newPassword, Userinfo userinfo);
 }

@@ -19,35 +19,101 @@
     <select id="userLogin" resultType="cn.duojunrui.etims.entity.Userinfo" parameterType="java.util.Map">
         SELECT id, user_id, user_name, user_role
         FROM userinfo
-        WHERE user_id=#{userId} AND password=#{password} AND is_deleted=0
+        WHERE user_id = #{userId} AND password = #{password} AND is_deleted=0
     </select>
 
     <!--查询用户账号是否存在-->
     <select id="checkUserId" resultType="int" parameterType="string">
         SELECT COUNT(1)
         FROM userinfo
-        WHERE user_id=#{userId}
+        WHERE user_id = #{userId}
     </select>
 
     <!--查询邮箱是否存在-->
     <select id="checkEmail" resultType="int" parameterType="String">
         SELECT COUNT(1)
         FROM userinfo
-        WHERE user_email=#{email}
+        WHERE user_email = #{email}
     </select>
 
     <!--根据用户账号查询Email-->
     <select id="selectEmailByUserId" resultType="string" parameterType="string">
         SELECT user_email
         FROM userinfo
-        WHERE user_id=#{userId}
+        WHERE user_id = #{userId}
     </select>
 
     <update id="updatePasswordByUserId" parameterType="map">
         UPDATE userinfo
-        SET password=#{newPassword}, update_time = now()
-        WHERE user_id=#{userId}
+        SET password = #{newPassword}, update_time = now()
+        WHERE user_id = #{userId}
     </update>
+
+    <!--选择性更新信息 根据传入的值-->
+    <update id="updateByPrimaryKeySelective" parameterType="cn.duojunrui.etims.entity.Userinfo">
+        UPDATE userinfo
+        <set>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="userName != null ">
+                user_name = #{userName},
+            </if>
+            <if test="userSex != null ">
+                user_sex = #{userSex},
+            </if>
+            <if test="photoMap != null ">
+                photo_map = #{photoMap},
+            </if>
+            <if test="userRole != null">
+                user_role = #{userRole},
+            </if>
+            <if test="userTel != null">
+                user_tel = #{userTel},
+            </if>
+            <if test="userEmail != null">
+                user_email = #{userEmail},
+            </if>
+            <if test="studentGrade != null">
+                student_grade = #{studentGrade},
+            </if>
+            <if test="studentClass != null">
+                student_class = #{studentClass},
+            </if>
+            <if test="studentId != null">
+                student_id = #{studentId},
+            </if>
+            <if test="studentMajor != null">
+                student_major = #{studentMajor},
+            </if>
+            <if test="staffId != null">
+                staff_id = #{staffId},
+            </if>
+            <if test="staffPart != null">
+                staff_part = #{staffPart},
+            </if>
+            <if test="checkStatus != null">
+                check_status = #{checkStatus},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted},
+            </if>
+            update_time = #{updateTime}
+        </set>
+        WHERE user_id = #{userId}
+    </update>
+
+    <select id="checkPassword" resultType="int" parameterType="map">
+        SELECT COUNT(1)
+        FROM userinfo
+        WHERE password = #{password} AND user_id = #{userId}
+    </select>
+
+    <select id="checkEmailByUserId" resultType="int" parameterType="map">
+        SELECT COUNT(1)
+        FROM userinfo
+        WHERE user_email = #{email} AND user_id != #{userId}
+    </select>
 
     <!--无条件查询所有用户-->
     <select id="listUser" resultType="cn.duojunrui.etims.entity.Userinfo">

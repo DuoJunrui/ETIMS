@@ -24,10 +24,16 @@ public interface UserinfoMapper {
     // 检查邮箱是否存在
     int checkEmail(String email);
 
+    // 选择性更新信息
+    int updateByPrimaryKeySelective(Userinfo userinfo);
+
     String selectEmailByUserId(String userId);
 
     int updatePasswordByUserId(@Param("userId") String userId, @Param("newPassword") String newPassword);
 
+    int checkPassword(@Param("password") String password, @Param("userId") String userId);
+
+    int checkEmailByUserId(@Param("email") String email, @Param("userId") String userId);
     // 修改用户信息
     Integer updateUserinfo();
 

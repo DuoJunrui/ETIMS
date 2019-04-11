@@ -71,6 +71,25 @@ public class UserinfoController {
         return userinfoService.forgetPassword(userId, newPassword, emailCodeToken);
     }
 
+    // 修改密码
+    @PostMapping("/resetPassword")
+    public ServerResponse<String> resetPassword(HttpSession session, String oldPassword, String newPassword) {
+        Userinfo userinfo = (Userinfo) session.getAttribute(Constant.CURRENT_USER);
+        if (userinfo == null) {
+            return ServerResponse.createByErrorMessage("用户未登录");
+        }
+        return userinfoService.resetPassword(oldPassword, newPassword, userinfo);
+    }
+
+    // 完善用户信息
+    public ServerResponse<Userinfo> completeInformation(HttpSession session, Userinfo userinfo) {
+        Userinfo currentUser = (Userinfo) session.getAttribute(Constant.CURRENT_USER);
+        if (currentUser == null) {
+            return ServerResponse.createByErrorMessage("用户未登录");
+        }
+        userinfo.setUserId(currentUser.getUserId());
+    }
+
     // 用户登出 移除session
     @GetMapping("/logout")
     public ServerResponse<String> logout(HttpSession session) {
