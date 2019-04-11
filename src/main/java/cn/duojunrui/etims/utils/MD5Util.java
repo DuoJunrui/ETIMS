@@ -1,7 +1,5 @@
 package cn.duojunrui.etims.utils;
 
-import org.apache.logging.log4j.util.PropertiesUtil;
-
 import java.security.MessageDigest;
 
 public class MD5Util {

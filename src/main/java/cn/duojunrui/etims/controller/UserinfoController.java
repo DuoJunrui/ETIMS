@@ -7,6 +7,7 @@ import cn.duojunrui.etims.entity.Userinfo;
 import cn.duojunrui.etims.enums.ResultEnum;
 import cn.duojunrui.etims.service.UserinfoService;
 import cn.duojunrui.etims.utils.ResultUtil;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,15 +21,15 @@ public class UserinfoController {
     private UserinfoService userinfoService;
 
     // 用户注册
-    @PostMapping
+    @PostMapping("/register")
     public ServerResponse<String> userRegister(Userinfo userinfo) {
-        if (userinfo.getUserId()==null || "".equals(userinfo.getUserId()) ||
-                userinfo.getPassword()==null || "".equals(userinfo.getPassword()) ||
-                userinfo.getUserEmail()==null || "".equals(userinfo.getUserEmail()) ||
-                userinfo.getUserRole()==null || "".equals(userinfo.getUserRole()) ) {
-            return ResultUtil.error(ResultEnum.DATA_NOT_NULL);
-        }
-        return null;
+        return userinfoService.userRegister(userinfo);
+    }
+
+    // 检查用户账号和用户邮箱是否有效
+    @PostMapping("/checkValid")
+    public ServerResponse<String> checkValid(String str, String type) {
+        return userinfoService.checkValid(str, type);
     }
 
     // 用户登录
@@ -40,6 +41,34 @@ public class UserinfoController {
             session.setAttribute(Constant.CURRENT_USER, response.getData());
         }
         return response;
+    }
+
+    // 获取用户登录信息
+    @GetMapping("/getUserSession")
+    public ServerResponse<Userinfo> getUserSession(HttpSession session) {
+        Userinfo userinfo = (Userinfo) session.getAttribute(Constant.CURRENT_USER);
+        if (userinfo != null) {
+            return ServerResponse.createBySuccess(userinfo);
+        }
+        return ServerResponse.createByErrorMessage("用户未登录，无法获取当前用户的信息");
+    }
+
+    // 获取用户邮箱
+    @GetMapping(value = "/getEamil")
+    public ServerResponse<String> getEmailByUserId(String userId) {
+        return userinfoService.selectEmail(userId);
+    }
+
+    // 验证邮箱验证码是否正确
+    @PostMapping("/checkEmailCode")
+    public ServerResponse<String> checkEmailCode(String userId, String userEmail, String emailCode){
+        return userinfoService.checkEmailCode(userId, userEmail, emailCode);
+    }
+
+    // 忘记密码
+    @PostMapping("/forgetPassword")
+    public ServerResponse<String> forgetPassword(String userId, String newPassword, String emailCodeToken) {
+        return userinfoService.forgetPassword(userId, newPassword, emailCodeToken);
     }
 
     // 用户登出 移除session

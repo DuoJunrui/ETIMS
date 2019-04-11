@@ -1,25 +1,36 @@
 package cn.duojunrui.etims.service.impl;
 
+import cn.duojunrui.etims.common.Constant;
 import cn.duojunrui.etims.common.ServerResponse;
+import cn.duojunrui.etims.common.TokenCache;
+import cn.duojunrui.etims.controller.MailController;
+import cn.duojunrui.etims.controller.UserinfoController;
 import cn.duojunrui.etims.entity.Result;
 import cn.duojunrui.etims.entity.Userinfo;
 import cn.duojunrui.etims.enums.ResultEnum;
 import cn.duojunrui.etims.mapper.UserinfoMapper;
+import cn.duojunrui.etims.service.MailService;
 import cn.duojunrui.etims.service.UserinfoService;
+import cn.duojunrui.etims.utils.MD5Util;
 import cn.duojunrui.etims.utils.ResultUtil;
 import cn.duojunrui.etims.utils.UUIDUtil;
-import com.alibaba.druid.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.print.attribute.standard.Severity;
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class UserinfoServiceImpl implements UserinfoService {
 
     @Resource
     private UserinfoMapper userinfoMapper;
+
+    @Resource
+    private MailController mailController;
 
     // 用户登录
     @Override
@@ -30,7 +41,8 @@ public class UserinfoServiceImpl implements UserinfoService {
         }
 
         //TODO 密码登录 MD5
-        Userinfo userinfo = userinfoMapper.userLogin(userId, password);
+        String md5Password = MD5Util.MD5EncodeUtf8(password);
+        Userinfo userinfo = userinfoMapper.userLogin(userId, md5Password);
         if (userinfo == null) {
             return ServerResponse.createByErrorMessage("密码错误");
         }
@@ -41,11 +53,117 @@ public class UserinfoServiceImpl implements UserinfoService {
 
     // 用户注册
     public ServerResponse<String> userRegister(Userinfo userinfo) {
+
         userinfo.setId(UUIDUtil.getUUID32());
-        userinfo.setCheckStatus(0);
+
+        // 校验用户账号
+        ServerResponse validResponse = this.checkValid(userinfo.getUserId(), Constant.USERID);
+        if (!validResponse.isSuccess()) {
+            return validResponse;
+        }
+
+        // 用户密码 MD5加密
+        userinfo.setPassword(MD5Util.MD5EncodeUtf8(userinfo.getPassword()));
+
+        int value = userinfo.getUserRole();
+        if (value == 0) {
+            userinfo.setUserRole(Constant.userRole.ROLE_SUPER_ADMIN);
+        } else if (value == 1) {
+            userinfo.setUserRole(Constant.userRole.ROLE_ADMIN);
+        } else if (value == 2) {
+            userinfo.setUserRole(Constant.userRole.ROLE_STAFF);
+        } else {
+            userinfo.setUserRole(Constant.userRole.ROLE_STUDENT);
+        }
+
+        // 校验用户邮箱
+        validResponse = this.checkValid(userinfo.getUserEmail(), Constant.USEREMAIL);
+        if (!validResponse.isSuccess()) {
+            return validResponse;
+        }
+
+        userinfo.setCheckStatus(Constant.checkStatus.CHECK_SUPPLEMENT);
+
         userinfo.setCreateTime(new Date().getTime());
-        userinfo.setIsDeleted(0);
-        return userinfoMapper.insertUser(userinfo);
+        userinfo.setIsDeleted(Constant.isDeleted.NOT_DELETED);
+
+        int resultCount = userinfoMapper.insertUser(userinfo);
+        if (resultCount == 0) {
+            return ServerResponse.createByErrorMessage("注册失败");
+        }
+        return ServerResponse.createBySuccessMessage("注册成功");
+
+    }
+
+    // 检查用户账号和用户邮箱是否有效
+    public ServerResponse<String> checkValid(String str, String type) {
+        if (StringUtils.isNotBlank(type)) {
+            // 开始校验
+            if (Constant.USERID.equals(type)) {
+                int resultCount = userinfoMapper.checkUserId(str);
+                if (resultCount > 0) {
+                    return ServerResponse.createByErrorMessage("该账号已存在");
+                }
+            }
+            if (Constant.USEREMAIL.equals(type)) {
+                int resultCount = userinfoMapper.checkEmail(str);
+                    if (resultCount > 0) {
+                        return ServerResponse.createByErrorMessage("该邮箱已存在");
+                }
+            }
+        } else {
+            return ServerResponse.createByErrorMessage("参数错误");
+        }
+        return ServerResponse.createBySuccessMessage("校验成功");
+    }
+
+    public ServerResponse selectEmail(String userId) {
+        ServerResponse validResponse = this.checkValid(userId, Constant.USERID);
+        if (validResponse.isSuccess()) {
+            // 用户不存在
+            return ServerResponse.createByErrorMessage("用户不存在");
+        }
+        String email = userinfoMapper.selectEmailByUserId(userId);
+        if (StringUtils.isNotBlank(email)) {
+            return ServerResponse.createBySuccess(email);
+        }
+        return ServerResponse.createByErrorMessage("用户未绑定邮箱");
+    }
+
+    public ServerResponse<String> checkEmailCode(String userId, String userEmail, String emailCode) {
+        if (mailController.sendEmailCode(userEmail) == emailCode) {
+            String emailCodeToken = UUID.randomUUID().toString();
+            TokenCache.setKey(TokenCache.TOKEN_PREFIX+userId, emailCodeToken);
+            return ServerResponse.createBySuccess(emailCodeToken);
+        }
+        return ServerResponse.createByErrorMessage("邮箱验证码错误或者已失效");
+    }
+
+    public ServerResponse<String> forgetPassword(String userId, String newPassword, String emailCodeToken) {
+        if (StringUtils.isBlank(emailCodeToken)) {
+            return ServerResponse.createByErrorMessage("参数错误，token需要传递");
+        }
+
+        ServerResponse vaildResponse = this.checkValid(userId, Constant.CURRENT_USER);
+        if (vaildResponse.isSuccess()) {
+            return ServerResponse.createByErrorMessage("用户不存在");
+        }
+
+        String token = TokenCache.getKey(TokenCache.TOKEN_PREFIX+userId);
+        if (StringUtils.isBlank(token)) {
+            return ServerResponse.createByErrorMessage("token无效或者过期");
+        }
+
+        if (StringUtils.equals(emailCodeToken,token)) {
+            String md5Password = MD5Util.MD5EncodeUtf8(newPassword);
+            int rowCount = userinfoMapper.updatePasswordByUserId(userId,md5Password);
+            if (rowCount>0) {
+                return ServerResponse.createBySuccess("密码修改成功");
+            }
+        } else {
+            return ServerResponse.createByErrorMessage("token错误，请重新获取重置密码的token");
+        }
+        return ServerResponse.createByErrorMessage("密码修改失败");
     }
 
     // 查询所有用户
