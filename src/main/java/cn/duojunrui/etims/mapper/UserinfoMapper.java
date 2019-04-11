@@ -34,6 +34,7 @@ public interface UserinfoMapper {
     int checkPassword(@Param("password") String password, @Param("userId") String userId);
 
     int checkEmailByUserId(@Param("email") String email, @Param("userId") String userId);
+
     // 修改用户信息
     Integer updateUserinfo();
 

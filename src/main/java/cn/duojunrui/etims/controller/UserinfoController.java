@@ -82,12 +82,19 @@ public class UserinfoController {
     }
 
     // 完善用户信息
+    @PostMapping("/completeInformation")
     public ServerResponse<Userinfo> completeInformation(HttpSession session, Userinfo userinfo) {
         Userinfo currentUser = (Userinfo) session.getAttribute(Constant.CURRENT_USER);
         if (currentUser == null) {
             return ServerResponse.createByErrorMessage("用户未登录");
         }
+        userinfo.setId(currentUser.getId());
         userinfo.setUserId(currentUser.getUserId());
+        ServerResponse<Userinfo> response = userinfoService.completeInformation(userinfo);
+        if (response.isSuccess()) {
+            session.setAttribute(Constant.CURRENT_USER, response.getData());
+        }
+        return response;
     }
 
     // 用户登出 移除session

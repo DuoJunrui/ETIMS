@@ -212,6 +212,12 @@ public class UserinfoServiceImpl implements UserinfoService {
 
         updateUser.setUpdateTime(new Date().getTime());
 
+        int updateCount = userinfoMapper.updateByPrimaryKeySelective(updateUser);
+        if (updateCount > 0) {
+            return ServerResponse.createBySuccess("完善个人信息成功",updateUser);
+        }
+        return ServerResponse.createByErrorMessage("完善个人信息失败");
+
 
     }
 
