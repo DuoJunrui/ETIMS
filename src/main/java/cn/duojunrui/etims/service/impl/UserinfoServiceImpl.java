@@ -4,22 +4,14 @@ import cn.duojunrui.etims.common.Constant;
 import cn.duojunrui.etims.common.ServerResponse;
 import cn.duojunrui.etims.common.TokenCache;
 import cn.duojunrui.etims.controller.MailController;
-import cn.duojunrui.etims.controller.UserinfoController;
-import cn.duojunrui.etims.entity.Result;
 import cn.duojunrui.etims.entity.Userinfo;
-import cn.duojunrui.etims.enums.ResultEnum;
 import cn.duojunrui.etims.mapper.UserinfoMapper;
-import cn.duojunrui.etims.service.MailService;
 import cn.duojunrui.etims.service.UserinfoService;
 import cn.duojunrui.etims.utils.MD5Util;
-import cn.duojunrui.etims.utils.ResultUtil;
 import cn.duojunrui.etims.utils.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
-import javax.print.attribute.standard.Severity;
 import java.util.Date;
 import java.util.UUID;
 
@@ -117,7 +109,7 @@ public class UserinfoServiceImpl implements UserinfoService {
         return ServerResponse.createBySuccessMessage("校验成功");
     }
 
-    public ServerResponse selectEmail(String userId) {
+    public ServerResponse selectEmailByUserId(String userId) {
         ServerResponse validResponse = this.checkValid(userId, Constant.USERID);
         if (validResponse.isSuccess()) {
             // 用户不存在
@@ -176,7 +168,7 @@ public class UserinfoServiceImpl implements UserinfoService {
         }
 
         userinfo.setPassword(MD5Util.MD5EncodeUtf8(newPassword));
-        int updateCount = userinfoMapper.updateByPrimaryKeySelective(userinfo);
+        int updateCount = userinfoMapper.updateByUserIdSelective(userinfo);
         if (updateCount > 0) {
             return ServerResponse.createBySuccessMessage("密码修改成功");
         }
@@ -212,12 +204,20 @@ public class UserinfoServiceImpl implements UserinfoService {
 
         updateUser.setUpdateTime(new Date().getTime());
 
-        int updateCount = userinfoMapper.updateByPrimaryKeySelective(updateUser);
+        int updateCount = userinfoMapper.updateByUserIdSelective(updateUser);
         if (updateCount > 0) {
             return ServerResponse.createBySuccess("完善个人信息成功",updateUser);
         }
         return ServerResponse.createByErrorMessage("完善个人信息失败");
+    }
 
+    public ServerResponse<Userinfo> getUserInformation(String userId) {
+        Userinfo userinfo = userinfoMapper.selectByUserId(userId);
+        if (userinfo == null) {
+            return ServerResponse.createByErrorMessage("找不到当前用户");
+        }
+        userinfo.setPassword(StringUtils.EMPTY);
+        return ServerResponse.createBySuccess(userinfo);
 
     }
 

@@ -4,6 +4,7 @@ public enum  ResponseCode {
 
     SUCCESS(000,"操作成功"),
     ERROR(111,"创建失败"),
+    NEED_LOGIN(222, "需要登录"),
     SUCCESS_BUT_NULL(001, "数据为空"),
 
     FAILED(100,"参数错误"),

@@ -25,7 +25,7 @@ public interface UserinfoMapper {
     int checkEmail(String email);
 
     // 选择性更新信息
-    int updateByPrimaryKeySelective(Userinfo userinfo);
+    int updateByUserIdSelective(Userinfo userinfo);
 
     String selectEmailByUserId(String userId);
 
@@ -35,13 +35,6 @@ public interface UserinfoMapper {
 
     int checkEmailByUserId(@Param("email") String email, @Param("userId") String userId);
 
-    // 修改用户信息
-    Integer updateUserinfo();
-
-    // 修改用户密码
-    Integer updateUserPassword();
-
-    // 注销用户
-    Integer deleteUser();
+    Userinfo selectByUserId(String userId);
 
 }

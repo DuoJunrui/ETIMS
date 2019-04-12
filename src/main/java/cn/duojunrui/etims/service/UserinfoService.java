@@ -15,14 +15,20 @@ public interface UserinfoService {
     ServerResponse<String> checkValid(String str, String type);
 
     // 根据用户账号查询邮箱
-    ServerResponse selectEmail(String userId);
+    ServerResponse selectEmailByUserId(String userId);
 
     // 验证邮箱验证码
     ServerResponse<String> checkEmailCode(String userId, String userEmail, String emailCode);
 
+    // 忘记密码
     ServerResponse<String> forgetPassword(String userId, String newPassword, String emailCodeToken);
 
+    // 修改密码
     ServerResponse<String> resetPassword(String oldPassword, String newPassword, Userinfo userinfo);
 
+    // 完善用户信息
     ServerResponse<Userinfo> completeInformation(Userinfo userinfo);
+
+    // 获取用户信息
+    ServerResponse<Userinfo> getUserInformation(String userId);
 }

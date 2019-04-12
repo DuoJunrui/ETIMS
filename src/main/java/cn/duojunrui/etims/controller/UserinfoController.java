@@ -1,15 +1,11 @@
 package cn.duojunrui.etims.controller;
-
 import cn.duojunrui.etims.common.Constant;
+import cn.duojunrui.etims.common.ResponseCode;
 import cn.duojunrui.etims.common.ServerResponse;
 import cn.duojunrui.etims.entity.Result;
 import cn.duojunrui.etims.entity.Userinfo;
-import cn.duojunrui.etims.enums.ResultEnum;
 import cn.duojunrui.etims.service.UserinfoService;
-import cn.duojunrui.etims.utils.ResultUtil;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -54,9 +50,9 @@ public class UserinfoController {
     }
 
     // 获取用户邮箱
-    @GetMapping(value = "/getEamil")
+    @GetMapping("/getEamil")
     public ServerResponse<String> getEmailByUserId(String userId) {
-        return userinfoService.selectEmail(userId);
+        return userinfoService.selectEmailByUserId(userId);
     }
 
     // 验证邮箱验证码是否正确
@@ -95,6 +91,16 @@ public class UserinfoController {
             session.setAttribute(Constant.CURRENT_USER, response.getData());
         }
         return response;
+    }
+
+    // 获取用户详细信息
+    @PostMapping("/getUserInformation")
+    public ServerResponse<Userinfo> getUserInformation(HttpSession session) {
+        Userinfo currentUser = (Userinfo) session.getAttribute(Constant.CURRENT_USER);
+        if (currentUser == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，需要强制登录");
+        }
+        return userinfoService.getUserInformation(currentUser.getUserId());
     }
 
     // 用户登出 移除session

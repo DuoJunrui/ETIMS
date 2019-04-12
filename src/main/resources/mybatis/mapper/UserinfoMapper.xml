@@ -50,7 +50,7 @@
     </update>
 
     <!--选择性更新信息 根据传入的值-->
-    <update id="updateByPrimaryKeySelective" parameterType="cn.duojunrui.etims.entity.Userinfo">
+    <update id="updateByUserIdSelective" parameterType="cn.duojunrui.etims.entity.Userinfo">
         UPDATE userinfo
         <set>
             <if test="password != null">
@@ -113,6 +113,12 @@
         SELECT COUNT(1)
         FROM userinfo
         WHERE user_email = #{email} AND user_id != #{userId}
+    </select>
+
+    <select id="selectByUserId" resultType="cn.duojunrui.etims.entity.Userinfo" parameterType="string">
+        SELECT *
+        FROM userinfo
+        WHERE user_id = #{userId}
     </select>
 
     <!--无条件查询所有用户-->
