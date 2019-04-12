@@ -2,7 +2,6 @@ package cn.duojunrui.etims.controller;
 import cn.duojunrui.etims.common.Constant;
 import cn.duojunrui.etims.common.ResponseCode;
 import cn.duojunrui.etims.common.ServerResponse;
-import cn.duojunrui.etims.entity.Result;
 import cn.duojunrui.etims.entity.Userinfo;
 import cn.duojunrui.etims.service.UserinfoService;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +19,12 @@ public class UserinfoController {
     @PostMapping("/register")
     public ServerResponse<String> userRegister(Userinfo userinfo) {
         return userinfoService.userRegister(userinfo);
+    }
+
+    // 所有用户列表
+    @GetMapping("/userList")
+    public ServerResponse<Userinfo> listAllUser(Userinfo userinfo) {
+        return userinfoService.listAllUser(userinfo);
     }
 
     // 检查用户账号和用户邮箱是否有效
@@ -110,9 +115,4 @@ public class UserinfoController {
         return ServerResponse.createBySuccess();
     }
 
-    // 查询所有用户
-    @GetMapping
-    public Result listUser() {
-        return null;
-    }
 }

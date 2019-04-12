@@ -1,7 +1,4 @@
 package cn.duojunrui.etims.mapper;
-
-import cn.duojunrui.etims.common.ServerResponse;
-import cn.duojunrui.etims.entity.Result;
 import cn.duojunrui.etims.entity.Userinfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,8 +9,8 @@ public interface UserinfoMapper {
     // 用户登录
     Userinfo userLogin(@Param("userId") String userId, @Param("password") String password);
 
-    // 用户列表
-    Userinfo listUser();
+    // 所有用户列表
+    Userinfo listAllUser();
 
     // 用户注册
     int insertUser(Userinfo userinfo);

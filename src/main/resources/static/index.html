@@ -66,23 +66,31 @@
 		var user = {};
 		user.userId = $('#userId').val();
 		user.password = $('#userPassword').val();
-		console.log(user);
+		if (user.userId == "") {
+		    alert("请输入学号或工号");
+		    return false;
+        } else if (user.password == "") {
+		    alert("请输入密码");
+            return false;
+        }
+        console.log(user);
+
 		$.ajax({
-			async: true,
-			url: "http://116.10.187.233:18009/wy/admin/adminLogin",
+			url: "localhost:8080/etims/user/login",
 			type: "POST",
 			contentType: "application/json",
-			data: JSON.stringify(user),
-			success: function(result) {
-				console.log(result['statusMessage']);
-				var success = JSON.parse(result);
-				console.log(success['statusMessage']);
-				if(success['statusMessage'] == "登录成功!" ) {
-					window.location.href = "index.html";
-				} else {
-					alert("账号或密码错误！");
-				}
-			}
+			data: user,
+
+			success: function(data) {
+			    console.log(data);
+			    console.log(user);
+                window.location.href = "adminIndex.html";
+            },
+            error: function () {
+                console.log(data);
+                alert("用户名或者密码错误");
+            },
+
 		});
 	}
 	

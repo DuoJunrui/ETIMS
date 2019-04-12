@@ -11,6 +11,9 @@ public interface UserinfoService {
     // 用户登录
     ServerResponse<Userinfo> userLogin(String userId, String password);
 
+    // 获取所有用户列表
+    ServerResponse<Userinfo> listAllUser(Userinfo userinfo);
+
     // 检查用户账号和用户邮箱是否有效
     ServerResponse<String> checkValid(String str, String type);
 

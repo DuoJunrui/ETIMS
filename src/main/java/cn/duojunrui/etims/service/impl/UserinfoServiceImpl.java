@@ -43,6 +43,11 @@ public class UserinfoServiceImpl implements UserinfoService {
         return ServerResponse.createBySuccess("登录成功", userinfo);
     }
 
+    // 获取所有用户列表
+    public ServerResponse<Userinfo> listAllUser(Userinfo userinfo){
+        return ServerResponse.createBySuccess(userinfo);
+    }
+
     // 用户注册
     public ServerResponse<String> userRegister(Userinfo userinfo) {
 
@@ -227,11 +232,5 @@ public class UserinfoServiceImpl implements UserinfoService {
         //userId是不能被更新的
     return null;
     }
-
-    // 查询所有用户
-    public Userinfo listUser() {
-        return userinfoMapper.listUser();
-    }
-
 
 }

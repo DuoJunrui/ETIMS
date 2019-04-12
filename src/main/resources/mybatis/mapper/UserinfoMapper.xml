@@ -15,6 +15,12 @@
         )
     </insert>
 
+    <!--无条件查询所有用户-->
+    <select id="listAllUser" resultType="cn.duojunrui.etims.entity.Userinfo">
+        SELECT *
+        FROM userinfo
+    </select>
+
     <!--用户登录-->
     <select id="userLogin" resultType="cn.duojunrui.etims.entity.Userinfo" parameterType="java.util.Map">
         SELECT id, user_id, user_name, user_role
@@ -121,10 +127,6 @@
         WHERE user_id = #{userId}
     </select>
 
-    <!--无条件查询所有用户-->
-    <select id="listUser" resultType="cn.duojunrui.etims.entity.Userinfo">
-        SELECT *
-        FROM userinfo
-    </select>
+
 
 </mapper>
