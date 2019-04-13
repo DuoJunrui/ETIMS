@@ -25,7 +25,6 @@ public class TeachMaterialService {
     }
 
     //上传教学资料
-    @Transactional  //回滚
     public int insertTeachFile(TeachMaterial tm) {
         tm.setId(UUIDUtil.getUUID32());
         tm.setCreateTime(new Date());

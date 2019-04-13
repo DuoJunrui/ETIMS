@@ -1,10 +1,12 @@
 package cn.duojunrui.etims.controller;
+
 import cn.duojunrui.etims.common.Constant;
 import cn.duojunrui.etims.common.ResponseCode;
 import cn.duojunrui.etims.common.ServerResponse;
 import cn.duojunrui.etims.entity.Userinfo;
 import cn.duojunrui.etims.service.UserinfoService;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -71,7 +73,7 @@ public class UserinfoController {
 
     // 验证邮箱验证码是否正确
     @PostMapping("/checkEmailCode")
-    public ServerResponse<String> checkEmailCode(String userId, String userEmail, String emailCode){
+    public ServerResponse<String> checkEmailCode(String userId, String userEmail, String emailCode) {
         return userinfoService.checkEmailCode(userId, userEmail, emailCode);
     }
 

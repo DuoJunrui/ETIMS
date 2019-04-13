@@ -24,7 +24,7 @@ public class PracticeMaterialService {
     public PracticeMaterial insertPracticeMaterial(PracticeMaterial pm) {
         pm.setId(UUIDUtil.getUUID32());
         pm.setApplyStatus(0);
-        pm.setCreateTime(new Date().getTime());
+        pm.setCreateTime(System.currentTimeMillis());
         pm.setIsDeleted(0);
         return pmm.insertPracticeMaterial(pm);
     }
@@ -34,7 +34,7 @@ public class PracticeMaterialService {
     }
 
     public PracticeMaterial deleteById(PracticeMaterial pm) {
-        pm.setUpdateTime(new Date().getTime());
+        pm.setUpdateTime(System.currentTimeMillis());
         pm.setIsDeleted(1);
         return pmm.deleteById(pm);
     }

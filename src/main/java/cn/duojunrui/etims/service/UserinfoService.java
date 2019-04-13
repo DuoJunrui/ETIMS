@@ -3,14 +3,23 @@ import cn.duojunrui.etims.common.ServerResponse;
 import cn.duojunrui.etims.entity.Userinfo;
 
 /**
- * 用户模块Service层接口
- */
+* @description: TODO
+* @param
+* @author Duojuntui
+* @date 2019/4/13 23:36
+*/
 public interface UserinfoService {
 
     // 用户注册
     ServerResponse<String> userRegister(Userinfo userinfo, String emailCode);
 
-    // 发送邮箱验证码
+    /**
+    * 用来注册时发送邮箱验证码
+    * @param userId 用户账号
+    * @param userEmail 用户账号
+    * @return ServerResponse
+    * @date 2019/4/13 23:32
+    */
     ServerResponse<String> sendRegisterEmailCode(String userId, String userEmail);
 
     // 用户登录
