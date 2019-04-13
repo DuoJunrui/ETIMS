@@ -4,10 +4,11 @@ import cn.duojunrui.etims.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.mail.AuthenticationFailedException;
 import java.util.Random;
 
+/**
+ * 发送邮箱验证码
+ */
 @Controller
 public class MailController {
 

@@ -1,12 +1,17 @@
 package cn.duojunrui.etims.service;
-
 import cn.duojunrui.etims.common.ServerResponse;
 import cn.duojunrui.etims.entity.Userinfo;
 
+/**
+ * 用户模块Service层接口
+ */
 public interface UserinfoService {
 
     // 用户注册
-    ServerResponse<String> userRegister(Userinfo userinfo);
+    ServerResponse<String> userRegister(Userinfo userinfo, String emailCode);
+
+    // 发送邮箱验证码
+    ServerResponse<String> sendRegisterEmailCode(String userId, String userEmail);
 
     // 用户登录
     ServerResponse<Userinfo> userLogin(String userId, String password);

@@ -76,19 +76,20 @@
         console.log(user);
 
 		$.ajax({
-			url: "localhost:8080/etims/user/login",
-			type: "POST",
+			url: "/etims/user/login?userId="+user.userId+"&password="+user.password,
+            type: "POST",
 			contentType: "application/json",
-			data: user,
-
-			success: function(data) {
-			    console.log(data);
+			//data: {user:JSON.stringify(user)},
+            async:true,
+			success: function(result) {
+			    console.log(result);
 			    console.log(user);
-                window.location.href = "adminIndex.html";
-            },
-            error: function () {
-                console.log(data);
-                alert("用户名或者密码错误");
+			    if (result.status == 0){
+			        alert("登录成功")
+                    window.location.href = "adminIndex.html";
+                }else {
+			        alert("登录失败");
+                }
             },
 
 		});
@@ -222,8 +223,8 @@
                 <input type="checkbox" name="checkbox" id="checkbox" class="index1-chek">记住密码
                 <a href="forgetpass.html" target="_blank">忘记密码？</a>
             </div>
-            <input type="submit" name="submit" id="submit" value="登录" class="index1-input-login" onclick="userLogin()">
-            <input type="button" name="button" id="button" value="注册" class="index1-input-but" onclick="window.location.href='register.html'">
+            <input value="登录" class="index1-input-login" onclick="userLogin()">
+            <input value="注册" class="index1-input-but" onclick="window.location.href='register.html'">
           </form>
         </div>
 		<div class="index1-list-menu">

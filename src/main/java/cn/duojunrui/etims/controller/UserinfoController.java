@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+/**
+ * 用户控制器类
+ */
 @RestController
 @RequestMapping("/user")
 public class UserinfoController {
@@ -17,8 +20,14 @@ public class UserinfoController {
 
     // 用户注册
     @PostMapping("/register")
-    public ServerResponse<String> userRegister(Userinfo userinfo) {
-        return userinfoService.userRegister(userinfo);
+    public ServerResponse<String> userRegister(Userinfo userinfo, String emailCode) {
+        return userinfoService.userRegister(userinfo, emailCode);
+    }
+
+    // 发送注册邮箱验证码
+    @PostMapping("/sendRegisterEmailCode")
+    public ServerResponse<String> sendRegisterEmailCode(String userId, String userEmail) {
+        return userinfoService.sendRegisterEmailCode(userId, userEmail);
     }
 
     // 所有用户列表

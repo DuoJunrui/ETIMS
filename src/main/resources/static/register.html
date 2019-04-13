@@ -93,15 +93,6 @@
 													
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input id="userEmail" type="email" class="form-control" placeholder="邮箱" />
-															<i class="ace-icon fa fa-envelope"></i>
-														</span>
-														<a style="text-decoration: none;">*邮箱为找回密码的唯一凭证</a>
-													</label>
-													
-
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
 															<input id="userPassword1" type="password" class="form-control" placeholder="密码" />
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
@@ -113,12 +104,21 @@
 															<i class="ace-icon fa fa-retweet"></i>
 														</span>
 													</label>
+
 													<label class="block clearfix">
-														<span class="input-icon input-icon-right" style="width:100px;display: inline-block;">
-															<input type="text" class="form-control" placeholder="验证码" />
+														<span class="block input-icon input-icon-right">
+															<input id="userEmail" type="email" class="form-control" placeholder="绑定邮箱" />
+															<i class="ace-icon fa fa-envelope"></i>
+														</span>
+														<a style="text-decoration: none;">*邮箱为找回密码的唯一凭证</a>
+													</label>
+
+													<label class="block clearfix">
+														<span class="input-icon input-icon-right" style="width:150px;display: inline-block;">
+															<input type="text" class="form-control" placeholder="邮箱验证码" />
 															<i class="ace-icon fa fa-qrcode"></i>
 														</span>
-                                                        <span><img src="assets/css/images/qrcode.png"></span>
+                                                        <button type="button" onclick="sendEmailCode()">获取邮箱验证码</button>
 													</label>
 
 													<label class="block">
@@ -191,6 +191,9 @@
 		</script>
 		
 		<script>
+			$(function () {
+
+			});
 			//用户注册
 			function userRegister() {
 				console.log("进入用户注册");
@@ -210,8 +213,8 @@
 					contentType: "application/json",
 					data:JSON.stringify(user),
 					dataType:"json",
-					location.href="index.html"
-					success:function(data) {
+					location.href="index.html",
+					success: function(data) {
 //						var success = JSON.parse(result);
 						if(data.code == 0) {
 							alert("注册成功,请返回登录并完善个人信息。");
@@ -219,10 +222,39 @@
 							alert("注册失败，"+data.message);
 						}
 					},
-					error:function() {
+					error: function() {
 						alert("注册失败");
 					}
 				});
+				
+			}
+			
+			// 发送验证码
+			function sendEmailCode() {
+				var user = {};
+				user.userId = $('#userId').val();
+				user.userEmail = $('#userEmail').val();
+
+				$.ajax({
+					type: "POST",
+					url: "/etims/user/sendRegisterEmailCode"
+					async:true,
+					cache:false,
+					contentType: "application/json",
+					data: user,
+					dataType:"json",
+					success: function (data) {
+						if (data.status = 0) {
+							alert("验证码发送成功");
+						} else {
+							alert("验证码发送失败");
+						}
+					},
+
+					error: function () {
+						alert("验证码发送失败");
+					}
+				})
 				
 			}
 		</script>

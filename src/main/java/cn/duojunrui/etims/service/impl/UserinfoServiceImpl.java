@@ -9,12 +9,15 @@ import cn.duojunrui.etims.mapper.UserinfoMapper;
 import cn.duojunrui.etims.service.UserinfoService;
 import cn.duojunrui.etims.utils.MD5Util;
 import cn.duojunrui.etims.utils.UUIDUtil;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.UUID;
 
+/**
+ * 用户模块Service层接口实现
+ */
 @Service
 public class UserinfoServiceImpl implements UserinfoService {
 
@@ -41,6 +44,7 @@ public class UserinfoServiceImpl implements UserinfoService {
 
         userinfo.setPassword(org.apache.commons.lang3.StringUtils.EMPTY);
         return ServerResponse.createBySuccess("登录成功", userinfo);
+        //return JSON.toJSONString(ServerResponse);
     }
 
     // 获取所有用户列表
@@ -48,8 +52,39 @@ public class UserinfoServiceImpl implements UserinfoService {
         return ServerResponse.createBySuccess(userinfo);
     }
 
+    // 发送注册验证邮箱验证码
+    String sendEmailCode = null;
+    public ServerResponse<String> sendRegisterEmailCode(String userId, String userEmail) {
+
+        // 校验用户账号
+        ServerResponse validResponse = this.checkValid(userId, Constant.USERID);
+        if (!validResponse.isSuccess()) {
+            return validResponse;
+        }
+
+        // 校验用户邮箱
+        validResponse = this.checkValid(userEmail, Constant.USEREMAIL);
+        if (!validResponse.isSuccess()) {
+            return validResponse;
+        }
+
+        sendEmailCode = mailController.sendEmailCode(userEmail);
+
+        return ServerResponse.createBySuccess("邮件发送成功",sendEmailCode);
+    }
+
+    // 校验用户邮箱验证码
+    public ServerResponse<String> checkEmailCode(String userId, String userEmail, String emailCode) {
+        if ( sendEmailCode.equals(emailCode)) {
+//            String emailCodeToken = UUID.randomUUID().toString();
+//            TokenCache.setKey(TokenCache.TOKEN_PREFIX+userId, emailCodeToken);
+            return ServerResponse.createBySuccess("邮箱验证成功");
+        }
+        return ServerResponse.createByErrorMessage("邮箱验证码错误或者已失效");
+    }
+
     // 用户注册
-    public ServerResponse<String> userRegister(Userinfo userinfo) {
+    public ServerResponse<String> userRegister(Userinfo userinfo, String emailCode) {
 
         userinfo.setId(UUIDUtil.getUUID32());
 
@@ -62,6 +97,7 @@ public class UserinfoServiceImpl implements UserinfoService {
         // 用户密码 MD5加密
         userinfo.setPassword(MD5Util.MD5EncodeUtf8(userinfo.getPassword()));
 
+        // 用户角色
         int value = userinfo.getUserRole();
         if (value == 0) {
             userinfo.setUserRole(Constant.userRole.ROLE_SUPER_ADMIN);
@@ -75,6 +111,12 @@ public class UserinfoServiceImpl implements UserinfoService {
 
         // 校验用户邮箱
         validResponse = this.checkValid(userinfo.getUserEmail(), Constant.USEREMAIL);
+        if (!validResponse.isSuccess()) {
+            return validResponse;
+        }
+
+        // 校验用户邮箱验证码
+        validResponse =this.checkEmailCode(userinfo.getUserId(), userinfo.getUserEmail(), emailCode);
         if (!validResponse.isSuccess()) {
             return validResponse;
         }
@@ -125,15 +167,6 @@ public class UserinfoServiceImpl implements UserinfoService {
             return ServerResponse.createBySuccess(email);
         }
         return ServerResponse.createByErrorMessage("用户未绑定邮箱");
-    }
-
-    public ServerResponse<String> checkEmailCode(String userId, String userEmail, String emailCode) {
-        if (mailController.sendEmailCode(userEmail) == emailCode) {
-            String emailCodeToken = UUID.randomUUID().toString();
-            TokenCache.setKey(TokenCache.TOKEN_PREFIX+userId, emailCodeToken);
-            return ServerResponse.createBySuccess(emailCodeToken);
-        }
-        return ServerResponse.createByErrorMessage("邮箱验证码错误或者已失效");
     }
 
     public ServerResponse<String> forgetPassword(String userId, String newPassword, String emailCodeToken) {

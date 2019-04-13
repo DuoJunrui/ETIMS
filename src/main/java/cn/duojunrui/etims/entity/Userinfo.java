@@ -1,5 +1,7 @@
 package cn.duojunrui.etims.entity;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
 import javax.validation.constraints.NotBlank;
 
 /**
