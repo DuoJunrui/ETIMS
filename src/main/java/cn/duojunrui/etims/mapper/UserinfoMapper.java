@@ -3,6 +3,15 @@ import cn.duojunrui.etims.entity.Userinfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 用户管理mapper层接口
+ * @interfaceName: UserinfoMapper
+ * @author: Duojunrui
+ * @date: 2019-04-09 12:08
+ */
 @Mapper
 public interface UserinfoMapper {
 
@@ -10,7 +19,7 @@ public interface UserinfoMapper {
     Userinfo userLogin(@Param("userId") String userId, @Param("password") String password);
 
     // 所有用户列表
-    Userinfo listAllUser();
+    List<Userinfo> listAllUser(Map<String, Object> map);
 
     // 用户注册
     int insertUser(Userinfo userinfo);

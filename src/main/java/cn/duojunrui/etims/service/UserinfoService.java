@@ -2,33 +2,57 @@ package cn.duojunrui.etims.service;
 import cn.duojunrui.etims.common.ServerResponse;
 import cn.duojunrui.etims.entity.Userinfo;
 
+import java.util.List;
+
 /**
-* @description: TODO
-* @param
-* @author Duojuntui
-* @date 2019/4/13 23:36
-*/
+ * 用户管理Service层接口
+ * @interfaceName: UserinfoService
+ * @author: Duojunrui
+ * @date: 2019-04-14 12:08
+ */
 public interface UserinfoService {
 
-    // 用户注册
+    /**
+    * 用户注册
+    * @param userinfo
+    * @param emailCode
+    * @return ServerResponse<String>
+    * @date 2019/4/14 11:55
+    */
     ServerResponse<String> userRegister(Userinfo userinfo, String emailCode);
 
     /**
     * 用来注册时发送邮箱验证码
-    * @param userId 用户账号
-    * @param userEmail 用户账号
-    * @return ServerResponse
+    * @param userId
+    * @param userEmail
+    * @return ServerResponse<String>
     * @date 2019/4/13 23:32
     */
     ServerResponse<String> sendRegisterEmailCode(String userId, String userEmail);
 
-    // 用户登录
+    /**
+    * 用户登录
+    * @param userId
+    * @param password
+    * @return ServerResponse<Userinfo>
+    * @date 2019/4/14 11:52
+    */
     ServerResponse<Userinfo> userLogin(String userId, String password);
 
-    // 获取所有用户列表
-    ServerResponse<Userinfo> listAllUser(Userinfo userinfo);
+    /**
+    * 获取所有用户列表
+    * @return List<Userinfo>
+    * @date 2019/4/14 12:01
+    */
+    List<Userinfo> listAllUser();
 
-    // 检查用户账号和用户邮箱是否有效
+    /**
+    * 检查用户账号和用户邮箱是否有效
+    * @param str
+    * @param type
+    * @return ServerResponse<String>
+    * @date 2019/4/14 12:02
+    */
     ServerResponse<String> checkValid(String str, String type);
 
     // 根据用户账号查询邮箱

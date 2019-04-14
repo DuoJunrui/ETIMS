@@ -16,7 +16,7 @@
     </insert>
 
     <!--无条件查询所有用户-->
-    <select id="listAllUser" resultType="cn.duojunrui.etims.entity.Userinfo">
+    <select id="listAllUser" resultType="map">
         SELECT *
         FROM userinfo
     </select>

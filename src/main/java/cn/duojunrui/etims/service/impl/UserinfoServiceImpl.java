@@ -1,5 +1,4 @@
 package cn.duojunrui.etims.service.impl;
-
 import cn.duojunrui.etims.common.Constant;
 import cn.duojunrui.etims.common.ServerResponse;
 import cn.duojunrui.etims.common.TokenCache;
@@ -12,6 +11,7 @@ import cn.duojunrui.etims.utils.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
 * @description: TODO
@@ -50,8 +50,8 @@ public class UserinfoServiceImpl implements UserinfoService {
 
     // 获取所有用户列表
     @Override
-    public ServerResponse<Userinfo> listAllUser(Userinfo userinfo){
-        return ServerResponse.createBySuccess(userinfo);
+    public List<Userinfo> listAllUser(){
+        return ServerResponse.createBySuccess(List);
     }
 
     // 发送注册验证邮箱验证码

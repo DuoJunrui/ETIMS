@@ -8,8 +8,14 @@ public class Constant {
 
     // 是否删除
     public interface isDeleted {
-        int DELETED = 1; // 已删除
-        int NOT_DELETED = 0; // 未删除
+        /**
+        * 已删除
+        */
+        int DELETED = 1;
+        /**
+         * 未删除
+         */
+        int NOT_DELETED = 0;
     }
 
     // 用户角色

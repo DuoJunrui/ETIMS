@@ -1,11 +1,14 @@
 package cn.duojunrui.etims.mapper;
 import cn.duojunrui.etims.entity.TeachMaterial;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
+/**
+ * 教学资料mapper层接口
+ * @interfaceName: TeachMaterialMapper
+ * @author: Duojunrui
+ * @date: 2019-04-09 12:08
+ */
 @Mapper
-@Repository
 public interface TeachMaterialMapper {
 
     //查询所有教学资料

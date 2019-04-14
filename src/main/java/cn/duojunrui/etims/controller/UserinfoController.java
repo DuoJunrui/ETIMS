@@ -1,18 +1,19 @@
 package cn.duojunrui.etims.controller;
-
 import cn.duojunrui.etims.common.Constant;
 import cn.duojunrui.etims.common.ResponseCode;
 import cn.duojunrui.etims.common.ServerResponse;
 import cn.duojunrui.etims.entity.Userinfo;
 import cn.duojunrui.etims.service.UserinfoService;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
- * 用户控制器类
- */
+* 用户控制器类 提供前台接口
+* @author Duojunrui
+* @date 2019/4/14 11:26
+*/
 @RestController
 @RequestMapping("/user")
 public class UserinfoController {
@@ -20,22 +21,38 @@ public class UserinfoController {
     @Resource
     private UserinfoService userinfoService;
 
-    // 用户注册
+    /**
+    * 用户注册
+    * @param userinfo
+    * @param emailCode
+    * @return ServerResponse<String>
+    * @date 2019/4/14 21:02
+    */
     @PostMapping("/register")
     public ServerResponse<String> userRegister(Userinfo userinfo, String emailCode) {
         return userinfoService.userRegister(userinfo, emailCode);
     }
 
-    // 发送注册邮箱验证码
+    /**
+    * 发送注册邮箱验证码
+    * @param userId
+    * @param userEmail
+    * @return ServerResponse<String>
+    * @date 2019/4/14 21:03
+    */
     @PostMapping("/sendRegisterEmailCode")
     public ServerResponse<String> sendRegisterEmailCode(String userId, String userEmail) {
         return userinfoService.sendRegisterEmailCode(userId, userEmail);
     }
 
-    // 所有用户列表
+    /**
+    * 获取所有用户账号列表
+    * @return ServerResponse<Userinfo>
+    * @date 2019/4/14 21:04
+    */
     @GetMapping("/userList")
-    public ServerResponse<Userinfo> listAllUser(Userinfo userinfo) {
-        return userinfoService.listAllUser(userinfo);
+    public ServerResponse<List> listAllUser() {
+        return userinfoService.listAllUser(List);
     }
 
     // 检查用户账号和用户邮箱是否有效

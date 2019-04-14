@@ -1,19 +1,20 @@
 package cn.duojunrui.etims.controller;
-import cn.duojunrui.etims.entity.TeachMaterial;
 import cn.duojunrui.etims.service.TeachMaterialService;
-import cn.duojunrui.etims.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * 教学资料控制层
+ * @author Duojunrui
+ * @date 2019/4/10 12:06
+ */
 @Controller
-@RequestMapping(value = "teachMatrial")
+@RequestMapping("/teachMatrial")
 public class TeachMaterialController {
 
     @Autowired
-    private TeachMaterialService tms;
+    private TeachMaterialService teachMaterialService;
 
 //    /**
 //     * 查询所有教学资料

@@ -71,43 +71,8 @@
         function frlink(selObj) {
             window.open(selObj.options[selObj.selectedIndex].value);
         }
-
-        //用户登录
-        function userLogin() {
-            console.log("submit");
-            var user = {};
-            user.userId = $('#userId').val();
-            user.password = $('#userPassword').val();
-            if (user.userId == "") {
-                alert("请输入学号或工号");
-                return false;
-            } else if (user.password == "") {
-                alert("请输入密码");
-                return false;
-            }
-            console.log(user);
-
-            $.ajax({
-                url: "/etims/user/login?userId=" + user.userId + "&password=" + user.password,
-                type: "POST",
-                contentType: "application/json",
-                //data: {user:JSON.stringify(user)},
-                async: true,
-                success: function (result) {
-                    console.log(result);
-                    console.log(user);
-                    if (result.status == 100) {
-                        window.location.href = "adminIndex.html";
-                    } else {
-                        alert(result.message);
-                    }
-                },
-
-            });
-        }
-
-
     </script>
+
 </head>
 
 <body>
@@ -292,5 +257,38 @@
 </div>
 <div id="div6">Copyright &copy; 2019 桂林电子科技大学信息科技学院实验教学中心</div>
 </body>
+<script type="text/javascript">
+    //用户登录
+    function userLogin() {
+        console.log("用户登录提交");
+        var user = {};
+        user.userId = $('#userId').val().trim();
+        user.password = $('#userPassword').val().trim();
+        if (user.userId == "") {
+            alert("请输入学号或工号");
+            return false;
+        } else if (user.password == "") {
+            alert("请输入密码");
+            return false;
+        }
+        ;
+        console.log(user);
+        $.ajax({
+            url: "/etims/user/login?userId=" + user.userId + "&password=" + user.password,
+            type: "POST",
+            contentType: "application/json",
+            //data: {user:JSON.stringify(user)},
+            success: function (result) {
+                console.log(result);
+                if (result.status == 100) {
+                    window.location.href = "adminIndex.html";
+                } else {
+                    alert(result.message);
+                }
+            },
+
+        });
+    }
+</script>
 </html>
 
