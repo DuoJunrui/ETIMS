@@ -9,9 +9,11 @@ import cn.duojunrui.etims.service.UserinfoService;
 import cn.duojunrui.etims.utils.Md5Util;
 import cn.duojunrui.etims.utils.UUIDUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.omg.CORBA.OBJ_ADAPTER;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
 * @description: TODO
@@ -50,8 +52,9 @@ public class UserinfoServiceImpl implements UserinfoService {
 
     // 获取所有用户列表
     @Override
-    public List<Userinfo> listAllUser(){
-        return ServerResponse.createBySuccess(List);
+    public List<Userinfo> listAllUser(Map<String, Object> map){
+        List<Userinfo> userinfos = userinfoMapper.listAllUser(map);
+        return userinfos;
     }
 
     // 发送注册验证邮箱验证码

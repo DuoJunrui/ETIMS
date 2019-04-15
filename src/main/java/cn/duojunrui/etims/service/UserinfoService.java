@@ -3,6 +3,7 @@ import cn.duojunrui.etims.common.ServerResponse;
 import cn.duojunrui.etims.entity.Userinfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户管理Service层接口
@@ -44,7 +45,7 @@ public interface UserinfoService {
     * @return List<Userinfo>
     * @date 2019/4/14 12:01
     */
-    List<Userinfo> listAllUser();
+    List<Userinfo> listAllUser(Map<String, Object> map);
 
     /**
     * 检查用户账号和用户邮箱是否有效

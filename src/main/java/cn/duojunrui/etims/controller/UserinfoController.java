@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
 * 用户控制器类 提供前台接口
@@ -50,10 +51,10 @@ public class UserinfoController {
     * @return ServerResponse<Userinfo>
     * @date 2019/4/14 21:04
     */
-    @GetMapping("/userList")
-    public ServerResponse<List> listAllUser() {
-        return userinfoService.listAllUser(List);
-    }
+//    @GetMapping("/userList")
+//    public ServerResponse<List> listAllUser() {
+//        return userinfoService.listAllUser();
+//    }
 
     // 检查用户账号和用户邮箱是否有效
     @PostMapping("/checkValid")
