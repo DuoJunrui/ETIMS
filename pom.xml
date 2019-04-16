@@ -25,7 +25,7 @@
         <!--<mybatisplus-spring-boot-starter.version>1.0.4</mybatisplus-spring-boot-starter.version>-->
         <!--<velocity.version>1.7</velocity.version>-->
         <!--<activiti.version>5.22.0</activiti.version>-->
-    </properties>s
+    </properties>
 
     <dependencies>
 
@@ -36,8 +36,20 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>org.mybatis</groupId>-->
+        <!--<artifactId>mybatis</artifactId>-->
+        <!--<version>3.4.4</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -97,6 +109,7 @@
             <artifactId>shiro-spring</artifactId>
             <version>1.3.2</version>
         </dependency>
+
         <!-- shiro ehcache -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -108,6 +121,12 @@
                 </exclusion>
             </exclusions>
             <version>1.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.theborakompanioni</groupId>
+            <artifactId>thymeleaf-extras-shiro</artifactId>
+            <version>2.0.0</version>
         </dependency>
 
         <!-- 热部署 -->
@@ -131,6 +150,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
         </dependency>
 
         <!--velocity代码生成使用模板 -->
@@ -221,11 +245,6 @@
             <version>1.9.2</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <build>
