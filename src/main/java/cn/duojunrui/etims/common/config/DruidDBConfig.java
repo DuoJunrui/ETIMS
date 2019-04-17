@@ -6,11 +6,13 @@ import com.alibaba.druid.support.http.WebStatFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -23,9 +25,12 @@ import java.sql.SQLException;
  * @date: 2019-04-16 16:31
  */
 
+// ConfigurationProperties不会创建bean，所以要加上其他注解交给spring容器管理；如@Component
 @Configuration
 public class DruidDBConfig {
+
     private Logger logger = LoggerFactory.getLogger(DruidDBConfig.class);
+
     @Value("${spring.datasource.url}")
     private String dbUrl;
 

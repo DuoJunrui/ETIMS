@@ -1,5 +1,6 @@
 package cn.duojunrui.etims.common.dao;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Map;
  * @author: Duojunrui
  * @date: 2019-04-16 17:16
  */
-
+@Mapper
 public interface GeneratorMapper {
     @Select("select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables"
             + " where table_schema = (select database())")

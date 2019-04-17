@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <title>面向学习型的开源框架，简洁高效，减少过渡封装，展现技术本质</title>
-    <meta name="keywords" content="面向学习型的开源框架，简洁高效，杜绝过渡封装，展现技术本质本质">
-    <meta name="description" content="面向学习型的开源框架，简洁高效，杜绝过渡封装，展现技术本质本质">
+    <title>实验教学信息管理系统-主页</title>
+    <meta name="keywords" content="实验教学信息管理系统,后台bootstrap框架,后台HTML,响应式后台">
+    <meta name="description" content="基于Bootstrap3最新版本开发的扁平化主题，采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -31,7 +31,7 @@
                     <div>
                         <span><img alt="image" class="img-circle" height="60" width="60" th:src="${picUrl}"/></span>
                         <h3 class="" style="color: #ffffff">
-                            </i>BootDo后台管理系统
+                            </i>用户名
                         </h3>
                     </div>
                     <div class="dropdown profile-element hidden">
@@ -56,7 +56,7 @@
                             <li><a href="/logout">安全退出</a>
                             </li>
                         </ul>
-                        <div class="logo-element">BootDo</div>
+                        <div class="logo-element">Etims</div>
                     </div>
                 </li>
                 <li><a href="#"> <i class="fa fa-home"></i> <span
@@ -64,7 +64,7 @@
                 </a>
                     <ul class="nav nav-second-level">
                         <li><a id="index001" class="J_menuItem" href="index_v1.html"
-                               data-index="0" th:href="@{/main}">了解BootDo</a></li>
+                               data-index="0" th:href="@{/main}">了解该系统</a></li>
                     </ul>
                 </li>
                 <li th:each="menu : ${menus}"><a href="#"> <i
@@ -100,8 +100,8 @@
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
-                    <li class="hidden-xs"><a href="/blog" target="_Blank"
-                                             class=""><i class="fa fa-rss-square"></i>博客</a></li>
+                    <li class="hidden-xs"><a href="center.html" target="_Blank"
+                                             class=""><i class="fa fa-rss-square"></i>实验中心</a></li>
                     <li class="dropdown"><a class="dropdown-toggle count-info"
                                             data-toggle="dropdown" href="#"> <i class="fa fa-envelope"></i>
                         <span class="label label-warning">{{total}}</span>通知
@@ -171,7 +171,7 @@
                     seamless></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">BootDo面向学习型的开源框架</div>
+            <div class="pull-right">实验教学信息管理系统-主页</div>
         </div>
     </div>
     <!--右侧部分结束-->
