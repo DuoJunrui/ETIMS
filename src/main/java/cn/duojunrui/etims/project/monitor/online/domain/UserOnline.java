@@ -3,7 +3,7 @@ package cn.duojunrui.etims.project.monitor.online.domain;
 import cn.duojunrui.etims.framework.web.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
+import cn.duojunrui.etims.project.monitor.online.domain.OnlineSession.OnlineStatus;
 import java.util.Date;
 
 /**

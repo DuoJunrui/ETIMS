@@ -1,8 +1,10 @@
 package cn.duojunrui.etims.common.utils.file;
 
 import cn.duojunrui.etims.common.exception.file.FileNameLengthLimitExceededException;
+import cn.duojunrui.etims.common.exception.file.FileSizeLimitExceededException;
 import cn.duojunrui.etims.common.utils.DateUtils;
 import cn.duojunrui.etims.common.utils.Md5Utils;
+import cn.duojunrui.etims.framework.config.EtimsConfig;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -30,7 +32,7 @@ public class FileUploadUtils {
     /**
      * 默认上传的地址
      */
-    private static String defaultBaseDir = RuoYiConfig.getProfile();
+    private static String defaultBaseDir = EtimsConfig.getProfile();
 
     /**
      * 默认文件类型jpg

@@ -1,5 +1,6 @@
 package cn.duojunrui.etims.project.monitor.job.util;
 
+import cn.duojunrui.etims.project.monitor.job.domain.Job;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 

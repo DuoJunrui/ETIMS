@@ -1,5 +1,9 @@
 package cn.duojunrui.etims.project.system.role.mapper;
 
+import cn.duojunrui.etims.project.system.role.domain.Role;
+
+import java.util.List;
+
 /**
  * 角色表 数据层
  *

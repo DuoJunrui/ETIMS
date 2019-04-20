@@ -1,5 +1,11 @@
 package cn.duojunrui.etims.common.utils;
 
+import cn.duojunrui.etims.project.system.menu.domain.Menu;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * 权限数据处理
  *

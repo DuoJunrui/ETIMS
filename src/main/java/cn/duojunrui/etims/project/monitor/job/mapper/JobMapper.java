@@ -1,5 +1,9 @@
 package cn.duojunrui.etims.project.monitor.job.mapper;
 
+import cn.duojunrui.etims.project.monitor.job.domain.Job;
+
+import java.util.List;
+
 /**
  * 调度任务信息 数据层
  *

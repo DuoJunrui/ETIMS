@@ -9,6 +9,7 @@ import cn.duojunrui.etims.framework.web.domain.Ztree;
 import cn.duojunrui.etims.project.system.dept.domain.Dept;
 import cn.duojunrui.etims.project.system.dept.mapper.DeptMapper;
 import cn.duojunrui.etims.project.system.dept.service.IDeptService;
+import cn.duojunrui.etims.project.system.role.domain.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

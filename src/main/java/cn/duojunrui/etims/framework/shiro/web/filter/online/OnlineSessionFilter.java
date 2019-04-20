@@ -3,6 +3,8 @@ package cn.duojunrui.etims.framework.shiro.web.filter.online;
 import cn.duojunrui.etims.common.constant.ShiroConstants;
 import cn.duojunrui.etims.common.utils.security.ShiroUtils;
 import cn.duojunrui.etims.framework.shiro.session.OnlineSessionDAO;
+import cn.duojunrui.etims.project.monitor.online.domain.OnlineSession;
+import cn.duojunrui.etims.project.system.user.domain.User;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;

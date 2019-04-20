@@ -3,6 +3,8 @@ package cn.duojunrui.etims.framework.shiro.session;
 import cn.duojunrui.etims.common.utils.IpUtils;
 import cn.duojunrui.etims.common.utils.ServletUtils;
 import cn.duojunrui.etims.common.utils.StringUtils;
+import cn.duojunrui.etims.project.monitor.online.domain.OnlineSession;
+import cn.duojunrui.etims.project.monitor.online.domain.UserOnline;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SessionContext;

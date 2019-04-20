@@ -1,5 +1,9 @@
 package cn.duojunrui.etims.project.system.user.mapper;
 
+import cn.duojunrui.etims.project.system.user.domain.User;
+
+import java.util.List;
+
 /**
  * 用户表 数据层
  *

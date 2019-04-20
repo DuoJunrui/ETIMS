@@ -2,11 +2,14 @@ package cn.duojunrui.etims.project.tool.gen.service.impl;
 
 import cn.duojunrui.etims.common.constant.Constants;
 import cn.duojunrui.etims.common.exception.base.BaseException;
+import cn.duojunrui.etims.common.utils.StringUtils;
 import cn.duojunrui.etims.framework.config.GenConfig;
 import cn.duojunrui.etims.project.tool.gen.domain.ColumnInfo;
 import cn.duojunrui.etims.project.tool.gen.domain.TableInfo;
 import cn.duojunrui.etims.project.tool.gen.mapper.GenMapper;
 import cn.duojunrui.etims.project.tool.gen.service.IGenService;
+import cn.duojunrui.etims.project.tool.gen.util.GenUtils;
+import cn.duojunrui.etims.project.tool.gen.util.VelocityInitializer;
 import org.apache.commons.io.IOUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;

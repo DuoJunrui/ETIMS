@@ -1,5 +1,7 @@
 package cn.duojunrui.etims.framework.manager;
 
+
+import cn.duojunrui.etims.framework.shiro.web.session.SpringSessionValidationScheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

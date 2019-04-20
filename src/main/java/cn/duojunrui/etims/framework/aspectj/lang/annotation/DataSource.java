@@ -1,5 +1,7 @@
 package cn.duojunrui.etims.framework.aspectj.lang.annotation;
 
+import cn.duojunrui.etims.framework.aspectj.lang.enums.DataSourceType;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -6,6 +6,7 @@ import cn.duojunrui.etims.common.utils.StringUtils;
 import cn.duojunrui.etims.common.utils.security.ShiroUtils;
 import cn.duojunrui.etims.framework.manager.AsyncManager;
 import cn.duojunrui.etims.framework.manager.factory.AsyncFactory;
+import cn.duojunrui.etims.project.system.user.domain.User;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;

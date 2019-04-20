@@ -1,5 +1,9 @@
 package cn.duojunrui.etims.project.system.user.service;
 
+import cn.duojunrui.etims.project.system.user.domain.User;
+
+import java.util.List;
+
 /**
  * 用户 业务层
  *

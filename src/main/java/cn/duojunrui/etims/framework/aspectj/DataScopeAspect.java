@@ -1,7 +1,12 @@
 package cn.duojunrui.etims.framework.aspectj;
 
+
 import cn.duojunrui.etims.common.utils.StringUtils;
 import cn.duojunrui.etims.common.utils.security.ShiroUtils;
+import cn.duojunrui.etims.framework.aspectj.lang.annotation.DataScope;
+import cn.duojunrui.etims.framework.web.domain.BaseEntity;
+import cn.duojunrui.etims.project.system.role.domain.Role;
+import cn.duojunrui.etims.project.system.user.domain.User;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
@@ -38,7 +43,7 @@ public class DataScopeAspect {
     public static final String DATA_SCOPE = "dataScope";
 
     // 配置织入点
-    @Pointcut("@annotation(com.ruoyi.framework.aspectj.lang.annotation.DataScope)")
+    @Pointcut("@annotation(cn.duojunrui.etims.framework.aspectj.lang.annotation.DataScope)")
     public void dataScopePointCut() {
     }
 

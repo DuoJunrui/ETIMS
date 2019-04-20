@@ -5,12 +5,15 @@ import cn.duojunrui.etims.framework.aspectj.lang.enums.BusinessType;
 import cn.duojunrui.etims.framework.web.controller.BaseController;
 import cn.duojunrui.etims.framework.web.domain.AjaxResult;
 import cn.duojunrui.etims.framework.web.page.TableDataInfo;
+import cn.duojunrui.etims.project.system.notice.domain.Notice;
 import cn.duojunrui.etims.project.system.notice.service.INoticeService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 公告 信息操作处理

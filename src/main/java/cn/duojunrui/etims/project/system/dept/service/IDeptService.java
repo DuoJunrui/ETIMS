@@ -2,6 +2,7 @@ package cn.duojunrui.etims.project.system.dept.service;
 
 import cn.duojunrui.etims.framework.web.domain.Ztree;
 import cn.duojunrui.etims.project.system.dept.domain.Dept;
+import cn.duojunrui.etims.project.system.role.domain.Role;
 
 import java.util.List;
 

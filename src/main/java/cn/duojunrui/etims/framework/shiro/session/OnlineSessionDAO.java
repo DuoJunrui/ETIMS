@@ -2,6 +2,9 @@ package cn.duojunrui.etims.framework.shiro.session;
 
 import cn.duojunrui.etims.framework.manager.AsyncManager;
 import cn.duojunrui.etims.framework.manager.factory.AsyncFactory;
+import cn.duojunrui.etims.project.monitor.online.domain.OnlineSession;
+import cn.duojunrui.etims.project.monitor.online.domain.UserOnline;
+import cn.duojunrui.etims.project.monitor.online.service.IUserOnlineService;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;

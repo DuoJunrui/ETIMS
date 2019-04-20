@@ -1,5 +1,9 @@
 package cn.duojunrui.etims.project.system.notice.service;
 
+import cn.duojunrui.etims.project.system.notice.domain.Notice;
+
+import java.util.List;
+
 /**
  * 公告 服务层
  *

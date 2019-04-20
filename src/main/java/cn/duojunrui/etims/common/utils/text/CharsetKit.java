@@ -1,5 +1,7 @@
 package cn.duojunrui.etims.common.utils.text;
 
+import cn.duojunrui.etims.common.utils.StringUtils;
+
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 

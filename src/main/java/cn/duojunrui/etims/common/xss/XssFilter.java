@@ -1,7 +1,6 @@
 package cn.duojunrui.etims.common.xss;
 
-import cn.duojunrui.etims.system.filter.XssHttpServletRequestWrapper;
-
+import cn.duojunrui.etims.common.utils.StringUtils;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

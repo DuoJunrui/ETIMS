@@ -1,7 +1,17 @@
 package cn.duojunrui.etims.framework.config;
 
+
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import cn.duojunrui.etims.common.utils.StringUtils;
+import cn.duojunrui.etims.framework.shiro.realm.UserRealm;
+import cn.duojunrui.etims.framework.shiro.session.OnlineSessionDAO;
+import cn.duojunrui.etims.framework.shiro.session.OnlineSessionFactory;
+import cn.duojunrui.etims.framework.shiro.web.filter.LogoutFilter;
+import cn.duojunrui.etims.framework.shiro.web.filter.captcha.CaptchaValidateFilter;
+import cn.duojunrui.etims.framework.shiro.web.filter.online.OnlineSessionFilter;
+import cn.duojunrui.etims.framework.shiro.web.filter.sync.SyncOnlineSessionFilter;
+import cn.duojunrui.etims.framework.shiro.web.session.OnlineWebSessionManager;
+import cn.duojunrui.etims.framework.shiro.web.session.SpringSessionValidationScheduler;
 import org.apache.commons.io.IOUtils;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
@@ -10,7 +20,6 @@ import org.apache.shiro.io.ResourceUtils;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;

@@ -1,5 +1,6 @@
 package cn.duojunrui.etims.framework.web.service;
 
+import cn.duojunrui.etims.project.system.config.service.IConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

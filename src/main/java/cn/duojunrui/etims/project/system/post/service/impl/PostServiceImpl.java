@@ -8,6 +8,7 @@ import cn.duojunrui.etims.common.utils.text.Convert;
 import cn.duojunrui.etims.project.system.post.domain.Post;
 import cn.duojunrui.etims.project.system.post.mapper.PostMapper;
 import cn.duojunrui.etims.project.system.post.service.IPostService;
+import cn.duojunrui.etims.project.system.user.mapper.UserPostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

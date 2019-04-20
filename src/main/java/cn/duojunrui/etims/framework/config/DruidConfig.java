@@ -2,6 +2,7 @@ package cn.duojunrui.etims.framework.config;
 
 import cn.duojunrui.etims.framework.aspectj.lang.enums.DataSourceType;
 import cn.duojunrui.etims.framework.config.properties.DruidProperties;
+import cn.duojunrui.etims.framework.datasource.DynamicDataSource;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

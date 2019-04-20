@@ -1,5 +1,6 @@
 package cn.duojunrui.etims.project.tool.gen.domain;
 
+import cn.duojunrui.etims.common.utils.StringUtils;
 import com.alibaba.fastjson.JSON;
 
 /**

@@ -2,6 +2,7 @@ package cn.duojunrui.etims.framework.shiro.web.filter.sync;
 
 import cn.duojunrui.etims.common.constant.ShiroConstants;
 import cn.duojunrui.etims.framework.shiro.session.OnlineSessionDAO;
+import cn.duojunrui.etims.project.monitor.online.domain.OnlineSession;
 import org.apache.shiro.web.filter.PathMatchingFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 

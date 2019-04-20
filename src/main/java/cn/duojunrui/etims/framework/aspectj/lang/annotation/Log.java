@@ -1,5 +1,8 @@
 package cn.duojunrui.etims.framework.aspectj.lang.annotation;
 
+import cn.duojunrui.etims.framework.aspectj.lang.enums.BusinessType;
+import cn.duojunrui.etims.framework.aspectj.lang.enums.OperatorType;
+
 import java.lang.annotation.*;
 
 /**

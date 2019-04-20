@@ -1,13 +1,16 @@
 package cn.duojunrui.etims.project.system.user.domain;
 
 import cn.duojunrui.etims.framework.aspectj.lang.annotation.Excel;
+import cn.duojunrui.etims.framework.aspectj.lang.annotation.Excel.Type;
 import cn.duojunrui.etims.framework.web.domain.BaseEntity;
 import cn.duojunrui.etims.project.system.dept.domain.Dept;
+import cn.duojunrui.etims.project.system.role.domain.Role;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户对象 sys_user

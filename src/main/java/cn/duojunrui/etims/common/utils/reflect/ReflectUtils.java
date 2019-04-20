@@ -1,8 +1,10 @@
 package cn.duojunrui.etims.common.utils.reflect;
 
-import com.sun.tools.javac.util.Convert;
+import cn.duojunrui.etims.common.utils.DateUtils;
+import cn.duojunrui.etims.common.utils.text.Convert;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

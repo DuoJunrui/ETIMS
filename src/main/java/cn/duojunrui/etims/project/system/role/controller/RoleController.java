@@ -1,16 +1,23 @@
 package cn.duojunrui.etims.project.system.role.controller;
 
+import cn.duojunrui.etims.common.utils.poi.ExcelUtil;
 import cn.duojunrui.etims.framework.aspectj.lang.annotation.Log;
 import cn.duojunrui.etims.framework.aspectj.lang.enums.BusinessType;
 import cn.duojunrui.etims.framework.web.controller.BaseController;
 import cn.duojunrui.etims.framework.web.domain.AjaxResult;
 import cn.duojunrui.etims.framework.web.page.TableDataInfo;
+import cn.duojunrui.etims.project.system.role.domain.Role;
 import cn.duojunrui.etims.project.system.role.service.IRoleService;
+import cn.duojunrui.etims.project.system.user.domain.User;
+import cn.duojunrui.etims.project.system.user.domain.UserRole;
+import cn.duojunrui.etims.project.system.user.service.IUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 角色信息

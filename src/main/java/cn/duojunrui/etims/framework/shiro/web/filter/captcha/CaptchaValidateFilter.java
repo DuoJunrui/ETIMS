@@ -1,6 +1,7 @@
 package cn.duojunrui.etims.framework.shiro.web.filter.captcha;
 
 import cn.duojunrui.etims.common.constant.ShiroConstants;
+import cn.duojunrui.etims.common.utils.StringUtils;
 import cn.duojunrui.etims.common.utils.security.ShiroUtils;
 import com.google.code.kaptcha.Constants;
 import org.apache.shiro.web.filter.AccessControlFilter;

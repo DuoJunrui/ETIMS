@@ -5,8 +5,12 @@ import cn.duojunrui.etims.common.utils.StringUtils;
 import cn.duojunrui.etims.common.utils.TreeUtils;
 import cn.duojunrui.etims.common.utils.security.ShiroUtils;
 import cn.duojunrui.etims.framework.web.domain.Ztree;
+import cn.duojunrui.etims.project.system.menu.domain.Menu;
 import cn.duojunrui.etims.project.system.menu.mapper.MenuMapper;
 import cn.duojunrui.etims.project.system.menu.service.IMenuService;
+import cn.duojunrui.etims.project.system.role.domain.Role;
+import cn.duojunrui.etims.project.system.role.mapper.RoleMenuMapper;
+import cn.duojunrui.etims.project.system.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

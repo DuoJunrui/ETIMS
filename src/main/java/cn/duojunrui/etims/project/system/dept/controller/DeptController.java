@@ -8,6 +8,7 @@ import cn.duojunrui.etims.framework.web.domain.AjaxResult;
 import cn.duojunrui.etims.framework.web.domain.Ztree;
 import cn.duojunrui.etims.project.system.dept.domain.Dept;
 import cn.duojunrui.etims.project.system.dept.service.IDeptService;
+import cn.duojunrui.etims.project.system.role.domain.Role;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

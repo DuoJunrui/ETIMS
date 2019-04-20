@@ -1,6 +1,8 @@
 package cn.duojunrui.etims.framework.aspectj;
 
 import cn.duojunrui.etims.common.utils.StringUtils;
+import cn.duojunrui.etims.framework.aspectj.lang.annotation.DataSource;
+import cn.duojunrui.etims.framework.datasource.DynamicDataSourceContextHolder;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -27,7 +29,7 @@ import java.lang.reflect.Method;
 public class DataSourceAspect {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Pointcut("@annotation(com.ruoyi.framework.aspectj.lang.annotation.DataSource)")
+    @Pointcut("@annotation(cn.duojunrui.etims.framework.aspectj.lang.annotation.DataSource)")
     public void dsPointCut() {
 
     }

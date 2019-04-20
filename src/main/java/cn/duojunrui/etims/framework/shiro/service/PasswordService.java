@@ -6,6 +6,7 @@ import cn.duojunrui.etims.common.exception.user.UserPasswordRetryLimitExceedExce
 import cn.duojunrui.etims.common.utils.MessageUtils;
 import cn.duojunrui.etims.framework.manager.AsyncManager;
 import cn.duojunrui.etims.framework.manager.factory.AsyncFactory;
+import cn.duojunrui.etims.project.system.user.domain.User;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.crypto.hash.Md5Hash;

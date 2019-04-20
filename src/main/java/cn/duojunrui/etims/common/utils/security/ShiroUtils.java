@@ -1,7 +1,9 @@
 package cn.duojunrui.etims.common.utils.security;
 
+import cn.duojunrui.etims.common.utils.StringUtils;
 import cn.duojunrui.etims.common.utils.bean.BeanUtils;
-import cn.duojunrui.etims.system.shiro.UserRealm;
+import cn.duojunrui.etims.framework.shiro.realm.UserRealm;
+import cn.duojunrui.etims.project.system.user.domain.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.mgt.RealmSecurityManager;
 import org.apache.shiro.session.Session;

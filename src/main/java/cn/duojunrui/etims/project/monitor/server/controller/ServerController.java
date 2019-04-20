@@ -1,6 +1,7 @@
 package cn.duojunrui.etims.project.monitor.server.controller;
 
 import cn.duojunrui.etims.framework.web.controller.BaseController;
+import cn.duojunrui.etims.project.monitor.server.domain.Server;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

@@ -1,10 +1,14 @@
 package cn.duojunrui.etims.project.system.user.controller;
 
+import cn.duojunrui.etims.common.utils.StringUtils;
 import cn.duojunrui.etims.common.utils.file.FileUploadUtils;
 import cn.duojunrui.etims.framework.aspectj.lang.annotation.Log;
 import cn.duojunrui.etims.framework.aspectj.lang.enums.BusinessType;
+import cn.duojunrui.etims.framework.config.EtimsConfig;
+import cn.duojunrui.etims.framework.shiro.service.PasswordService;
 import cn.duojunrui.etims.framework.web.controller.BaseController;
 import cn.duojunrui.etims.framework.web.domain.AjaxResult;
+import cn.duojunrui.etims.project.system.user.domain.User;
 import cn.duojunrui.etims.project.system.user.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -131,7 +135,7 @@ public class ProfileController extends BaseController {
         User currentUser = getSysUser();
         try {
             if (!file.isEmpty()) {
-                String avatar = FileUploadUtils.upload(RuoYiConfig.getAvatarPath(), file);
+                String avatar = FileUploadUtils.upload(EtimsConfig.getAvatarPath(), file);
                 currentUser.setAvatar(avatar);
                 if (userService.updateUserInfo(currentUser) > 0) {
                     setSysUser(userService.selectUserById(currentUser.getUserId()));

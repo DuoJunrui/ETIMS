@@ -1,5 +1,6 @@
 package cn.duojunrui.etims.framework.config;
 
+import cn.duojunrui.etims.common.utils.StringUtils;
 import cn.duojunrui.etims.common.xss.XssFilter;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Value;

@@ -4,6 +4,7 @@ import cn.duojunrui.etims.common.utils.Arith;
 import cn.duojunrui.etims.common.utils.IpUtils;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
+import oshi.hardware.CentralProcessor.TickType;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.FileSystem;
@@ -12,6 +13,8 @@ import oshi.software.os.OperatingSystem;
 import oshi.util.Util;
 
 import java.net.UnknownHostException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
 
 /**

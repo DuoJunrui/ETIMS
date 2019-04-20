@@ -1,8 +1,8 @@
 package cn.duojunrui.etims.common.utils.security;
 
 import cn.duojunrui.etims.common.constant.PermissionConstants;
+import cn.duojunrui.etims.common.utils.MessageUtils;
 import org.apache.commons.lang3.StringUtils;
-import sun.misc.MessageUtils;
 
 /**
  * permission 工具类

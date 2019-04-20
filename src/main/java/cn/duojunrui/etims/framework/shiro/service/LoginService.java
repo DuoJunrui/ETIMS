@@ -1,5 +1,6 @@
 package cn.duojunrui.etims.framework.shiro.service;
 
+
 import cn.duojunrui.etims.common.constant.Constants;
 import cn.duojunrui.etims.common.constant.ShiroConstants;
 import cn.duojunrui.etims.common.constant.UserConstants;
@@ -10,7 +11,9 @@ import cn.duojunrui.etims.common.utils.ServletUtils;
 import cn.duojunrui.etims.common.utils.security.ShiroUtils;
 import cn.duojunrui.etims.framework.manager.AsyncManager;
 import cn.duojunrui.etims.framework.manager.factory.AsyncFactory;
-import org.apache.shiro.authc.credential.PasswordService;
+import cn.duojunrui.etims.project.system.user.domain.User;
+import cn.duojunrui.etims.project.system.user.domain.UserStatus;
+import cn.duojunrui.etims.project.system.user.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

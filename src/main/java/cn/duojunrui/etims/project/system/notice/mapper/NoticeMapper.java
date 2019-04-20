@@ -1,5 +1,9 @@
 package cn.duojunrui.etims.project.system.notice.mapper;
 
+import cn.duojunrui.etims.project.system.notice.domain.Notice;
+
+import java.util.List;
+
 /**
  * 公告 数据层
  *

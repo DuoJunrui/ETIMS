@@ -1,5 +1,9 @@
 package cn.duojunrui.etims.project.system.role.service;
 
+import cn.duojunrui.etims.project.system.role.domain.Role;
+import cn.duojunrui.etims.project.system.user.domain.UserRole;
+
+import java.util.List;
 import java.util.Set;
 
 /**

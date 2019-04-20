@@ -1,5 +1,6 @@
 package cn.duojunrui.etims.project.system.menu.mapper;
 
+import cn.duojunrui.etims.project.system.menu.domain.Menu;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

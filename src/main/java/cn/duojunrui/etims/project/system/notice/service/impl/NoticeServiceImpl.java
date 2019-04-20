@@ -2,10 +2,13 @@ package cn.duojunrui.etims.project.system.notice.service.impl;
 
 import cn.duojunrui.etims.common.utils.security.ShiroUtils;
 import cn.duojunrui.etims.common.utils.text.Convert;
+import cn.duojunrui.etims.project.system.notice.domain.Notice;
 import cn.duojunrui.etims.project.system.notice.mapper.NoticeMapper;
 import cn.duojunrui.etims.project.system.notice.service.INoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 公告 服务层实现

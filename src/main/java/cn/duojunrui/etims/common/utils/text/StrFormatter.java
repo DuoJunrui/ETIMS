@@ -1,5 +1,7 @@
 package cn.duojunrui.etims.common.utils.text;
 
+import cn.duojunrui.etims.common.utils.StringUtils;
+
 /**
  * 字符串格式化
  *

@@ -3,6 +3,12 @@ package cn.duojunrui.etims.framework.aspectj;
 import cn.duojunrui.etims.common.utils.ServletUtils;
 import cn.duojunrui.etims.common.utils.StringUtils;
 import cn.duojunrui.etims.common.utils.security.ShiroUtils;
+import cn.duojunrui.etims.framework.aspectj.lang.annotation.Log;
+import cn.duojunrui.etims.framework.aspectj.lang.enums.BusinessStatus;
+import cn.duojunrui.etims.framework.manager.AsyncManager;
+import cn.duojunrui.etims.framework.manager.factory.AsyncFactory;
+import cn.duojunrui.etims.project.monitor.operlog.domain.OperLog;
+import cn.duojunrui.etims.project.system.user.domain.User;
 import com.alibaba.fastjson.JSONObject;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -32,7 +38,7 @@ public class LogAspect {
     private static final Logger log = LoggerFactory.getLogger(LogAspect.class);
 
     // 配置织入点
-    @Pointcut("@annotation(com.ruoyi.framework.aspectj.lang.annotation.Log)")
+    @Pointcut("@annotation(cn.duojunrui.etims.framework.aspectj.lang.annotation.Log)")
     public void logPointCut() {
     }
 

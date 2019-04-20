@@ -3,6 +3,7 @@ package cn.duojunrui.etims.project.common;
 import cn.duojunrui.etims.common.utils.StringUtils;
 import cn.duojunrui.etims.common.utils.file.FileUploadUtils;
 import cn.duojunrui.etims.common.utils.file.FileUtils;
+import cn.duojunrui.etims.framework.config.EtimsConfig;
 import cn.duojunrui.etims.framework.config.ServerConfig;
 import cn.duojunrui.etims.framework.web.domain.AjaxResult;
 import org.slf4j.Logger;
@@ -54,7 +55,7 @@ public class CommonController
                 throw new Exception(StringUtils.format("文件名称({})非法，不允许下载。 ", fileName));
             }
             String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
-            String filePath = RuoYiConfig.getDownloadPath() + fileName;
+            String filePath = EtimsConfig.getDownloadPath() + fileName;
 
             response.setCharacterEncoding("utf-8");
             response.setContentType("multipart/form-data");
@@ -82,7 +83,7 @@ public class CommonController
         try
         {
             // 上传文件路径
-            String filePath = RuoYiConfig.getUploadPath();
+            String filePath = EtimsConfig.getUploadPath();
             // 上传并返回新文件名称
             String fileName = FileUploadUtils.upload(filePath, file);
             String url = serverConfig.getUrl() + UPLOAD_PATH + fileName;
