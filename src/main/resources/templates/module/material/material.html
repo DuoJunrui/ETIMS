@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('教学资源列表')"/>
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                                                                                                                                                                            <li>
+                                        模块分类（教学、试题、案例、文献、学生项目等）：<input type="text" name="module"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        资料分类（教学课件、实验指导书、试题等）：<input type="text" name="category"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        课程类别（如计算机组成原理）：<input type="text" name="courseType"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        资料文件名称：<input type="text" name="fileName"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        文件大小：<input type="text" name="fileSize"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        文件类型（doc、zip、ppt）：<input type="text" name="fileType"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        下载次数：<input type="text" name="downloadCount"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        资料上传者：<input type="text" name="uploader"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        文件磁盘路径：<input type="text" name="filePath"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        指导老师：<input type="text" name="adviser"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        检查状态（0检查中 1检查通过 2检查不通过）：<input type="text" name="checkStatus"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        创建时间（上传时间）：<input type="text" name="createTime"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        最后更新时间：<input type="text" name="updateTime"/>
+                                    </li>
+
+                                                                                                                                                                                    <li>
+                                        删除标志（0代表存在 2代表删除）：<input type="text" name="delFlag"/>
+                                    </li>
+
+                                                                                                            <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                    class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                    class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="module:material:add">
+                <i class="fa fa-plus"></i> 添加
+            </a>
+            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()"
+               shiro:hasPermission="module:material:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
+               shiro:hasPermission="module:material:remove">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-warning" onclick="$.table.exportExcel()"
+               shiro:hasPermission="module:material:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+        </div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('module:material:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('module:material:remove')}]];
+    var prefix = ctx + "module/material";
+                                                                                                                                                                                                                                                                                                                    
+    $(function () {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
+            modalName: "教学资源",
+            showExport: true,
+            columns: [{
+                checkbox: true
+            },
+                                                            {
+                            field: 'materialId',
+                            title: '教学资源表ID主键',
+                            visible: false
+                        },
+                                                                                                            {
+                                field: 'module',
+                                title: '模块分类（教学、试题、案例、文献、学生项目等）',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'category',
+                                title: '资料分类（教学课件、实验指导书、试题等）',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'courseType',
+                                title: '课程类别（如计算机组成原理）',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'fileName',
+                                title: '资料文件名称',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'fileSize',
+                                title: '文件大小',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'fileType',
+                                title: '文件类型（doc、zip、ppt）',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'downloadCount',
+                                title: '下载次数',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'uploader',
+                                title: '资料上传者',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'filePath',
+                                title: '文件磁盘路径',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'adviser',
+                                title: '指导老师',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'checkStatus',
+                                title: '检查状态（0检查中 1检查通过 2检查不通过）',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'createTime',
+                                title: '创建时间（上传时间）',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'updateTime',
+                                title: '最后更新时间',
+                                sortable: true
+                            },
+                                                                                                                                    {
+                                field: 'delFlag',
+                                title: '删除标志（0代表存在 2代表删除）',
+                                sortable: true
+                            },
+                                                                            {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.materialId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.materialId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    });
+</script>
+</body>
+</html>

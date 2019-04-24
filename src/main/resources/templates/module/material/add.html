@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('新增教学资源')"/>
+</head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-material-add">
+                                                                            <div class="form-group">
+                        <label class="col-sm-3 control-label">模块分类（教学、试题、案例、文献、学生项目等）：</label>
+                        <div class="col-sm-8">
+                            <input id="module" name="module" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">资料分类（教学课件、实验指导书、试题等）：</label>
+                        <div class="col-sm-8">
+                            <input id="category" name="category" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">课程类别（如计算机组成原理）：</label>
+                        <div class="col-sm-8">
+                            <input id="courseType" name="courseType" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">资料文件名称：</label>
+                        <div class="col-sm-8">
+                            <input id="fileName" name="fileName" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">文件大小：</label>
+                        <div class="col-sm-8">
+                            <input id="fileSize" name="fileSize" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">文件类型（doc、zip、ppt）：</label>
+                        <div class="col-sm-8">
+                            <input id="fileType" name="fileType" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">下载次数：</label>
+                        <div class="col-sm-8">
+                            <input id="downloadCount" name="downloadCount" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">资料上传者：</label>
+                        <div class="col-sm-8">
+                            <input id="uploader" name="uploader" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">文件磁盘路径：</label>
+                        <div class="col-sm-8">
+                            <input id="filePath" name="filePath" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">指导老师：</label>
+                        <div class="col-sm-8">
+                            <input id="adviser" name="adviser" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">检查状态（0检查中 1检查通过 2检查不通过）：</label>
+                        <div class="col-sm-8">
+                            <input id="checkStatus" name="checkStatus" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">创建时间（上传时间）：</label>
+                        <div class="col-sm-8">
+                            <input id="createTime" name="createTime" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">最后更新时间：</label>
+                        <div class="col-sm-8">
+                            <input id="updateTime" name="updateTime" class="form-control" type="text">
+                        </div>
+                    </div>
+                                                                                    <div class="form-group">
+                        <label class="col-sm-3 control-label">删除标志（0代表存在 2代表删除）：</label>
+                        <div class="col-sm-8">
+                            <input id="delFlag" name="delFlag" class="form-control" type="text">
+                        </div>
+                    </div>
+                                        </form>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    var prefix = ctx + "module/material"
+    $("#form-material-add").validate({
+        rules: {
+            xxxx: {
+                required: true,
+            },
+        },
+        focusCleanup: true
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/add", $('#form-material-add').serialize());
+        }
+    }
+</script>
+</body>
+</html>
