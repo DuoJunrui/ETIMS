@@ -1,6 +1,6 @@
-package cn.duojunrui.etims.module.material.mapper;
+package cn.duojunrui.etims.project.module.material.mapper;
 
-import cn.duojunrui.etims.module.material.domain.Material;
+import cn.duojunrui.etims.project.module.material.domain.Material;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

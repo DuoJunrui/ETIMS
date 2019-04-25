@@ -1,12 +1,12 @@
-package cn.duojunrui.etims.module.material.service.impl;
+package cn.duojunrui.etims.project.module.material.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import cn.duojunrui.etims.module.material.mapper.MaterialMapper;
-import cn.duojunrui.etims.module.material.domain.Material;
-import cn.duojunrui.etims.module.material.service.IMaterialService;
+import cn.duojunrui.etims.project.module.material.mapper.MaterialMapper;
+import cn.duojunrui.etims.project.module.material.domain.Material;
+import cn.duojunrui.etims.project.module.material.service.IMaterialService;
 import cn.duojunrui.etims.common.utils.text.Convert;
 
 /**
