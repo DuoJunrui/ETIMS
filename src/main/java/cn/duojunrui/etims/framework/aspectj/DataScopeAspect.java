@@ -85,7 +85,7 @@ public class DataScopeAspect {
                 break;
             } else if (DATA_SCOPE_CUSTOM.equals(dataScope)) {
                 sqlString.append(StringUtils.format(
-                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id = {} ) ", alias,
+                        " OR {}.dept_id IN ( SELECT dept_id FROM sys_role_dept WHERE role_id = {} ) " , alias,
                         role.getRoleId()));
             }
         }

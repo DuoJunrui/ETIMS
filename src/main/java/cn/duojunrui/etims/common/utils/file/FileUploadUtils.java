@@ -130,7 +130,7 @@ public class FileUploadUtils {
      * 编码文件名
      */
     private static final String encodingFilename(String filename) {
-        filename = filename.replace("_", " ");
+        filename = filename.replace("_" , " ");
         filename = Md5Utils.hash(filename + System.nanoTime() + counter++);
         return filename;
     }

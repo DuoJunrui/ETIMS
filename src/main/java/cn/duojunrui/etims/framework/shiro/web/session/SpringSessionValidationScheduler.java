@@ -113,7 +113,7 @@ public class SpringSessionValidationScheduler implements SessionValidationSchedu
 
         } catch (Exception e) {
             if (log.isErrorEnabled()) {
-                log.error("Error starting the Spring Scheduler session validation job.  Session validation may not occur.", e);
+                log.error("Error starting the Spring Scheduler session validation job.  Session validation may not occur." , e);
             }
         }
     }

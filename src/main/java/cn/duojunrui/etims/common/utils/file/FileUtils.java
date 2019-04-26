@@ -95,7 +95,7 @@ public class FileUtils {
         if (agent.contains("MSIE")) {
             // IE浏览器
             filename = URLEncoder.encode(filename, "utf-8");
-            filename = filename.replace("+", " ");
+            filename = filename.replace("+" , " ");
         } else if (agent.contains("Firefox")) {
             // 火狐浏览器
             filename = new String(fileName.getBytes(), "ISO8859-1");

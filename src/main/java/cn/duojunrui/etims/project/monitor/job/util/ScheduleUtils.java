@@ -61,7 +61,7 @@ public class ScheduleUtils {
         try {
             return (CronTrigger) scheduler.getTrigger(getTriggerKey(jobId));
         } catch (SchedulerException e) {
-            log.error("getCronTrigger 异常：", e);
+            log.error("getCronTrigger 异常：" , e);
         }
         return null;
     }
@@ -158,7 +158,7 @@ public class ScheduleUtils {
                 return cb.withMisfireHandlingInstructionDoNothing();
             default:
                 throw new TaskException("The task misfire policy '" + job.getMisfirePolicy()
-                        + "' cannot be used in cron schedule tasks", Code.CONFIG_ERROR);
+                        + "' cannot be used in cron schedule tasks" , Code.CONFIG_ERROR);
         }
     }
 }

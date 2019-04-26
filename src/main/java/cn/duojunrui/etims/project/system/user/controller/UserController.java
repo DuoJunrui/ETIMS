@@ -30,8 +30,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/system/user")
-public class UserController extends BaseController
-{
+public class UserController extends BaseController {
     private String prefix = "system/user";
 
     @Autowired
@@ -45,38 +44,34 @@ public class UserController extends BaseController
 
     @RequiresPermissions("system:user:view")
     @GetMapping()
-    public String user()
-    {
+    public String user() {
         return prefix + "/user";
     }
 
     @RequiresPermissions("system:user:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(User user)
-    {
+    public TableDataInfo list(User user) {
         startPage();
         List<User> list = userService.selectUserList(user);
         return getDataTable(list);
     }
 
-    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
+    @Log(title = "用户管理" , businessType = BusinessType.EXPORT)
     @RequiresPermissions("system:user:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(User user)
-    {
+    public AjaxResult export(User user) {
         List<User> list = userService.selectUserList(user);
         ExcelUtil<User> util = new ExcelUtil<User>(User.class);
         return util.exportExcel(list, "用户数据");
     }
 
-    @Log(title = "用户管理", businessType = BusinessType.IMPORT)
+    @Log(title = "用户管理" , businessType = BusinessType.IMPORT)
     @RequiresPermissions("system:user:import")
     @PostMapping("/importData")
     @ResponseBody
-    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception
-    {
+    public AjaxResult importData(MultipartFile file, boolean updateSupport) throws Exception {
         ExcelUtil<User> util = new ExcelUtil<User>(User.class);
         List<User> userList = util.importExcel(file.getInputStream());
         String message = userService.importUser(userList, updateSupport);
@@ -86,8 +81,7 @@ public class UserController extends BaseController
     @RequiresPermissions("system:user:view")
     @GetMapping("/importTemplate")
     @ResponseBody
-    public AjaxResult importTemplate()
-    {
+    public AjaxResult importTemplate() {
         ExcelUtil<User> util = new ExcelUtil<User>(User.class);
         return util.importTemplateExcel("用户数据");
     }
@@ -96,10 +90,9 @@ public class UserController extends BaseController
      * 新增用户
      */
     @GetMapping("/add")
-    public String add(ModelMap mmap)
-    {
-        mmap.put("roles", roleService.selectRoleAll());
-        mmap.put("posts", postService.selectPostAll());
+    public String add(ModelMap mmap) {
+        mmap.put("roles" , roleService.selectRoleAll());
+        mmap.put("posts" , postService.selectPostAll());
         return prefix + "/add";
     }
 
@@ -107,13 +100,11 @@ public class UserController extends BaseController
      * 新增保存用户
      */
     @RequiresPermissions("system:user:add")
-    @Log(title = "用户管理", businessType = BusinessType.INSERT)
+    @Log(title = "用户管理" , businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(User user)
-    {
-        if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId()))
-        {
+    public AjaxResult addSave(User user) {
+        if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId())) {
             return error("不允许修改超级管理员用户");
         }
         return toAjax(userService.insertUser(user));
@@ -123,11 +114,10 @@ public class UserController extends BaseController
      * 修改用户
      */
     @GetMapping("/edit/{userId}")
-    public String edit(@PathVariable("userId") Long userId, ModelMap mmap)
-    {
-        mmap.put("user", userService.selectUserById(userId));
-        mmap.put("roles", roleService.selectRolesByUserId(userId));
-        mmap.put("posts", postService.selectPostsByUserId(userId));
+    public String edit(@PathVariable("userId") Long userId, ModelMap mmap) {
+        mmap.put("user" , userService.selectUserById(userId));
+        mmap.put("roles" , roleService.selectRolesByUserId(userId));
+        mmap.put("posts" , postService.selectPostsByUserId(userId));
         return prefix + "/edit";
     }
 
@@ -135,48 +125,40 @@ public class UserController extends BaseController
      * 修改保存用户
      */
     @RequiresPermissions("system:user:edit")
-    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
+    @Log(title = "用户管理" , businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(User user)
-    {
-        if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId()))
-        {
+    public AjaxResult editSave(User user) {
+        if (StringUtils.isNotNull(user.getUserId()) && User.isAdmin(user.getUserId())) {
             return error("不允许修改超级管理员用户");
         }
         return toAjax(userService.updateUser(user));
     }
 
     @RequiresPermissions("system:user:resetPwd")
-    @Log(title = "重置密码", businessType = BusinessType.UPDATE)
+    @Log(title = "重置密码" , businessType = BusinessType.UPDATE)
     @GetMapping("/resetPwd/{userId}")
-    public String resetPwd(@PathVariable("userId") Long userId, ModelMap mmap)
-    {
-        mmap.put("user", userService.selectUserById(userId));
+    public String resetPwd(@PathVariable("userId") Long userId, ModelMap mmap) {
+        mmap.put("user" , userService.selectUserById(userId));
         return prefix + "/resetPwd";
     }
 
     @RequiresPermissions("system:user:resetPwd")
-    @Log(title = "重置密码", businessType = BusinessType.UPDATE)
+    @Log(title = "重置密码" , businessType = BusinessType.UPDATE)
     @PostMapping("/resetPwd")
     @ResponseBody
-    public AjaxResult resetPwd(User user)
-    {
+    public AjaxResult resetPwd(User user) {
         return toAjax(userService.resetUserPwd(user));
     }
 
     @RequiresPermissions("system:user:remove")
-    @Log(title = "用户管理", businessType = BusinessType.DELETE)
+    @Log(title = "用户管理" , businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        try
-        {
+    public AjaxResult remove(String ids) {
+        try {
             return toAjax(userService.deleteUserByIds(ids));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return error(e.getMessage());
         }
     }
@@ -186,8 +168,7 @@ public class UserController extends BaseController
      */
     @PostMapping("/checkLoginNameUnique")
     @ResponseBody
-    public String checkLoginNameUnique(User user)
-    {
+    public String checkLoginNameUnique(User user) {
         return userService.checkLoginNameUnique(user.getLoginName());
     }
 
@@ -196,8 +177,7 @@ public class UserController extends BaseController
      */
     @PostMapping("/checkPhoneUnique")
     @ResponseBody
-    public String checkPhoneUnique(User user)
-    {
+    public String checkPhoneUnique(User user) {
         return userService.checkPhoneUnique(user);
     }
 
@@ -206,20 +186,18 @@ public class UserController extends BaseController
      */
     @PostMapping("/checkEmailUnique")
     @ResponseBody
-    public String checkEmailUnique(User user)
-    {
+    public String checkEmailUnique(User user) {
         return userService.checkEmailUnique(user);
     }
 
     /**
      * 用户状态修改
      */
-    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
+    @Log(title = "用户管理" , businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:user:edit")
     @PostMapping("/changeStatus")
     @ResponseBody
-    public AjaxResult changeStatus(User user)
-    {
+    public AjaxResult changeStatus(User user) {
         return toAjax(userService.changeStatus(user));
     }
 }

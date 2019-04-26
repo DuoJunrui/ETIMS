@@ -52,13 +52,13 @@ public class GenController extends BaseController {
      * 生成代码
      */
     @RequiresPermissions("tool:gen:code")
-    @Log(title = "代码生成", businessType = BusinessType.GENCODE)
+    @Log(title = "代码生成" , businessType = BusinessType.GENCODE)
     @GetMapping("/genCode/{tableName}")
     public void genCode(HttpServletResponse response, @PathVariable("tableName") String tableName) throws IOException {
         byte[] data = genService.generatorCode(tableName);
         response.reset();
-        response.setHeader("Content-Disposition", "attachment; filename=\"etims.zip\"");
-        response.addHeader("Content-Length", "" + data.length);
+        response.setHeader("Content-Disposition" , "attachment; filename=\"etims.zip\"");
+        response.addHeader("Content-Length" , "" + data.length);
         response.setContentType("application/octet-stream; charset=UTF-8");
 
         IOUtils.write(data, response.getOutputStream());
@@ -68,15 +68,15 @@ public class GenController extends BaseController {
      * 批量生成代码
      */
     @RequiresPermissions("tool:gen:code")
-    @Log(title = "代码生成", businessType = BusinessType.GENCODE)
+    @Log(title = "代码生成" , businessType = BusinessType.GENCODE)
     @GetMapping("/batchGenCode")
     @ResponseBody
     public void batchGenCode(HttpServletResponse response, String tables) throws IOException {
         String[] tableNames = Convert.toStrArray(tables);
         byte[] data = genService.generatorCode(tableNames);
         response.reset();
-        response.setHeader("Content-Disposition", "attachment; filename=\"etims.zip\"");
-        response.addHeader("Content-Length", "" + data.length);
+        response.setHeader("Content-Disposition" , "attachment; filename=\"etims.zip\"");
+        response.addHeader("Content-Length" , "" + data.length);
         response.setContentType("application/octet-stream; charset=UTF-8");
 
         IOUtils.write(data, response.getOutputStream());

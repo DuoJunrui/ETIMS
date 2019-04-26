@@ -41,8 +41,8 @@ public class RoleMenu {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("roleId", getRoleId())
-                .append("menuId", getMenuId())
+                .append("roleId" , getRoleId())
+                .append("menuId" , getMenuId())
                 .toString();
     }
 }

@@ -54,11 +54,11 @@ public class LogoutFilter extends org.apache.shiro.web.filter.authc.LogoutFilter
                 // 退出登录
                 subject.logout();
             } catch (SessionException ise) {
-                log.error("logout fail.", ise);
+                log.error("logout fail." , ise);
             }
             issueRedirect(request, response, redirectUrl);
         } catch (Exception e) {
-            log.error("Encountered session exception during logout.  This can generally safely be ignored.", e);
+            log.error("Encountered session exception during logout.  This can generally safely be ignored." , e);
         }
         return false;
     }

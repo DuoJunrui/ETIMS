@@ -50,12 +50,12 @@ public class PasswordService {
             loginRecordCache.put(loginName, retryCount);
         }
         if (retryCount.incrementAndGet() > Integer.valueOf(maxRetryCount).intValue()) {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.exceed", maxRetryCount)));
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.exceed" , maxRetryCount)));
             throw new UserPasswordRetryLimitExceedException(Integer.valueOf(maxRetryCount).intValue());
         }
 
         if (!matches(user, password)) {
-            AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.count", retryCount)));
+            AsyncManager.me().execute(AsyncFactory.recordLogininfor(loginName, Constants.LOGIN_FAIL, MessageUtils.message("user.password.retry.limit.count" , retryCount)));
             loginRecordCache.put(loginName, retryCount);
             throw new UserPasswordNotMatchException();
         } else {
@@ -76,7 +76,7 @@ public class PasswordService {
     }
 
     public static void main(String[] args) {
-        System.out.println(new PasswordService().encryptPassword("admin", "admin123", "111111"));
-        System.out.println(new PasswordService().encryptPassword("ry", "admin123", "222222"));
+        System.out.println(new PasswordService().encryptPassword("admin" , "admin123" , "111111"));
+        System.out.println(new PasswordService().encryptPassword("ry" , "admin123" , "222222"));
     }
 }

@@ -85,7 +85,7 @@ public class IpUtils {
         }
 
         byte[] bytes = new byte[4];
-        String[] elements = text.split("\\.", -1);
+        String[] elements = text.split("\\." , -1);
         try {
             long l;
             int i;

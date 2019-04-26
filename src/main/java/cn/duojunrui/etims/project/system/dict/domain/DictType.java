@@ -37,7 +37,7 @@ public class DictType extends BaseEntity {
     /**
      * 状态（0正常 1停用）
      */
-    @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
+    @Excel(name = "状态" , readConverterExp = "0=正常,1=停用")
     private String status;
 
     public Long getDictId() {
@@ -75,15 +75,15 @@ public class DictType extends BaseEntity {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("dictId", getDictId())
-                .append("dictName", getDictName())
-                .append("dictType", getDictType())
-                .append("status", getStatus())
-                .append("createBy", getCreateBy())
-                .append("createTime", getCreateTime())
-                .append("updateBy", getUpdateBy())
-                .append("updateTime", getUpdateTime())
-                .append("remark", getRemark())
+                .append("dictId" , getDictId())
+                .append("dictName" , getDictName())
+                .append("dictType" , getDictType())
+                .append("status" , getStatus())
+                .append("createBy" , getCreateBy())
+                .append("createTime" , getCreateTime())
+                .append("updateBy" , getUpdateBy())
+                .append("updateTime" , getUpdateTime())
+                .append("remark" , getRemark())
                 .toString();
     }
 }

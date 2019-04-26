@@ -67,16 +67,16 @@ public class GenUtils {
         // java对象数据传递到模板文件vm
         VelocityContext velocityContext = new VelocityContext();
         String packageName = GenConfig.getPackageName();
-        velocityContext.put("tableName", table.getTableName());
-        velocityContext.put("tableComment", replaceKeyword(table.getTableComment()));
-        velocityContext.put("primaryKey", table.getPrimaryKey());
-        velocityContext.put("className", table.getClassName());
-        velocityContext.put("classname", table.getClassname());
-        velocityContext.put("moduleName", getModuleName(packageName));
-        velocityContext.put("columns", table.getColumns());
-        velocityContext.put("package", packageName + "." + table.getClassname());
-        velocityContext.put("author", GenConfig.getAuthor());
-        velocityContext.put("datetime", DateUtils.getDate());
+        velocityContext.put("tableName" , table.getTableName());
+        velocityContext.put("tableComment" , replaceKeyword(table.getTableComment()));
+        velocityContext.put("primaryKey" , table.getPrimaryKey());
+        velocityContext.put("className" , table.getClassName());
+        velocityContext.put("classname" , table.getClassname());
+        velocityContext.put("moduleName" , getModuleName(packageName));
+        velocityContext.put("columns" , table.getColumns());
+        velocityContext.put("package" , packageName + "." + table.getClassname());
+        velocityContext.put("author" , GenConfig.getAuthor());
+        velocityContext.put("datetime" , DateUtils.getDate());
         return velocityContext;
     }
 
@@ -125,7 +125,7 @@ public class GenUtils {
         String htmlPath = TEMPLATES_PATH + "/" + moduleName + "/" + classname;
 
         if (StringUtils.isNotEmpty(classname)) {
-            javaPath += classname.replace(".", "/") + "/";
+            javaPath += classname.replace("." , "/") + "/";
         }
 
         if (template.contains("domain.java.vm")) {
@@ -184,13 +184,13 @@ public class GenUtils {
         String packageName = GenConfig.getPackageName();
         StringBuffer projectPath = new StringBuffer();
         projectPath.append("main/java/");
-        projectPath.append(packageName.replace(".", "/"));
+        projectPath.append(packageName.replace("." , "/"));
         projectPath.append("/");
         return projectPath.toString();
     }
 
     public static String replaceKeyword(String keyword) {
-        String keyName = keyword.replaceAll("(?:表|信息|管理)", "");
+        String keyName = keyword.replaceAll("(?:表|信息|管理)" , "");
         return keyName;
     }
 }

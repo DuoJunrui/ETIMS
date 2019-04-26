@@ -26,8 +26,8 @@ public class TestController extends BaseController {
     private final static Map<Integer, UserEntity> USERS = new LinkedHashMap<Integer, UserEntity>();
 
     {
-        USERS.put(1, new UserEntity(1, "admin", "admin123", "15888888888"));
-        USERS.put(2, new UserEntity(2, "ry", "admin123", "15666666666"));
+        USERS.put(1, new UserEntity(1, "admin" , "admin123" , "15888888888"));
+        USERS.put(2, new UserEntity(2, "ry" , "admin123" , "15666666666"));
     }
 
     @ApiOperation("获取用户列表")
@@ -38,7 +38,7 @@ public class TestController extends BaseController {
     }
 
     @ApiOperation("获取用户详细")
-    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "Integer", paramType = "path")
+    @ApiImplicitParam(name = "userId" , value = "用户ID" , required = true, dataType = "Integer" , paramType = "path")
     @GetMapping("/{userId}")
     public AjaxResult getUser(@PathVariable Integer userId) {
         if (!USERS.isEmpty() && USERS.containsKey(userId)) {
@@ -49,7 +49,7 @@ public class TestController extends BaseController {
     }
 
     @ApiOperation("新增用户")
-    @ApiImplicitParam(name = "userEntity", value = "新增用户信息", dataType = "UserEntity")
+    @ApiImplicitParam(name = "userEntity" , value = "新增用户信息" , dataType = "UserEntity")
     @PostMapping("/save")
     public AjaxResult save(UserEntity user) {
         if (StringUtils.isNull(user) || StringUtils.isNull(user.getUserId())) {
@@ -59,7 +59,7 @@ public class TestController extends BaseController {
     }
 
     @ApiOperation("更新用户")
-    @ApiImplicitParam(name = "userEntity", value = "新增用户信息", dataType = "UserEntity")
+    @ApiImplicitParam(name = "userEntity" , value = "新增用户信息" , dataType = "UserEntity")
     @PutMapping("/update")
     public AjaxResult update(UserEntity user) {
         if (StringUtils.isNull(user) || StringUtils.isNull(user.getUserId())) {
@@ -73,7 +73,7 @@ public class TestController extends BaseController {
     }
 
     @ApiOperation("删除用户信息")
-    @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "Integer", paramType = "path")
+    @ApiImplicitParam(name = "userId" , value = "用户ID" , required = true, dataType = "Integer" , paramType = "path")
     @DeleteMapping("/{userId}")
     public AjaxResult delete(@PathVariable Integer userId) {
         if (!USERS.isEmpty() && USERS.containsKey(userId)) {

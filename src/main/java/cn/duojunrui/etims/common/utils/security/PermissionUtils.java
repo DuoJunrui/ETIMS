@@ -50,7 +50,7 @@ public class PermissionUtils {
      * @return 提示信息
      */
     public static String getMsg(String permissionsStr) {
-        String permission = StringUtils.substringBetween(permissionsStr, "[", "]");
+        String permission = StringUtils.substringBetween(permissionsStr, "[" , "]");
         String msg = MessageUtils.message(PERMISSION, permission);
         if (StringUtils.endsWithIgnoreCase(permission, PermissionConstants.ADD_PERMISSION)) {
             msg = MessageUtils.message(CREATE_PERMISSION, permission);

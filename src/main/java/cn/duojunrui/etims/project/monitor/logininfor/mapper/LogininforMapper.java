@@ -12,8 +12,7 @@ import java.util.List;
  * @date: 2019-04-19 20:24
  */
 
-public interface LogininforMapper
-{
+public interface LogininforMapper {
     /**
      * 新增系统登录日志
      *

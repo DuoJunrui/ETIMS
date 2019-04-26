@@ -58,7 +58,7 @@ public class BaseController {
     /**
      * 响应请求分页数据
      */
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({"rawtypes" , "unchecked"})
     protected TableDataInfo getDataTable(List<?> list) {
         TableDataInfo rspData = new TableDataInfo();
         rspData.setCode(0);
@@ -126,7 +126,7 @@ public class BaseController {
      * 页面跳转
      */
     public String redirect(String url) {
-        return StringUtils.format("redirect:{}", url);
+        return StringUtils.format("redirect:{}" , url);
     }
 
     public User getSysUser() {

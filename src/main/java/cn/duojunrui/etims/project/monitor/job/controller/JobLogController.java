@@ -47,7 +47,7 @@ public class JobLogController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "调度日志", businessType = BusinessType.EXPORT)
+    @Log(title = "调度日志" , businessType = BusinessType.EXPORT)
     @RequiresPermissions("monitor:job:export")
     @PostMapping("/export")
     @ResponseBody
@@ -57,7 +57,7 @@ public class JobLogController extends BaseController {
         return util.exportExcel(list, "调度日志");
     }
 
-    @Log(title = "调度日志", businessType = BusinessType.DELETE)
+    @Log(title = "调度日志" , businessType = BusinessType.DELETE)
     @RequiresPermissions("monitor:job:remove")
     @PostMapping("/remove")
     @ResponseBody
@@ -68,12 +68,12 @@ public class JobLogController extends BaseController {
     @RequiresPermissions("monitor:job:detail")
     @GetMapping("/detail/{jobLogId}")
     public String detail(@PathVariable("jobLogId") Long jobLogId, ModelMap mmap) {
-        mmap.put("name", "jobLog");
-        mmap.put("jobLog", jobLogService.selectJobLogById(jobLogId));
+        mmap.put("name" , "jobLog");
+        mmap.put("jobLog" , jobLogService.selectJobLogById(jobLogId));
         return prefix + "/detail";
     }
 
-    @Log(title = "调度日志", businessType = BusinessType.CLEAN)
+    @Log(title = "调度日志" , businessType = BusinessType.CLEAN)
     @RequiresPermissions("monitor:job:remove")
     @PostMapping("/clean")
     @ResponseBody

@@ -17,8 +17,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DataSource
-{
+public @interface DataSource {
     /**
      * 切换数据源名称
      */

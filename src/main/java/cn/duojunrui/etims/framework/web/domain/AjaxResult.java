@@ -117,7 +117,7 @@ public class AjaxResult extends HashMap<String, Object> {
      * @return 成功消息
      */
     public static AjaxResult success(Object data) {
-        return AjaxResult.success("操作成功", data);
+        return AjaxResult.success("操作成功" , data);
     }
 
     /**
@@ -226,7 +226,7 @@ public class AjaxResult extends HashMap<String, Object> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("code", getCode())
-                .append("msg", getMsg()).append("data", getData()).toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("code" , getCode())
+                .append("msg" , getMsg()).append("data" , getData()).toString();
     }
 }

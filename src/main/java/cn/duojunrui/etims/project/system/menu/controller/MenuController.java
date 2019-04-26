@@ -49,7 +49,7 @@ public class MenuController extends BaseController {
     /**
      * 删除菜单
      */
-    @Log(title = "菜单管理", businessType = BusinessType.DELETE)
+    @Log(title = "菜单管理" , businessType = BusinessType.DELETE)
     @RequiresPermissions("system:menu:remove")
     @GetMapping("/remove/{menuId}")
     @ResponseBody
@@ -76,14 +76,14 @@ public class MenuController extends BaseController {
             menu.setMenuId(0L);
             menu.setMenuName("主目录");
         }
-        mmap.put("menu", menu);
+        mmap.put("menu" , menu);
         return prefix + "/add";
     }
 
     /**
      * 新增保存菜单
      */
-    @Log(title = "菜单管理", businessType = BusinessType.INSERT)
+    @Log(title = "菜单管理" , businessType = BusinessType.INSERT)
     @RequiresPermissions("system:menu:add")
     @PostMapping("/add")
     @ResponseBody
@@ -96,14 +96,14 @@ public class MenuController extends BaseController {
      */
     @GetMapping("/edit/{menuId}")
     public String edit(@PathVariable("menuId") Long menuId, ModelMap mmap) {
-        mmap.put("menu", menuService.selectMenuById(menuId));
+        mmap.put("menu" , menuService.selectMenuById(menuId));
         return prefix + "/edit";
     }
 
     /**
      * 修改保存菜单
      */
-    @Log(title = "菜单管理", businessType = BusinessType.UPDATE)
+    @Log(title = "菜单管理" , businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:menu:edit")
     @PostMapping("/edit")
     @ResponseBody
@@ -153,7 +153,7 @@ public class MenuController extends BaseController {
      */
     @GetMapping("/selectMenuTree/{menuId}")
     public String selectMenuTree(@PathVariable("menuId") Long menuId, ModelMap mmap) {
-        mmap.put("menu", menuService.selectMenuById(menuId));
+        mmap.put("menu" , menuService.selectMenuById(menuId));
         return prefix + "/tree";
     }
 }

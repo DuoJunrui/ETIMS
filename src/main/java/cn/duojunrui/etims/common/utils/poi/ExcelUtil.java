@@ -302,7 +302,7 @@ public class ExcelUtil<T> {
                     // 如果设置了提示信息则鼠标放上去提示.
                     if (StringUtils.isNotEmpty(attr.prompt())) {
                         // 这里默认设了2-101列提示.
-                        setXSSFPrompt(sheet, "", attr.prompt(), 1, 100, i, i);
+                        setXSSFPrompt(sheet, "" , attr.prompt(), 1, 100, i, i);
                     }
                     // 如果设置了combo属性则本列只能选择不能输入
                     if (attr.combo().length > 0) {
@@ -319,7 +319,7 @@ public class ExcelUtil<T> {
             wb.write(out);
             return AjaxResult.success(filename);
         } catch (Exception e) {
-            log.error("导出Excel异常{}", e.getMessage());
+            log.error("导出Excel异常{}" , e.getMessage());
             throw new BusinessException("导出Excel失败，请联系网站管理员！");
         } finally {
             if (wb != null) {
@@ -392,7 +392,7 @@ public class ExcelUtil<T> {
                         }
                     }
                 } catch (Exception e) {
-                    log.error("导出Excel失败{}", e);
+                    log.error("导出Excel失败{}" , e);
                 }
             }
         }

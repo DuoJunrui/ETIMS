@@ -23,7 +23,8 @@
     </resultMap>
 
     <sql id="selectMaterialVo">
-        select material_id, module, category, course_type, file_name, file_size, file_type, download_count, uploader, file_path, adviser, check_status, create_time, update_time, del_flag from mod_material
+        select material_id, module, category, course_type, file_name, file_size, file_type, download_count, uploader,
+        file_path, adviser, check_status, create_time, update_time, del_flag from mod_material
     </sql>
 
     <select id="selectMaterialList" parameterType="Material" resultMap="MaterialResult">

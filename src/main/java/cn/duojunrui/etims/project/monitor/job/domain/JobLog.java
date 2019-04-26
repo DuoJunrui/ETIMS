@@ -57,7 +57,7 @@ public class JobLog extends BaseEntity {
     /**
      * 执行状态（0正常 1失败）
      */
-    @Excel(name = "执行状态", readConverterExp = "0=正常,1=失败")
+    @Excel(name = "执行状态" , readConverterExp = "0=正常,1=失败")
     private String status;
 
     /**
@@ -159,16 +159,16 @@ public class JobLog extends BaseEntity {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("jobLogId", getJobLogId())
-                .append("jobName", getJobName())
-                .append("jobGroup", getJobGroup())
-                .append("methodName", getMethodName())
-                .append("methodParams", getMethodParams())
-                .append("jobMessage", getJobMessage())
-                .append("status", getStatus())
-                .append("exceptionInfo", getExceptionInfo())
-                .append("startTime", getStartTime())
-                .append("endTime", getEndTime())
+                .append("jobLogId" , getJobLogId())
+                .append("jobName" , getJobName())
+                .append("jobGroup" , getJobGroup())
+                .append("methodName" , getMethodName())
+                .append("methodParams" , getMethodParams())
+                .append("jobMessage" , getJobMessage())
+                .append("status" , getStatus())
+                .append("exceptionInfo" , getExceptionInfo())
+                .append("startTime" , getStartTime())
+                .append("endTime" , getEndTime())
                 .toString();
     }
 }

@@ -33,7 +33,7 @@ public class OperLog extends BaseEntity {
     /**
      * 操作业务类型
      */
-    @Excel(name = "业务类型", readConverterExp = "0=其它,1=新增,2=修改,3=删除,4=授权,5=导出,6=导入,7=强退,8=生成代码,9=清空数据")
+    @Excel(name = "业务类型" , readConverterExp = "0=其它,1=新增,2=修改,3=删除,4=授权,5=导出,6=导入,7=强退,8=生成代码,9=清空数据")
     private Integer businessType;
 
     /**
@@ -45,7 +45,7 @@ public class OperLog extends BaseEntity {
     /**
      * 操作人类别
      */
-    @Excel(name = "操作类别", readConverterExp = "0=其它,1=后台用户,2=手机端用户")
+    @Excel(name = "操作类别" , readConverterExp = "0=其它,1=后台用户,2=手机端用户")
     private Integer operatorType;
 
     /**
@@ -87,7 +87,7 @@ public class OperLog extends BaseEntity {
     /**
      * 状态0正常 1异常
      */
-    @Excel(name = "状态", readConverterExp = "0=正常,1=异常")
+    @Excel(name = "状态" , readConverterExp = "0=正常,1=异常")
     private Integer status;
 
     /**
@@ -99,7 +99,7 @@ public class OperLog extends BaseEntity {
     /**
      * 操作时间
      */
-    @Excel(name = "操作时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Excel(name = "操作时间" , width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date operTime;
 
     public Long getOperId() {
@@ -217,20 +217,20 @@ public class OperLog extends BaseEntity {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("operId", getOperId())
-                .append("title", getTitle())
-                .append("businessType", getBusinessType())
-                .append("method", getMethod())
-                .append("operatorType", getOperatorType())
-                .append("operName", getOperName())
-                .append("deptName", getDeptName())
-                .append("operUrl", getOperUrl())
-                .append("operIp", getOperIp())
-                .append("operLocation", getOperLocation())
-                .append("operParam", getOperParam())
-                .append("status", getStatus())
-                .append("errorMsg", getErrorMsg())
-                .append("operTime", getOperTime())
+                .append("operId" , getOperId())
+                .append("title" , getTitle())
+                .append("businessType" , getBusinessType())
+                .append("method" , getMethod())
+                .append("operatorType" , getOperatorType())
+                .append("operName" , getOperName())
+                .append("deptName" , getDeptName())
+                .append("operUrl" , getOperUrl())
+                .append("operIp" , getOperIp())
+                .append("operLocation" , getOperLocation())
+                .append("operParam" , getOperParam())
+                .append("status" , getStatus())
+                .append("errorMsg" , getErrorMsg())
+                .append("operTime" , getOperTime())
                 .toString();
     }
 }

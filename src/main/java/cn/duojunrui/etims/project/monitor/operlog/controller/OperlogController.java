@@ -47,7 +47,7 @@ public class OperlogController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "操作日志", businessType = BusinessType.EXPORT)
+    @Log(title = "操作日志" , businessType = BusinessType.EXPORT)
     @RequiresPermissions("monitor:operlog:export")
     @PostMapping("/export")
     @ResponseBody
@@ -67,11 +67,11 @@ public class OperlogController extends BaseController {
     @RequiresPermissions("monitor:operlog:detail")
     @GetMapping("/detail/{operId}")
     public String detail(@PathVariable("operId") Long operId, ModelMap mmap) {
-        mmap.put("operLog", operLogService.selectOperLogById(operId));
+        mmap.put("operLog" , operLogService.selectOperLogById(operId));
         return prefix + "/detail";
     }
 
-    @Log(title = "操作日志", businessType = BusinessType.CLEAN)
+    @Log(title = "操作日志" , businessType = BusinessType.CLEAN)
     @RequiresPermissions("monitor:operlog:remove")
     @PostMapping("/clean")
     @ResponseBody

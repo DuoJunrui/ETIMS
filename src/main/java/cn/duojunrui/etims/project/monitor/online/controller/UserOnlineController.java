@@ -53,7 +53,7 @@ public class UserOnlineController extends BaseController {
     }
 
     @RequiresPermissions("monitor:online:batchForceLogout")
-    @Log(title = "在线用户", businessType = BusinessType.FORCE)
+    @Log(title = "在线用户" , businessType = BusinessType.FORCE)
     @PostMapping("/batchForceLogout")
     @ResponseBody
     public AjaxResult batchForceLogout(@RequestParam("ids[]") String[] ids) {
@@ -78,7 +78,7 @@ public class UserOnlineController extends BaseController {
     }
 
     @RequiresPermissions("monitor:online:forceLogout")
-    @Log(title = "在线用户", businessType = BusinessType.FORCE)
+    @Log(title = "在线用户" , businessType = BusinessType.FORCE)
     @PostMapping("/forceLogout")
     @ResponseBody
     public AjaxResult forceLogout(String sessionId) {

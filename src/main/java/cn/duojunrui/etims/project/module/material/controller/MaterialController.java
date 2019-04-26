@@ -77,7 +77,7 @@ public class MaterialController extends BaseController {
      * 新增保存教学资源
      */
     @RequiresPermissions("module:material:add")
-    @Log(title = "教学资源", businessType = BusinessType.INSERT)
+    @Log(title = "教学资源" , businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Material material) {
@@ -90,7 +90,7 @@ public class MaterialController extends BaseController {
     @GetMapping("/edit/{materialId}")
     public String edit(@PathVariable("materialId") Long materialId, ModelMap mmap) {
         Material material = materialService.selectMaterialById(materialId);
-        mmap.put("material", material);
+        mmap.put("material" , material);
         return prefix + "/edit";
     }
 
@@ -98,7 +98,7 @@ public class MaterialController extends BaseController {
      * 修改保存教学资源
      */
     @RequiresPermissions("module:material:edit")
-    @Log(title = "教学资源", businessType = BusinessType.UPDATE)
+    @Log(title = "教学资源" , businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Material material) {
@@ -109,7 +109,7 @@ public class MaterialController extends BaseController {
      * 删除教学资源
      */
     @RequiresPermissions("module:material:remove")
-    @Log(title = "教学资源", businessType = BusinessType.DELETE)
+    @Log(title = "教学资源" , businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {

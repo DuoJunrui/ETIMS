@@ -8,8 +8,7 @@ package cn.duojunrui.etims.framework.aspectj.lang.enums;
  * @date: 2019-04-19 19:29
  */
 
-public enum DataSourceType
-{
+public enum DataSourceType {
     /**
      * 主库
      */

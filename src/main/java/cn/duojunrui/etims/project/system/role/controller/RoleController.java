@@ -53,7 +53,7 @@ public class RoleController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "角色管理", businessType = BusinessType.EXPORT)
+    @Log(title = "角色管理" , businessType = BusinessType.EXPORT)
     @RequiresPermissions("system:role:export")
     @PostMapping("/export")
     @ResponseBody
@@ -75,7 +75,7 @@ public class RoleController extends BaseController {
      * 新增保存角色
      */
     @RequiresPermissions("system:role:add")
-    @Log(title = "角色管理", businessType = BusinessType.INSERT)
+    @Log(title = "角色管理" , businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Role role) {
@@ -88,7 +88,7 @@ public class RoleController extends BaseController {
      */
     @GetMapping("/edit/{roleId}")
     public String edit(@PathVariable("roleId") Long roleId, ModelMap mmap) {
-        mmap.put("role", roleService.selectRoleById(roleId));
+        mmap.put("role" , roleService.selectRoleById(roleId));
         return prefix + "/edit";
     }
 
@@ -96,7 +96,7 @@ public class RoleController extends BaseController {
      * 修改保存角色
      */
     @RequiresPermissions("system:role:edit")
-    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
+    @Log(title = "角色管理" , businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Role role) {
@@ -108,7 +108,7 @@ public class RoleController extends BaseController {
      */
     @GetMapping("/authDataScope/{roleId}")
     public String authDataScope(@PathVariable("roleId") Long roleId, ModelMap mmap) {
-        mmap.put("role", roleService.selectRoleById(roleId));
+        mmap.put("role" , roleService.selectRoleById(roleId));
         return prefix + "/dataScope";
     }
 
@@ -116,7 +116,7 @@ public class RoleController extends BaseController {
      * 保存角色分配数据权限
      */
     @RequiresPermissions("system:role:edit")
-    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
+    @Log(title = "角色管理" , businessType = BusinessType.UPDATE)
     @PostMapping("/authDataScope")
     @ResponseBody
     public AjaxResult authDataScopeSave(Role role) {
@@ -124,7 +124,7 @@ public class RoleController extends BaseController {
     }
 
     @RequiresPermissions("system:role:remove")
-    @Log(title = "角色管理", businessType = BusinessType.DELETE)
+    @Log(title = "角色管理" , businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
@@ -164,7 +164,7 @@ public class RoleController extends BaseController {
     /**
      * 角色状态修改
      */
-    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
+    @Log(title = "角色管理" , businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:role:edit")
     @PostMapping("/changeStatus")
     @ResponseBody
@@ -178,7 +178,7 @@ public class RoleController extends BaseController {
     @RequiresPermissions("system:role:edit")
     @GetMapping("/authUser/{roleId}")
     public String authUser(@PathVariable("roleId") Long roleId, ModelMap mmap) {
-        mmap.put("role", roleService.selectRoleById(roleId));
+        mmap.put("role" , roleService.selectRoleById(roleId));
         return prefix + "/authUser";
     }
 
@@ -197,7 +197,7 @@ public class RoleController extends BaseController {
     /**
      * 取消授权
      */
-    @Log(title = "角色管理", businessType = BusinessType.GRANT)
+    @Log(title = "角色管理" , businessType = BusinessType.GRANT)
     @PostMapping("/authUser/cancel")
     @ResponseBody
     public AjaxResult cancelAuthUser(UserRole userRole) {
@@ -207,7 +207,7 @@ public class RoleController extends BaseController {
     /**
      * 批量取消授权
      */
-    @Log(title = "角色管理", businessType = BusinessType.GRANT)
+    @Log(title = "角色管理" , businessType = BusinessType.GRANT)
     @PostMapping("/authUser/cancelAll")
     @ResponseBody
     public AjaxResult cancelAuthUserAll(Long roleId, String userIds) {
@@ -219,7 +219,7 @@ public class RoleController extends BaseController {
      */
     @GetMapping("/authUser/selectUser/{roleId}")
     public String selectUser(@PathVariable("roleId") Long roleId, ModelMap mmap) {
-        mmap.put("role", roleService.selectRoleById(roleId));
+        mmap.put("role" , roleService.selectRoleById(roleId));
         return prefix + "/selectUser";
     }
 
@@ -238,7 +238,7 @@ public class RoleController extends BaseController {
     /**
      * 批量选择用户授权
      */
-    @Log(title = "角色管理", businessType = BusinessType.GRANT)
+    @Log(title = "角色管理" , businessType = BusinessType.GRANT)
     @PostMapping("/authUser/selectAll")
     @ResponseBody
     public AjaxResult selectAuthUserAll(Long roleId, String userIds) {

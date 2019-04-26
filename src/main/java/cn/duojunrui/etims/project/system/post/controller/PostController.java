@@ -47,7 +47,7 @@ public class PostController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "岗位管理", businessType = BusinessType.EXPORT)
+    @Log(title = "岗位管理" , businessType = BusinessType.EXPORT)
     @RequiresPermissions("system:post:export")
     @PostMapping("/export")
     @ResponseBody
@@ -58,7 +58,7 @@ public class PostController extends BaseController {
     }
 
     @RequiresPermissions("system:post:remove")
-    @Log(title = "岗位管理", businessType = BusinessType.DELETE)
+    @Log(title = "岗位管理" , businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
@@ -81,7 +81,7 @@ public class PostController extends BaseController {
      * 新增保存岗位
      */
     @RequiresPermissions("system:post:add")
-    @Log(title = "岗位管理", businessType = BusinessType.INSERT)
+    @Log(title = "岗位管理" , businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Post post) {
@@ -93,7 +93,7 @@ public class PostController extends BaseController {
      */
     @GetMapping("/edit/{postId}")
     public String edit(@PathVariable("postId") Long postId, ModelMap mmap) {
-        mmap.put("post", postService.selectPostById(postId));
+        mmap.put("post" , postService.selectPostById(postId));
         return prefix + "/edit";
     }
 
@@ -101,7 +101,7 @@ public class PostController extends BaseController {
      * 修改保存岗位
      */
     @RequiresPermissions("system:post:edit")
-    @Log(title = "岗位管理", businessType = BusinessType.UPDATE)
+    @Log(title = "岗位管理" , businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Post post) {

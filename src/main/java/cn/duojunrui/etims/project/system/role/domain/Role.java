@@ -43,13 +43,13 @@ public class Role extends BaseEntity {
     /**
      * 数据范围（1：所有数据权限；2：自定义数据权限）
      */
-    @Excel(name = "数据范围", readConverterExp = "1=所有数据权限,2=自定义数据权限")
+    @Excel(name = "数据范围" , readConverterExp = "1=所有数据权限,2=自定义数据权限")
     private String dataScope;
 
     /**
      * 角色状态（0正常 1停用）
      */
-    @Excel(name = "角色状态", readConverterExp = "0=正常,1=停用")
+    @Excel(name = "角色状态" , readConverterExp = "0=正常,1=停用")
     private String status;
 
     /**
@@ -155,18 +155,18 @@ public class Role extends BaseEntity {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("roleId", getRoleId())
-                .append("roleName", getRoleName())
-                .append("roleKey", getRoleKey())
-                .append("roleSort", getRoleSort())
-                .append("dataScope", getDataScope())
-                .append("status", getStatus())
-                .append("delFlag", getDelFlag())
-                .append("createBy", getCreateBy())
-                .append("createTime", getCreateTime())
-                .append("updateBy", getUpdateBy())
-                .append("updateTime", getUpdateTime())
-                .append("remark", getRemark())
+                .append("roleId" , getRoleId())
+                .append("roleName" , getRoleName())
+                .append("roleKey" , getRoleKey())
+                .append("roleSort" , getRoleSort())
+                .append("dataScope" , getDataScope())
+                .append("status" , getStatus())
+                .append("delFlag" , getDelFlag())
+                .append("createBy" , getCreateBy())
+                .append("createTime" , getCreateTime())
+                .append("updateBy" , getUpdateBy())
+                .append("updateTime" , getUpdateTime())
+                .append("remark" , getRemark())
                 .toString();
     }
 }

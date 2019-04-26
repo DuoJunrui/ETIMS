@@ -109,7 +109,7 @@ public class OnlineWebSessionManager extends DefaultWebSessionManager {
             try {
                 userOnlineService.batchDeleteOnline(needOfflineIdList);
             } catch (Exception e) {
-                log.error("batch delete db session error.", e);
+                log.error("batch delete db session error." , e);
             }
         }
 

@@ -39,14 +39,15 @@
             user.userPassword1 = $('#userPassword1').val().trim();
             user.userPassword2 = $('#userPassword2').val().trim();
             user.emailCode = $('#emailCode').val().trim();
-            console.log(user,emailCode);
+            console.log(user, emailCode);
             if (user.userId == "") {
                 alert("请输入注册账号");
                 return;
             } else if (emailCode == "") {
                 alert("请输入邮箱账号");
                 return;
-            };
+            }
+            ;
             $.ajax({
                 type: "post",
                 url: "/etims/user/register",
@@ -71,54 +72,54 @@
         var count = 60; //间隔函数，1秒执行
         var curCount;//当前剩余秒数
 
-         function sendEmailCode() {
-        	console.log("进入sendEamilCode");
-        	curCount = count;
-        	//设置button效果，开始计时
-        	$("#btnSendCode").attr("disabled", "true");
-        	$("#btnSendCode").val(curCount + "秒后重新获取验证码");
-        	InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
-        	//向后台发送处理数据
-             var user = {};
-             user.userId = $('#userId').val().trim();
-             user.userEmail = $('#userEmail').val().trim();
-             if (user.userId == "") {
-                 alert("请输入注册账号");
-                 return;
-             } else if (user.userEmail == "") {
-                 alert("请输入邮箱账号");
-             };
-             $.ajax({
-                 type: "POST",
-                 url: "/etims/user/sendRegisterEmailCode?userId="+user.userId+"&userEmail="+user.userEmail,
-                 //async:true,
-                 // cache:false,
-                 contentType: "application/json",
-                 // data: {
-                 //     userId: "userId", userEmail: "userEmail"
-                 // },
-                 //dataType:"json",
-                 success: function (result) {
-                     if (result.status = 100) {
-                         alert("验证码发送成功");
-                     } else {
-                         alert(result.message);
-                     }
-                 },
-             });
+        function sendEmailCode() {
+            console.log("进入sendEamilCode");
+            curCount = count;
+            //设置button效果，开始计时
+            $("#btnSendCode").attr("disabled", "true");
+            $("#btnSendCode").val(curCount + "秒后重新获取验证码");
+            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+            //向后台发送处理数据
+            var user = {};
+            user.userId = $('#userId').val().trim();
+            user.userEmail = $('#userEmail').val().trim();
+            if (user.userId == "") {
+                alert("请输入注册账号");
+                return;
+            } else if (user.userEmail == "") {
+                alert("请输入邮箱账号");
+            }
+            ;
+            $.ajax({
+                type: "POST",
+                url: "/etims/user/sendRegisterEmailCode?userId=" + user.userId + "&userEmail=" + user.userEmail,
+                //async:true,
+                // cache:false,
+                contentType: "application/json",
+                // data: {
+                //     userId: "userId", userEmail: "userEmail"
+                // },
+                //dataType:"json",
+                success: function (result) {
+                    if (result.status = 100) {
+                        alert("验证码发送成功");
+                    } else {
+                        alert(result.message);
+                    }
+                },
+            });
         }
 
         //timer处理函数
         function SetRemainTime() {
-        	if (curCount == 0) {
-        		window.clearInterval(InterValObj);//停止计时器
-        		$("#btnSendCode").removeAttr("disabled");//启用按钮
-        		$("#btnSendCode").val("重新发送验证码");
-        	}
-        	else {
-        		curCount--;
-        		$("#btnSendCode").val(curCount + "秒后重新获取验证码");
-        	}
+            if (curCount == 0) {
+                window.clearInterval(InterValObj);//停止计时器
+                $("#btnSendCode").removeAttr("disabled");//启用按钮
+                $("#btnSendCode").val("重新发送验证码");
+            } else {
+                curCount--;
+                $("#btnSendCode").val(curCount + "秒后重新获取验证码");
+            }
         }
 
         // // 发送验证码

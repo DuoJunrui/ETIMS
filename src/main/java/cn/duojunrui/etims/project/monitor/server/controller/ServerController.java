@@ -26,7 +26,7 @@ public class ServerController extends BaseController {
     public String server(ModelMap mmap) throws Exception {
         Server server = new Server();
         server.copyTo();
-        mmap.put("server", server);
+        mmap.put("server" , server);
         return prefix + "/server";
     }
 }

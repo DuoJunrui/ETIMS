@@ -47,7 +47,7 @@ public class DictTypeController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "字典类型", businessType = BusinessType.EXPORT)
+    @Log(title = "字典类型" , businessType = BusinessType.EXPORT)
     @RequiresPermissions("system:dict:export")
     @PostMapping("/export")
     @ResponseBody
@@ -69,7 +69,7 @@ public class DictTypeController extends BaseController {
     /**
      * 新增保存字典类型
      */
-    @Log(title = "字典类型", businessType = BusinessType.INSERT)
+    @Log(title = "字典类型" , businessType = BusinessType.INSERT)
     @RequiresPermissions("system:dict:add")
     @PostMapping("/add")
     @ResponseBody
@@ -82,14 +82,14 @@ public class DictTypeController extends BaseController {
      */
     @GetMapping("/edit/{dictId}")
     public String edit(@PathVariable("dictId") Long dictId, ModelMap mmap) {
-        mmap.put("dict", dictTypeService.selectDictTypeById(dictId));
+        mmap.put("dict" , dictTypeService.selectDictTypeById(dictId));
         return prefix + "/edit";
     }
 
     /**
      * 修改保存字典类型
      */
-    @Log(title = "字典类型", businessType = BusinessType.UPDATE)
+    @Log(title = "字典类型" , businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:dict:edit")
     @PostMapping("/edit")
     @ResponseBody
@@ -97,7 +97,7 @@ public class DictTypeController extends BaseController {
         return toAjax(dictTypeService.updateDictType(dict));
     }
 
-    @Log(title = "字典类型", businessType = BusinessType.DELETE)
+    @Log(title = "字典类型" , businessType = BusinessType.DELETE)
     @RequiresPermissions("system:dict:remove")
     @PostMapping("/remove")
     @ResponseBody
@@ -115,8 +115,8 @@ public class DictTypeController extends BaseController {
     @RequiresPermissions("system:dict:list")
     @GetMapping("/detail/{dictId}")
     public String detail(@PathVariable("dictId") Long dictId, ModelMap mmap) {
-        mmap.put("dict", dictTypeService.selectDictTypeById(dictId));
-        mmap.put("dictList", dictTypeService.selectDictTypeAll());
+        mmap.put("dict" , dictTypeService.selectDictTypeById(dictId));
+        mmap.put("dictList" , dictTypeService.selectDictTypeAll());
         return "system/dict/data/data";
     }
 

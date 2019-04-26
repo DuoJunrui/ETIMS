@@ -24,7 +24,7 @@ public class DynamicDataSourceContextHolder {
      * 设置数据源的变量
      */
     public static void setDataSourceType(String dsType) {
-        log.info("切换到{}数据源", dsType);
+        log.info("切换到{}数据源" , dsType);
         CONTEXT_HOLDER.set(dsType);
     }
 

@@ -43,10 +43,10 @@ public class CaptchaController extends BaseController {
         ServletOutputStream out = null;
         try {
             HttpSession session = request.getSession();
-            response.setDateHeader("Expires", 0);
-            response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
-            response.addHeader("Cache-Control", "post-check=0, pre-check=0");
-            response.setHeader("Pragma", "no-cache");
+            response.setDateHeader("Expires" , 0);
+            response.setHeader("Cache-Control" , "no-store, no-cache, must-revalidate");
+            response.addHeader("Cache-Control" , "post-check=0, pre-check=0");
+            response.setHeader("Pragma" , "no-cache");
             response.setContentType("image/jpeg");
 
             String type = request.getParameter("type");
@@ -64,7 +64,7 @@ public class CaptchaController extends BaseController {
             }
             session.setAttribute(Constants.KAPTCHA_SESSION_KEY, code);
             out = response.getOutputStream();
-            ImageIO.write(bi, "jpg", out);
+            ImageIO.write(bi, "jpg" , out);
             out.flush();
 
         } catch (Exception e) {

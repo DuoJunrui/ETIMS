@@ -52,14 +52,14 @@ public class DeptController extends BaseController {
      */
     @GetMapping("/add/{parentId}")
     public String add(@PathVariable("parentId") Long parentId, ModelMap mmap) {
-        mmap.put("dept", deptService.selectDeptById(parentId));
+        mmap.put("dept" , deptService.selectDeptById(parentId));
         return prefix + "/add";
     }
 
     /**
      * 新增保存部门
      */
-    @Log(title = "部门管理", businessType = BusinessType.INSERT)
+    @Log(title = "部门管理" , businessType = BusinessType.INSERT)
     @RequiresPermissions("system:dept:add")
     @PostMapping("/add")
     @ResponseBody
@@ -76,14 +76,14 @@ public class DeptController extends BaseController {
         if (StringUtils.isNotNull(dept) && 100L == deptId) {
             dept.setParentName("无");
         }
-        mmap.put("dept", dept);
+        mmap.put("dept" , dept);
         return prefix + "/edit";
     }
 
     /**
      * 保存
      */
-    @Log(title = "部门管理", businessType = BusinessType.UPDATE)
+    @Log(title = "部门管理" , businessType = BusinessType.UPDATE)
     @RequiresPermissions("system:dept:edit")
     @PostMapping("/edit")
     @ResponseBody
@@ -94,7 +94,7 @@ public class DeptController extends BaseController {
     /**
      * 删除
      */
-    @Log(title = "部门管理", businessType = BusinessType.DELETE)
+    @Log(title = "部门管理" , businessType = BusinessType.DELETE)
     @RequiresPermissions("system:dept:remove")
     @GetMapping("/remove/{deptId}")
     @ResponseBody
@@ -122,7 +122,7 @@ public class DeptController extends BaseController {
      */
     @GetMapping("/selectDeptTree/{deptId}")
     public String selectDeptTree(@PathVariable("deptId") Long deptId, ModelMap mmap) {
-        mmap.put("dept", deptService.selectDeptById(deptId));
+        mmap.put("dept" , deptService.selectDeptById(deptId));
         return prefix + "/tree";
     }
 

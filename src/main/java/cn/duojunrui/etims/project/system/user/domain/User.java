@@ -26,13 +26,13 @@ public class User extends BaseEntity {
     /**
      * 用户ID
      */
-    @Excel(name = "用户序号", prompt = "用户编号")
+    @Excel(name = "用户序号" , prompt = "用户编号")
     private Long userId;
 
     /**
      * 部门ID
      */
-    @Excel(name = "部门编号", type = Type.IMPORT)
+    @Excel(name = "部门编号" , type = Type.IMPORT)
     private Long deptId;
 
     /**
@@ -72,7 +72,7 @@ public class User extends BaseEntity {
     /**
      * 用户性别
      */
-    @Excel(name = "用户性别", readConverterExp = "0=男,1=女,2=未知")
+    @Excel(name = "用户性别" , readConverterExp = "0=男,1=女,2=未知")
     private String sex;
 
     /**
@@ -93,7 +93,7 @@ public class User extends BaseEntity {
     /**
      * 帐号状态（0正常 1停用）
      */
-    @Excel(name = "帐号状态", readConverterExp = "0=正常,1=停用")
+    @Excel(name = "帐号状态" , readConverterExp = "0=正常,1=停用")
     private String status;
 
     /**
@@ -104,19 +104,19 @@ public class User extends BaseEntity {
     /**
      * 最后登陆IP
      */
-    @Excel(name = "最后登陆IP", type = Type.EXPORT)
+    @Excel(name = "最后登陆IP" , type = Type.EXPORT)
     private String loginIp;
 
     /**
      * 最后登陆时间
      */
-    @Excel(name = "最后登陆时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss", type = Type.EXPORT)
+    @Excel(name = "最后登陆时间" , width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss" , type = Type.EXPORT)
     private Date loginDate;
 
     /**
      * 部门对象
      */
-    @Excel(name = "部门名称", targetAttr = "deptName", type = Type.EXPORT)
+    @Excel(name = "部门名称" , targetAttr = "deptName" , type = Type.EXPORT)
     private Dept dept;
 
     /**
@@ -318,26 +318,26 @@ public class User extends BaseEntity {
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("userId", getUserId())
-                .append("deptId", getDeptId())
-                .append("loginName", getLoginName())
-                .append("userName", getUserName())
-                .append("email", getEmail())
-                .append("phonenumber", getPhonenumber())
-                .append("sex", getSex())
-                .append("avatar", getAvatar())
-                .append("password", getPassword())
-                .append("salt", getSalt())
-                .append("status", getStatus())
-                .append("delFlag", getDelFlag())
-                .append("loginIp", getLoginIp())
-                .append("loginDate", getLoginDate())
-                .append("createBy", getCreateBy())
-                .append("createTime", getCreateTime())
-                .append("updateBy", getUpdateBy())
-                .append("updateTime", getUpdateTime())
-                .append("remark", getRemark())
-                .append("dept", getDept())
+                .append("userId" , getUserId())
+                .append("deptId" , getDeptId())
+                .append("loginName" , getLoginName())
+                .append("userName" , getUserName())
+                .append("email" , getEmail())
+                .append("phonenumber" , getPhonenumber())
+                .append("sex" , getSex())
+                .append("avatar" , getAvatar())
+                .append("password" , getPassword())
+                .append("salt" , getSalt())
+                .append("status" , getStatus())
+                .append("delFlag" , getDelFlag())
+                .append("loginIp" , getLoginIp())
+                .append("loginDate" , getLoginDate())
+                .append("createBy" , getCreateBy())
+                .append("createTime" , getCreateTime())
+                .append("updateBy" , getUpdateBy())
+                .append("updateTime" , getUpdateTime())
+                .append("remark" , getRemark())
+                .append("dept" , getDept())
                 .toString();
     }
 }

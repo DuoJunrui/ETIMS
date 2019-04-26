@@ -43,7 +43,7 @@ public abstract class AbstractQuartzJob implements org.quartz.Job {
             }
             after(context, job, null);
         } catch (Exception e) {
-            log.error("任务执行异常  - ：", e);
+            log.error("任务执行异常  - ：" , e);
             after(context, job, e);
         }
     }

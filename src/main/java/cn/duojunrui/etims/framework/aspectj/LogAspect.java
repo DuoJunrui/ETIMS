@@ -58,7 +58,7 @@ public class LogAspect {
      * @param joinPoint 切点
      * @param e         异常
      */
-    @AfterThrowing(value = "logPointCut()", throwing = "e")
+    @AfterThrowing(value = "logPointCut()" , throwing = "e")
     public void doAfterThrowing(JoinPoint joinPoint, Exception e) {
         handleLog(joinPoint, e);
     }
@@ -105,7 +105,7 @@ public class LogAspect {
         } catch (Exception exp) {
             // 记录本地异常日志
             log.error("==前置通知异常==");
-            log.error("异常信息:{}", exp.getMessage());
+            log.error("异常信息:{}" , exp.getMessage());
             exp.printStackTrace();
         }
     }

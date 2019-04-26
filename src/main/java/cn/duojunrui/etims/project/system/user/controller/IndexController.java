@@ -35,16 +35,16 @@ public class IndexController extends BaseController {
         User user = getSysUser();
         // 根据用户id取出菜单
         List<Menu> menus = menuService.selectMenusByUser(user);
-        mmap.put("menus", menus);
-        mmap.put("user", user);
-        mmap.put("copyrightYear", etimsConfig.getCopyrightYear());
+        mmap.put("menus" , menus);
+        mmap.put("user" , user);
+        mmap.put("copyrightYear" , etimsConfig.getCopyrightYear());
         return "index";
     }
 
     // 系统介绍
     @GetMapping("/system/main")
     public String main(ModelMap mmap) {
-        mmap.put("version", etimsConfig.getVersion());
+        mmap.put("version" , etimsConfig.getVersion());
         return "main";
     }
 }

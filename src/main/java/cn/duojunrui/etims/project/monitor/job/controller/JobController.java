@@ -49,7 +49,7 @@ public class JobController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "定时任务", businessType = BusinessType.EXPORT)
+    @Log(title = "定时任务" , businessType = BusinessType.EXPORT)
     @RequiresPermissions("monitor:job:export")
     @PostMapping("/export")
     @ResponseBody
@@ -59,7 +59,7 @@ public class JobController extends BaseController {
         return util.exportExcel(list, "定时任务");
     }
 
-    @Log(title = "定时任务", businessType = BusinessType.DELETE)
+    @Log(title = "定时任务" , businessType = BusinessType.DELETE)
     @RequiresPermissions("monitor:job:remove")
     @PostMapping("/remove")
     @ResponseBody
@@ -71,15 +71,15 @@ public class JobController extends BaseController {
     @RequiresPermissions("monitor:job:detail")
     @GetMapping("/detail/{jobId}")
     public String detail(@PathVariable("jobId") Long jobId, ModelMap mmap) {
-        mmap.put("name", "job");
-        mmap.put("job", jobService.selectJobById(jobId));
+        mmap.put("name" , "job");
+        mmap.put("job" , jobService.selectJobById(jobId));
         return prefix + "/detail";
     }
 
     /**
      * 任务调度状态修改
      */
-    @Log(title = "定时任务", businessType = BusinessType.UPDATE)
+    @Log(title = "定时任务" , businessType = BusinessType.UPDATE)
     @RequiresPermissions("monitor:job:changeStatus")
     @PostMapping("/changeStatus")
     @ResponseBody
@@ -92,7 +92,7 @@ public class JobController extends BaseController {
     /**
      * 任务调度立即执行一次
      */
-    @Log(title = "定时任务", businessType = BusinessType.UPDATE)
+    @Log(title = "定时任务" , businessType = BusinessType.UPDATE)
     @RequiresPermissions("monitor:job:changeStatus")
     @PostMapping("/run")
     @ResponseBody
@@ -112,7 +112,7 @@ public class JobController extends BaseController {
     /**
      * 新增保存调度
      */
-    @Log(title = "定时任务", businessType = BusinessType.INSERT)
+    @Log(title = "定时任务" , businessType = BusinessType.INSERT)
     @RequiresPermissions("monitor:job:add")
     @PostMapping("/add")
     @ResponseBody
@@ -125,14 +125,14 @@ public class JobController extends BaseController {
      */
     @GetMapping("/edit/{jobId}")
     public String edit(@PathVariable("jobId") Long jobId, ModelMap mmap) {
-        mmap.put("job", jobService.selectJobById(jobId));
+        mmap.put("job" , jobService.selectJobById(jobId));
         return prefix + "/edit";
     }
 
     /**
      * 修改保存调度
      */
-    @Log(title = "定时任务", businessType = BusinessType.UPDATE)
+    @Log(title = "定时任务" , businessType = BusinessType.UPDATE)
     @RequiresPermissions("monitor:job:edit")
     @PostMapping("/edit")
     @ResponseBody
