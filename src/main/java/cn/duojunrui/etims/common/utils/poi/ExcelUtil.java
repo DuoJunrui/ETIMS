@@ -66,7 +66,7 @@ public class ExcelUtil<T> {
     /**
      * Excel sheet最大行数，默认65536
      */
-    public static final int sheetSize = 65536;
+    public static final int SHEETSIZE = 65536;
 
     /**
      * 工作表名称
@@ -257,7 +257,7 @@ public class ExcelUtil<T> {
         OutputStream out = null;
         try {
             // 取出一共有多少个sheet.
-            double sheetNo = Math.ceil(list.size() / sheetSize);
+            double sheetNo = Math.ceil(list.size() / SHEETSIZE);
             for (int index = 0; index <= sheetNo; index++) {
                 createSheet(sheetNo, index);
                 Cell cell = null; // 产生单元格
@@ -347,8 +347,8 @@ public class ExcelUtil<T> {
      * @param cell  类型单元格
      */
     public void fillExcelData(int index, Row row, Cell cell) {
-        int startNo = index * sheetSize;
-        int endNo = Math.min(startNo + sheetSize, list.size());
+        int startNo = index * SHEETSIZE;
+        int endNo = Math.min(startNo + SHEETSIZE, list.size());
         // 写入各条记录,每条记录对应excel表中的一行
         CellStyle cs = wb.createCellStyle();
         cs.setAlignment(HorizontalAlignment.CENTER);

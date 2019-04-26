@@ -81,6 +81,7 @@ public class UserServiceImpl implements IUserService {
      * @return 用户信息集合信息
      */
     @DataScope(tableAlias = "u")
+    @Override
     public List<User> selectAllocatedList(User user) {
         return userMapper.selectAllocatedList(user);
     }
@@ -92,6 +93,7 @@ public class UserServiceImpl implements IUserService {
      * @return 用户信息集合信息
      */
     @DataScope(tableAlias = "u")
+    @Override
     public List<User> selectUnallocatedList(User user) {
         return userMapper.selectUnallocatedList(user);
     }
