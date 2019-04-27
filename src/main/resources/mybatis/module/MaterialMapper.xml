@@ -6,42 +6,36 @@
 
     <resultMap type="Material" id="MaterialResult">
         <result property="materialId" column="material_id"/>
-        <result property="module" column="module"/>
         <result property="category" column="category"/>
-        <result property="courseType" column="course_type"/>
+        <result property="course" column="course"/>
         <result property="fileName" column="file_name"/>
         <result property="fileSize" column="file_size"/>
         <result property="fileType" column="file_type"/>
         <result property="downloadCount" column="download_count"/>
         <result property="uploader" column="uploader"/>
         <result property="filePath" column="file_path"/>
-        <result property="adviser" column="adviser"/>
-        <result property="checkStatus" column="check_status"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="delFlag" column="del_flag"/>
     </resultMap>
 
     <sql id="selectMaterialVo">
-        select material_id, module, category, course_type, file_name, file_size, file_type, download_count, uploader,
-        file_path, adviser, check_status, create_time, update_time, del_flag from mod_material
+        select material_id, category, course, file_name, file_size, file_type, download_count, uploader,
+        file_path, create_time, update_time, del_flag from mod_material
     </sql>
 
     <select id="selectMaterialList" parameterType="Material" resultMap="MaterialResult">
         <include refid="selectMaterialVo"/>
         <where>
             <if test="materialId != null ">and material_id = #{materialId}</if>
-            <if test="module != null  and module != '' ">and module = #{module}</if>
             <if test="category != null  and category != '' ">and category = #{category}</if>
-            <if test="courseType != null  and courseType != '' ">and course_type = #{courseType}</if>
+            <if test="course != null  and course != '' ">and course = #{course}</if>
             <if test="fileName != null  and fileName != '' ">and file_name = #{fileName}</if>
             <if test="fileSize != null  and fileSize != '' ">and file_size = #{fileSize}</if>
             <if test="fileType != null  and fileType != '' ">and file_type = #{fileType}</if>
             <if test="downloadCount != null  and downloadCount != '' ">and download_count = #{downloadCount}</if>
             <if test="uploader != null  and uploader != '' ">and uploader = #{uploader}</if>
             <if test="filePath != null  and filePath != '' ">and file_path = #{filePath}</if>
-            <if test="adviser != null  and adviser != '' ">and adviser = #{adviser}</if>
-            <if test="checkStatus != null  and checkStatus != '' ">and check_status = #{checkStatus}</if>
             <if test="createTime != null ">and create_time = #{createTime}</if>
             <if test="updateTime != null ">and update_time = #{updateTime}</if>
             <if test="delFlag != null  and delFlag != '' ">and del_flag = #{delFlag}</if>
@@ -56,33 +50,27 @@
     <insert id="insertMaterial" parameterType="Material" useGeneratedKeys="true" keyProperty="materialId">
         insert into mod_material
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="module != null  and module != ''  ">module,</if>
             <if test="category != null  and category != ''  ">category,</if>
-            <if test="courseType != null  and courseType != ''  ">course_type,</if>
+            <if test="course != null  and course != ''  ">course,</if>
             <if test="fileName != null  and fileName != ''  ">file_name,</if>
             <if test="fileSize != null  and fileSize != ''  ">file_size,</if>
             <if test="fileType != null  and fileType != ''  ">file_type,</if>
             <if test="downloadCount != null  and downloadCount != ''  ">download_count,</if>
             <if test="uploader != null  and uploader != ''  ">uploader,</if>
             <if test="filePath != null  and filePath != ''  ">file_path,</if>
-            <if test="adviser != null  and adviser != ''  ">adviser,</if>
-            <if test="checkStatus != null  and checkStatus != ''  ">check_status,</if>
             <if test="createTime != null  ">create_time,</if>
             <if test="updateTime != null  ">update_time,</if>
             <if test="delFlag != null  and delFlag != ''  ">del_flag,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="module != null  and module != ''  ">#{module},</if>
             <if test="category != null  and category != ''  ">#{category},</if>
-            <if test="courseType != null  and courseType != ''  ">#{courseType},</if>
+            <if test="course != null  and course != ''  ">#{course},</if>
             <if test="fileName != null  and fileName != ''  ">#{fileName},</if>
             <if test="fileSize != null  and fileSize != ''  ">#{fileSize},</if>
             <if test="fileType != null  and fileType != ''  ">#{fileType},</if>
             <if test="downloadCount != null  and downloadCount != ''  ">#{downloadCount},</if>
             <if test="uploader != null  and uploader != ''  ">#{uploader},</if>
             <if test="filePath != null  and filePath != ''  ">#{filePath},</if>
-            <if test="adviser != null  and adviser != ''  ">#{adviser},</if>
-            <if test="checkStatus != null  and checkStatus != ''  ">#{checkStatus},</if>
             <if test="createTime != null  ">#{createTime},</if>
             <if test="updateTime != null  ">#{updateTime},</if>
             <if test="delFlag != null  and delFlag != ''  ">#{delFlag},</if>
@@ -92,17 +80,14 @@
     <update id="updateMaterial" parameterType="Material">
         update mod_material
         <trim prefix="SET" suffixOverrides=",">
-            <if test="module != null  and module != ''  ">module = #{module},</if>
             <if test="category != null  and category != ''  ">category = #{category},</if>
-            <if test="courseType != null  and courseType != ''  ">course_type = #{courseType},</if>
+            <if test="course != null  and course != ''  ">course = #{course},</if>
             <if test="fileName != null  and fileName != ''  ">file_name = #{fileName},</if>
             <if test="fileSize != null  and fileSize != ''  ">file_size = #{fileSize},</if>
             <if test="fileType != null  and fileType != ''  ">file_type = #{fileType},</if>
             <if test="downloadCount != null  and downloadCount != ''  ">download_count = #{downloadCount},</if>
             <if test="uploader != null  and uploader != ''  ">uploader = #{uploader},</if>
             <if test="filePath != null  and filePath != ''  ">file_path = #{filePath},</if>
-            <if test="adviser != null  and adviser != ''  ">adviser = #{adviser},</if>
-            <if test="checkStatus != null  and checkStatus != ''  ">check_status = #{checkStatus},</if>
             <if test="createTime != null  ">create_time = #{createTime},</if>
             <if test="updateTime != null  ">update_time = #{updateTime},</if>
             <if test="delFlag != null  and delFlag != ''  ">del_flag = #{delFlag},</if>

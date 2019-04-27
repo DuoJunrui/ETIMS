@@ -18,7 +18,6 @@ import cn.duojunrui.etims.project.module.material.service.IMaterialService;
 import cn.duojunrui.etims.framework.web.controller.BaseController;
 import cn.duojunrui.etims.framework.web.page.TableDataInfo;
 import cn.duojunrui.etims.framework.web.domain.AjaxResult;
-import cn.duojunrui.etims.common.utils.poi.ExcelUtil;
 
 /**
  * 教学资源信息操作处理
@@ -50,19 +49,6 @@ public class MaterialController extends BaseController {
         startPage();
         List<Material> list = materialService.selectMaterialList(material);
         return getDataTable(list);
-    }
-
-
-    /**
-     * 导出教学资源列表
-     */
-    @RequiresPermissions("module:material:export")
-    @PostMapping("/export")
-    @ResponseBody
-    public AjaxResult export(Material material) {
-        List<Material> list = materialService.selectMaterialList(material);
-        ExcelUtil<Material> util = new ExcelUtil<Material>(Material.class);
-        return util.exportExcel(list, "material");
     }
 
     /**

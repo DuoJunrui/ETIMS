@@ -11,59 +11,23 @@
                 <div class="select-list">
                     <ul>
                         <li>
-                            模块分类（教学、试题、案例、文献、学生项目等）：<input type="text" name="module"/>
+                            课程名称：<input type="text" name="course"/>
                         </li>
 
                         <li>
-                            资料分类（教学课件、实验指导书、试题等）：<input type="text" name="category"/>
+                            资料分类：<select name="category" th:with="type=${@dict.getType('mod_material_category')}">
+                            <option value="">所有学习资料</option>
+                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+                                    th:value="${dict.dictValue}"></option>
+                        </select>
                         </li>
 
                         <li>
-                            课程类别（如计算机组成原理）：<input type="text" name="courseType"/>
+                            资料名称：<input type="text" name="fileName"/>
                         </li>
 
                         <li>
-                            资料文件名称：<input type="text" name="fileName"/>
-                        </li>
-
-                        <li>
-                            文件大小：<input type="text" name="fileSize"/>
-                        </li>
-
-                        <li>
-                            文件类型（doc、zip、ppt）：<input type="text" name="fileType"/>
-                        </li>
-
-                        <li>
-                            下载次数：<input type="text" name="downloadCount"/>
-                        </li>
-
-                        <li>
-                            资料上传者：<input type="text" name="uploader"/>
-                        </li>
-
-                        <li>
-                            文件磁盘路径：<input type="text" name="filePath"/>
-                        </li>
-
-                        <li>
-                            指导老师：<input type="text" name="adviser"/>
-                        </li>
-
-                        <li>
-                            检查状态（0检查中 1检查通过 2检查不通过）：<input type="text" name="checkStatus"/>
-                        </li>
-
-                        <li>
-                            创建时间（上传时间）：<input type="text" name="createTime"/>
-                        </li>
-
-                        <li>
-                            最后更新时间：<input type="text" name="updateTime"/>
-                        </li>
-
-                        <li>
-                            删除标志（0代表存在 2代表删除）：<input type="text" name="delFlag"/>
+                            上传者：<input type="text" name="uploader"/>
                         </li>
 
                         <li>
@@ -89,10 +53,6 @@
                shiro:hasPermission="module:material:remove">
                 <i class="fa fa-remove"></i> 删除
             </a>
-            <a class="btn btn-warning" onclick="$.table.exportExcel()"
-               shiro:hasPermission="module:material:export">
-                <i class="fa fa-download"></i> 导出
-            </a>
         </div>
         <div class="col-sm-12 select-table table-striped">
             <table id="bootstrap-table" data-mobile-responsive="true"></table>
@@ -103,6 +63,8 @@
 <script th:inline="javascript">
     var editFlag = [[${@permission.hasPermi('module:material:edit')}]];
     var removeFlag = [[${@permission.hasPermi('module:material:remove')}]];
+    var categoryTypes = [[${@dict.getType('mod_material_category')}]];
+    var fileTypes = [[${@dict.getType('mod_material_file_type')}]];
     var prefix = ctx + "module/material";
 
     $(function () {
@@ -111,45 +73,51 @@
             createUrl: prefix + "/add",
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
-            exportUrl: prefix + "/export",
             modalName: "教学资源",
             showExport: true,
             columns: [{
                 checkbox: true
             },
                 {
-                    field: 'materialId',
-                    title: '教学资源表ID主键',
-                    visible: false
+                    field: 'id',
+                    title: '序号',
+                    sortable: true,
+                    formatter: function (value, row, index) {
+                        return index + 1;
+                    }
                 },
                 {
-                    field: 'module',
-                    title: '模块分类（教学、试题、案例、文献、学生项目等）',
+                    field: 'course',
+                    title: '课程名称',
                     sortable: true
                 },
                 {
                     field: 'category',
-                    title: '资料分类（教学课件、实验指导书、试题等）',
-                    sortable: true
-                },
-                {
-                    field: 'courseType',
-                    title: '课程类别（如计算机组成原理）',
-                    sortable: true
+                    title: '资料分类',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(categoryTypes, value);
+                    }
                 },
                 {
                     field: 'fileName',
-                    title: '资料文件名称',
+                    title: '资料名称',
                     sortable: true
                 },
                 {
-                    field: 'fileSize',
-                    title: '文件大小',
+                    field: 'uploader',
+                    title: '上传者',
                     sortable: true
                 },
                 {
                     field: 'fileType',
-                    title: '文件类型（doc、zip、ppt）',
+                    title: '文件类型',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(fileTypes, value);
+                    }
+                },
+                {
+                    field: 'fileSize',
+                    title: '文件大小',
                     sortable: true
                 },
                 {
@@ -158,38 +126,13 @@
                     sortable: true
                 },
                 {
-                    field: 'uploader',
-                    title: '资料上传者',
-                    sortable: true
-                },
-                {
-                    field: 'filePath',
-                    title: '文件磁盘路径',
-                    sortable: true
-                },
-                {
-                    field: 'adviser',
-                    title: '指导老师',
-                    sortable: true
-                },
-                {
-                    field: 'checkStatus',
-                    title: '检查状态（0检查中 1检查通过 2检查不通过）',
-                    sortable: true
-                },
-                {
                     field: 'createTime',
-                    title: '创建时间（上传时间）',
+                    title: '上传时间',
                     sortable: true
                 },
                 {
                     field: 'updateTime',
-                    title: '最后更新时间',
-                    sortable: true
-                },
-                {
-                    field: 'delFlag',
-                    title: '删除标志（0代表存在 2代表删除）',
+                    title: '更新时间',
                     sortable: true
                 },
                 {
