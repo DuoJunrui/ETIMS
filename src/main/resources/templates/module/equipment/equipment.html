@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('教学资源列表')"/>
+    <th:block th:include="include :: header('实验室设备列表')"/>
 </head>
 <body class="gray-bg">
 <div class="container-div">
@@ -11,23 +11,19 @@
                 <div class="select-list">
                     <ul>
                         <li>
-                            课程名称：<input type="text" name="course"/>
+                            所属实验室：<input type="text" name="labName"/>
                         </li>
 
                         <li>
-                            资料分类：<select name="category" th:with="type=${@dict.getType('mod_material_category')}">
-                            <option value="">所有学习资料</option>
-                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
-                                    th:value="${dict.dictValue}"></option>
-                        </select>
+                            设备名称：<input type="text" name="equipmentName"/>
                         </li>
 
                         <li>
-                            资料名称：<input type="text" name="fileName"/>
+                            入库登记人：<input type="text" name="inputUser"/>
                         </li>
 
                         <li>
-                            上传者：<input type="text" name="uploader"/>
+                            出库登记人：<input type="text" name="outputUser"/>
                         </li>
 
                         <li>
@@ -42,13 +38,21 @@
         </div>
 
         <div class="btn-group-sm" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="module:material:add">
-                <i class="fa fa-plus"></i> 上传资料
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="module:equipment:add">
+                <i class="fa fa-plus"></i> 入库
+            </a>
+            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()"
+               shiro:hasPermission="module:equipment:edit">
+                <i class="fa fa-edit"></i> 修改
             </a>
             <a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
-               shiro:hasPermission="module:material:remove">
-                <i class="fa fa-remove"></i> 批量删除
+               shiro:hasPermission="module:equipment:remove">
+                <i class="fa fa-remove"></i> 删除
             </a>
+            <!--<a class="btn btn-warning" onclick="$.table.exportExcel()"-->
+               <!--shiro:hasPermission="module:equipment:export">-->
+                <!--<i class="fa fa-download"></i> 导出-->
+            <!--</a>-->
         </div>
         <div class="col-sm-12 select-table table-striped">
             <table id="bootstrap-table" data-mobile-responsive="true"></table>
@@ -57,11 +61,9 @@
 </div>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('module:material:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('module:material:remove')}]];
-    var categoryTypes = [[${@dict.getType('mod_material_category')}]];
-    var fileTypes = [[${@dict.getType('mod_material_file_type')}]];
-    var prefix = ctx + "module/material";
+    var editFlag = [[${@permission.hasPermi('module:equipment:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('module:equipment:remove')}]];
+    var prefix = ctx + "module/equipment";
 
     $(function () {
         var options = {
@@ -69,11 +71,17 @@
             createUrl: prefix + "/add",
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
-            modalName: "教学资源",
+            exportUrl: prefix + "/export",
+            modalName: "实验室设备",
             showExport: true,
             columns: [{
                 checkbox: true
             },
+                {
+                    field: 'equipmentId',
+                    title: '实验室设备表id',
+                    visible: false
+                },
                 {
                     field: 'id',
                     title: '序号',
@@ -83,52 +91,53 @@
                     }
                 },
                 {
-                    field: 'course',
-                    title: '课程名称',
+                    field: 'labName',
+                    title: '所属实验室',
                     sortable: true
                 },
                 {
-                    field: 'category',
-                    title: '资料分类',
-                    formatter: function (value, row, index) {
-                        return $.table.selectDictLabel(categoryTypes, value);
-                    }
-                },
-                {
-                    field: 'fileName',
-                    title: '资料名称',
+                    field: 'equipmentName',
+                    title: '设备名称',
                     sortable: true
                 },
                 {
-                    field: 'uploader',
-                    title: '上传者',
+                    field: 'equipmentCount',
+                    title: '设备数量',
                     sortable: true
                 },
                 {
-                    field: 'fileType',
-                    title: '文件类型',
-                    formatter: function (value, row, index) {
-                        return $.table.selectDictLabel(fileTypes, value);
-                    }
-                },
-                {
-                    field: 'fileSize',
-                    title: '文件大小',
+                    field: 'equipmentUse',
+                    title: '设备用途',
                     sortable: true
                 },
                 {
-                    field: 'downloadCount',
-                    title: '下载次数',
+                    field: 'inputTime',
+                    title: '入库时间',
                     sortable: true
                 },
                 {
-                    field: 'createTime',
-                    title: '上传时间',
+                    field: 'inputUser',
+                    title: '入库登记人',
                     sortable: true
                 },
                 {
-                    field: 'updateTime',
-                    title: '更新时间',
+                    field: 'intputRemark',
+                    title: '入库备注',
+                    sortable: true
+                },
+                {
+                    field: 'outputTime',
+                    title: '出库时间',
+                    sortable: true
+                },
+                {
+                    field: 'outputUser',
+                    title: '出库登记人',
+                    sortable: true
+                },
+                {
+                    field: 'outputRemark',
+                    title: '出库备注',
                     sortable: true
                 },
                 {
@@ -136,8 +145,8 @@
                     align: 'center',
                     formatter: function (value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.materialId + '\')"><i class="fa fa-edit"></i>修改</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.materialId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.equipmentId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.equipmentId + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }]

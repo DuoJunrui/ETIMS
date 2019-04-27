@@ -3,7 +3,6 @@ package cn.duojunrui.etims.project.module.material.domain;
 import cn.duojunrui.etims.framework.web.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import cn.duojunrui.etims.framework.web.domain.BaseEntity;
 
 /**
  * 教学资源表 mod_material

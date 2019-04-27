@@ -49,7 +49,7 @@ public class LogininforController extends BaseController {
         return getDataTable(list);
     }
 
-    @Log(title = "登陆日志" , businessType = BusinessType.EXPORT)
+    @Log(title = "登陆日志", businessType = BusinessType.EXPORT)
     @RequiresPermissions("monitor:logininfor:export")
     @PostMapping("/export")
     @ResponseBody
@@ -60,7 +60,7 @@ public class LogininforController extends BaseController {
     }
 
     @RequiresPermissions("monitor:logininfor:remove")
-    @Log(title = "登陆日志" , businessType = BusinessType.DELETE)
+    @Log(title = "登陆日志", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {
@@ -68,7 +68,7 @@ public class LogininforController extends BaseController {
     }
 
     @RequiresPermissions("monitor:logininfor:remove")
-    @Log(title = "登陆日志" , businessType = BusinessType.CLEAN)
+    @Log(title = "登陆日志", businessType = BusinessType.CLEAN)
     @PostMapping("/clean")
     @ResponseBody
     public AjaxResult clean() {
