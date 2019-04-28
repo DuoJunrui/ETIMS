@@ -77,7 +77,15 @@
             },
                 {
                     field: 'postId',
-                    title: '岗位编号'
+                    title: '岗位编号',
+                    visible: false
+                },
+                {
+                    field: 'id',
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return index + 1;
+                    }
                 },
                 {
                     field: 'postCode',

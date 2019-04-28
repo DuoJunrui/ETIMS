@@ -73,7 +73,15 @@
             },
                 {
                     field: 'noticeId',
-                    title: '序号'
+                    title: '主键',
+                    visible: false
+                },
+                {
+                    field: 'id',
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return index + 1;
+                    }
                 },
                 {
                     field: 'noticeTitle',

@@ -6,6 +6,8 @@
     <th:block th:include="include :: ztree-css"/>
 </head>
 <body class="gray-bg">
+
+<!--树形组织列表-->
 <div class="ui-layout-west">
     <div class="main-content">
         <div class="box box-main">
@@ -40,13 +42,13 @@
                 <div class="select-list">
                     <ul>
                         <li>
-                            登录名称：<input type="text" name="loginName"/>
+                            学号/工号：<input type="text" name="loginName"/>
                         </li>
                         <li>
                             手机号码：<input type="text" name="phonenumber"/>
                         </li>
                         <li>
-                            用户状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">
+                            账号状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">
                             <option value="">所有</option>
                             <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
                                     th:value="${dict.dictValue}"></option>
@@ -134,29 +136,36 @@
             },
                 {
                     field: 'userId',
-                    title: '用户ID'
+                    title: '用户ID',
+                    visible: false
+                },
+                {
+                    field: 'id',
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return index + 1;
+                    }
                 },
                 {
                     field: 'loginName',
-                    title: '登录名称',
+                    title: '学号/工号',
                     sortable: true
                 },
                 {
                     field: 'userName',
-                    title: '用户名称'
+                    title: '用户姓名'
                 },
                 {
                     field: 'dept.deptName',
                     title: '部门'
                 },
                 {
-                    field: 'email',
-                    title: '邮箱',
-                    visible: false
-                },
-                {
                     field: 'phonenumber',
                     title: '手机'
+                },
+                {
+                    field: 'email',
+                    title: '邮箱'
                 },
                 {
                     visible: editFlag == 'hidden' ? false : true,
@@ -167,8 +176,12 @@
                     }
                 },
                 {
-                    field: 'createTime',
-                    title: '创建时间',
+                    field: 'loginIp',
+                    title: '最后登陆IP',
+                },
+                {
+                    field: 'loginDate',
+                    title: '最后登陆时间',
                     sortable: true
                 },
                 {

@@ -81,6 +81,13 @@
                 checkbox: true
             },
                 {
+                    field: 'id',
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return index + 1;
+                    }
+                },
+                {
                     field: 'dictCode',
                     title: '字典编码'
                 },

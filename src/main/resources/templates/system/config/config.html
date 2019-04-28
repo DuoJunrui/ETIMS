@@ -85,7 +85,15 @@
             },
                 {
                     field: 'configId',
-                    title: '参数主键'
+                    title: '参数主键',
+                    visible: false
+                },
+                {
+                    field: 'id',
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return index + 1;
+                    }
                 },
                 {
                     field: 'configName',
