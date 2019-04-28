@@ -3,16 +3,16 @@ package cn.duojunrui.etims.project.module.equipment.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import cn.duojunrui.etims.framework.web.domain.BaseEntity;
+
 import java.util.Date;
 
 /**
  * 实验室设备表 mod_equipment
  *
  * @author Duojunrui
- * @date 2019-04-27
+ * @date 2019-04-28
  */
 public class Equipment extends BaseEntity {
-
     private static final long serialVersionUID = 1L;
 
     /**
@@ -36,31 +36,19 @@ public class Equipment extends BaseEntity {
      */
     private String equipmentUse;
     /**
-     * 入库时间
+     * 操作状态（0入库，1出库）
      */
-    private Date inputTime;
+    private String operateStatus;
     /**
-     * 入库登记人
+     * 出入库时间
      */
-    private String inputUser;
+    private Date operateTime;
     /**
-     * 入库备注
+     * 登记人
      */
-    private String intputRemark;
+    private String register;
     /**
-     * 出库时间
-     */
-    private Date outputTime;
-    /**
-     * 出库登记人
-     */
-    private String outputUser;
-    /**
-     * 出库备注
-     */
-    private String outputRemark;
-    /**
-     * 删除标志（0代表存在 2代表删除）
+     * 删除标志（0代表存在 1代表删除）
      */
     private String delFlag;
 
@@ -104,52 +92,28 @@ public class Equipment extends BaseEntity {
         return equipmentUse;
     }
 
-    public void setInputTime(Date inputTime) {
-        this.inputTime = inputTime;
+    public void setOperateStatus(String operateStatus) {
+        this.operateStatus = operateStatus;
     }
 
-    public Date getInputTime() {
-        return inputTime;
+    public String getOperateStatus() {
+        return operateStatus;
     }
 
-    public void setInputUser(String inputUser) {
-        this.inputUser = inputUser;
+    public void setOperateTime(Date operateTime) {
+        this.operateTime = operateTime;
     }
 
-    public String getInputUser() {
-        return inputUser;
+    public Date getOperateTime() {
+        return operateTime;
     }
 
-    public void setIntputRemark(String intputRemark) {
-        this.intputRemark = intputRemark;
+    public void setRegister(String register) {
+        this.register = register;
     }
 
-    public String getIntputRemark() {
-        return intputRemark;
-    }
-
-    public void setOutputTime(Date outputTime) {
-        this.outputTime = outputTime;
-    }
-
-    public Date getOutputTime() {
-        return outputTime;
-    }
-
-    public void setOutputUser(String outputUser) {
-        this.outputUser = outputUser;
-    }
-
-    public String getOutputUser() {
-        return outputUser;
-    }
-
-    public void setOutputRemark(String outputRemark) {
-        this.outputRemark = outputRemark;
-    }
-
-    public String getOutputRemark() {
-        return outputRemark;
+    public String getRegister() {
+        return register;
     }
 
     public void setDelFlag(String delFlag) {
@@ -167,12 +131,10 @@ public class Equipment extends BaseEntity {
                 .append("equipmentName", getEquipmentName())
                 .append("equipmentCount", getEquipmentCount())
                 .append("equipmentUse", getEquipmentUse())
-                .append("inputTime", getInputTime())
-                .append("inputUser", getInputUser())
-                .append("intputRemark", getIntputRemark())
-                .append("outputTime", getOutputTime())
-                .append("outputUser", getOutputUser())
-                .append("outputRemark", getOutputRemark())
+                .append("operateStatus", getOperateStatus())
+                .append("operateTime", getOperateTime())
+                .append("register", getRegister())
+                .append("remark", getRemark())
                 .append("createTime", getCreateTime())
                 .append("updateTime", getUpdateTime())
                 .append("delFlag", getDelFlag())

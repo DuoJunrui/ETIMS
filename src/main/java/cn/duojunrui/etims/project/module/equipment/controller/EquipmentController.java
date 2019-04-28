@@ -2,7 +2,6 @@ package cn.duojunrui.etims.project.module.equipment.controller;
 
 import java.util.List;
 
-import cn.duojunrui.etims.common.utils.poi.ExcelUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,12 +18,13 @@ import cn.duojunrui.etims.project.module.equipment.service.IEquipmentService;
 import cn.duojunrui.etims.framework.web.controller.BaseController;
 import cn.duojunrui.etims.framework.web.page.TableDataInfo;
 import cn.duojunrui.etims.framework.web.domain.AjaxResult;
+import cn.duojunrui.etims.common.utils.poi.ExcelUtil;
 
 /**
- * 实验室设备操作处理
+ * 实验室设备信息操作处理
  *
  * @author Duojunrui
- * @date 2019-04-27
+ * @date 2019-04-28
  */
 @Controller
 @RequestMapping("/module/equipment")
@@ -61,12 +61,12 @@ public class EquipmentController extends BaseController {
     @ResponseBody
     public AjaxResult export(Equipment equipment) {
         List<Equipment> list = equipmentService.selectEquipmentList(equipment);
-        ExcelUtil<Equipment> util = new ExcelUtil<Equipment>(Equipment.class);
+        ExcelUtil<Equipment> util = new ExcelUtil<Equipment>(Equipment. class);
         return util.exportExcel(list, "equipment");
     }
 
     /**
-     * 新增实验室设备（设备入库）
+     * 新增实验室设备
      */
     @GetMapping("/add")
     public String add() {
@@ -74,10 +74,10 @@ public class EquipmentController extends BaseController {
     }
 
     /**
-     * 新增保存实验室设备（设备入库）
+     * 新增保存实验室设备
      */
     @RequiresPermissions("module:equipment:add")
-    @Log(title = "实验室设备", businessType = BusinessType.INSERT)
+    @Log(title = "实验室设备" , businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Equipment equipment) {
@@ -85,20 +85,20 @@ public class EquipmentController extends BaseController {
     }
 
     /**
-     * 修改实验室设备（入库信息修改）
+     * 修改实验室设备
      */
     @GetMapping("/edit/{equipmentId}")
     public String edit(@PathVariable("equipmentId") Long equipmentId, ModelMap mmap) {
-        Equipment equipment = equipmentService.selectEquipmentById(equipmentId);
-        mmap.put("equipment", equipment);
+        Equipment equipment =equipmentService.selectEquipmentById(equipmentId);
+        mmap.put("equipment" , equipment);
         return prefix + "/edit";
     }
 
     /**
-     * 修改保存实验室设备（入库信息修改）
+     * 修改保存实验室设备
      */
     @RequiresPermissions("module:equipment:edit")
-    @Log(title = "实验室设备", businessType = BusinessType.UPDATE)
+    @Log(title = "实验室设备" , businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Equipment equipment) {
@@ -106,32 +106,10 @@ public class EquipmentController extends BaseController {
     }
 
     /**
-     * 修改保存实验室设备（出库登记）
-     */
-    @RequiresPermissions("module:equipment:output")
-    @Log(title = "实验室设备", businessType = BusinessType.UPDATE)
-    @PostMapping("/output")
-    @ResponseBody
-    public AjaxResult outputSave(Equipment equipment) {
-        return toAjax(equipmentService.updateEquipment(equipment));
-    }
-
-    /**
-     * 修改保存实验室设备（归还登记）
-     */
-    @RequiresPermissions("module:equipment:input")
-    @Log(title = "实验室设备", businessType = BusinessType.UPDATE)
-    @PostMapping("/input")
-    @ResponseBody
-    public AjaxResult inputSave(Equipment equipment) {
-        return toAjax(equipmentService.updateEquipment(equipment));
-    }
-
-    /**
-     * 删除实验室设备（仓储设备信息删除）
+     * 删除实验室设备
      */
     @RequiresPermissions("module:equipment:remove")
-    @Log(title = "实验室设备", businessType = BusinessType.DELETE)
+    @Log(title = "实验室设备" , businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {

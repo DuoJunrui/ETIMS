@@ -7,7 +7,7 @@ import java.util.List;
  * 实验室设备 服务层
  *
  * @author Duojunrui
- * @date 2019-04-27
+ * @date 2019-04-28
  */
 public interface IEquipmentService {
     /**

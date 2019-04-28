@@ -2,14 +2,13 @@ package cn.duojunrui.etims.project.module.equipment.mapper;
 
 import cn.duojunrui.etims.project.module.equipment.domain.Equipment;
 import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
 
 /**
  * 实验室设备 数据层
  *
  * @author Duojunrui
- * @date 2019-04-27
+ * @date 2019-04-28
  */
 @Mapper
 public interface EquipmentMapper {

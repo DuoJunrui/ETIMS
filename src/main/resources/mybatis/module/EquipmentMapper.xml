@@ -10,19 +10,17 @@
         <result property="equipmentName" column="equipment_name"/>
         <result property="equipmentCount" column="equipment_count"/>
         <result property="equipmentUse" column="equipment_use"/>
-        <result property="inputTime" column="input_time"/>
-        <result property="inputUser" column="input_user"/>
-        <result property="intputRemark" column="intput_remark"/>
-        <result property="outputTime" column="output_time"/>
-        <result property="outputUser" column="output_user"/>
-        <result property="outputRemark" column="output_remark"/>
+        <result property="operateStatus" column="operate_status"/>
+        <result property="operateTime" column="operate_time"/>
+        <result property="register" column="register"/>
+        <result property="remark" column="remark"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <result property="delFlag" column="del_flag"/>
     </resultMap>
 
     <sql id="selectEquipmentVo">
-        select equipment_id, lab_name, equipment_name, equipment_count, equipment_use, input_time, input_user, intput_remark, output_time, output_user, output_remark, create_time, update_time, del_flag        from mod_equipment
+        select equipment_id, lab_name, equipment_name, equipment_count, equipment_use, operate_status, operate_time, register, remark, create_time, update_time, del_flag from mod_equipment
     </sql>
 
     <select id="selectEquipmentList" parameterType="Equipment" resultMap="EquipmentResult">
@@ -31,17 +29,23 @@
             <if test="equipmentId != null ">and equipment_id = #{equipmentId}</if>
             <if test="labName != null  and labName != '' ">and lab_name = #{labName}</if>
             <if test="equipmentName != null  and equipmentName != '' ">and equipment_name = #{equipmentName}</if>
-            <if test="equipmentCount != null ">and equipment_count = #{equipmentCount}</if>
-            <if test="equipmentUse != null  and equipmentUse != '' ">and equipment_use = #{equipmentUse}</if>
-            <if test="inputTime != null ">and input_time = #{inputTime}</if>
-            <if test="inputUser != null  and inputUser != '' ">and input_user = #{inputUser}</if>
-            <if test="intputRemark != null  and intputRemark != '' ">and intput_remark = #{intputRemark}</if>
-            <if test="outputTime != null ">and output_time = #{outputTime}</if>
-            <if test="outputUser != null  and outputUser != '' ">and output_user = #{outputUser}</if>
-            <if test="outputRemark != null  and outputRemark != '' ">and output_remark = #{outputRemark}</if>
-            <if test="createTime != null ">and create_time = #{createTime}</if>
-            <if test="updateTime != null ">and update_time = #{updateTime}</if>
-            <if test="delFlag != null  and delFlag != '' ">and del_flag = #{delFlag}</if>
+            <if test="equipmentCount != null ">and equipment_count = #{equipmentCount}
+            </if>
+            <if test="equipmentUse != null  and equipmentUse != '' ">and equipment_use = #{equipmentUse}
+            </if>
+            <if test="operateStatus != null  and operateStatus != '' ">and operate_status = #{operateStatus}
+            </if>
+            <if test="operateTime != null ">and operate_time = #{operateTime}
+            </if>
+            <if test="register != null  and register != '' ">and register = #{register}
+            </if>
+            <if test="remark != null  and remark != '' ">and remark = #{remark}
+            </if>
+            <if test="createTime != null ">and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null ">and update_time = #{updateTime}
+            </if>
+            and del_flag = 0
         </where>
     </select>
 
@@ -50,71 +54,100 @@
         where equipment_id = #{equipmentId}
     </select>
 
-    <insert id="insertEquipment" parameterType="Equipment">
+    <insert id="insertEquipment" parameterType="Equipment" useGeneratedKeys="true" keyProperty="equipmentId">
         insert into mod_equipment
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="equipmentId != null  ">equipment_id,</if>
-            <if test="labName != null  and labName != ''  ">lab_name,</if>
-            <if test="equipmentName != null  and equipmentName != ''  ">equipment_name,</if>
-            <if test="equipmentCount != null  ">equipment_count,</if>
-            <if test="equipmentUse != null  and equipmentUse != ''  ">equipment_use,</if>
-            <if test="inputTime != null  ">input_time,</if>
-            <if test="inputUser != null  and inputUser != ''  ">input_user,</if>
-            <if test="intputRemark != null  and intputRemark != ''  ">intput_remark,</if>
-            <if test="outputTime != null  ">output_time,</if>
-            <if test="outputUser != null  and outputUser != ''  ">output_user,</if>
-            <if test="outputRemark != null  and outputRemark != ''  ">output_remark,</if>
-            <if test="createTime != null  ">create_time,</if>
-            <if test="updateTime != null  ">update_time,</if>
-            <if test="delFlag != null  and delFlag != ''  ">del_flag,</if>
+            <if test="labName != null  and labName != ''  ">lab_name,
+            </if>
+            <if test="equipmentName != null  and equipmentName != ''  ">equipment_name,
+            </if>
+            <if test="equipmentCount != null  ">equipment_count,
+            </if>
+            <if test="equipmentUse != null  and equipmentUse != ''  ">equipment_use,
+            </if>
+            <if test="operateStatus != null  and operateStatus != ''  ">operate_status,
+            </if>
+            <if test="operateTime != null  ">operate_time,
+            </if>
+            <if test="register != null  and register != ''  ">register,
+            </if>
+            <if test="remark != null  and remark != ''  ">remark,
+            </if>
+            <if test="createTime != null  ">create_time,
+            </if>
+            <if test="updateTime != null  ">update_time,
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">del_flag,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="equipmentId != null  ">#{equipmentId},</if>
-            <if test="labName != null  and labName != ''  ">#{labName},</if>
-            <if test="equipmentName != null  and equipmentName != ''  ">#{equipmentName},</if>
-            <if test="equipmentCount != null  ">#{equipmentCount},</if>
-            <if test="equipmentUse != null  and equipmentUse != ''  ">#{equipmentUse},</if>
-            <if test="inputTime != null  ">#{inputTime},</if>
-            <if test="inputUser != null  and inputUser != ''  ">#{inputUser},</if>
-            <if test="intputRemark != null  and intputRemark != ''  ">#{intputRemark},</if>
-            <if test="outputTime != null  ">#{outputTime},</if>
-            <if test="outputUser != null  and outputUser != ''  ">#{outputUser},</if>
-            <if test="outputRemark != null  and outputRemark != ''  ">#{outputRemark},</if>
-            <if test="createTime != null  ">#{createTime},</if>
-            <if test="updateTime != null  ">#{updateTime},</if>
-            <if test="delFlag != null  and delFlag != ''  ">#{delFlag},</if>
+            <if test="labName != null  and labName != ''  ">#{labName},
+            </if>
+            <if test="equipmentName != null  and equipmentName != ''  ">#{equipmentName},
+            </if>
+            <if test="equipmentCount != null  ">#{equipmentCount},
+            </if>
+            <if test="equipmentUse != null  and equipmentUse != ''  ">#{equipmentUse},
+            </if>
+            <if test="operateStatus != null  and operateStatus != ''  ">#{operateStatus},
+            </if>
+            <if test="operateTime != null  ">#{operateTime},
+            </if>
+            <if test="register != null  and register != ''  ">#{register},
+            </if>
+            <if test="remark != null  and remark != ''  ">#{remark},
+            </if>
+            <if test="createTime != null  ">#{createTime},
+            </if>
+            <if test="updateTime != null  ">#{updateTime},
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">#{delFlag},
+            </if>
         </trim>
     </insert>
 
     <update id="updateEquipment" parameterType="Equipment">
         update mod_equipment
         <trim prefix="SET" suffixOverrides=",">
-            <if test="labName != null  and labName != ''  ">lab_name = #{labName},</if>
-            <if test="equipmentName != null  and equipmentName != ''  ">equipment_name = #{equipmentName},</if>
-            <if test="equipmentCount != null  ">equipment_count = #{equipmentCount},</if>
-            <if test="equipmentUse != null  and equipmentUse != ''  ">equipment_use = #{equipmentUse},</if>
-            <if test="inputTime != null  ">input_time = #{inputTime},</if>
-            <if test="inputUser != null  and inputUser != ''  ">input_user = #{inputUser},</if>
-            <if test="intputRemark != null  and intputRemark != ''  ">intput_remark = #{intputRemark},</if>
-            <if test="outputTime != null  ">output_time = #{outputTime},</if>
-            <if test="outputUser != null  and outputUser != ''  ">output_user = #{outputUser},</if>
-            <if test="outputRemark != null  and outputRemark != ''  ">output_remark = #{outputRemark},</if>
-            <if test="createTime != null  ">create_time = #{createTime},</if>
-            <if test="updateTime != null  ">update_time = #{updateTime},</if>
-            <if test="delFlag != null  and delFlag != ''  ">del_flag = #{delFlag},</if>
+            <if test="labName != null  and labName != ''  ">lab_name = #{labName},
+            </if>
+            <if test="equipmentName != null  and equipmentName != ''  ">equipment_name = #{equipmentName},
+            </if>
+            <if test="equipmentCount != null  ">equipment_count = #{equipmentCount},
+            </if>
+            <if test="equipmentUse != null  and equipmentUse != ''  ">equipment_use = #{equipmentUse},
+            </if>
+            <if test="operateStatus != null  and operateStatus != ''  ">operate_status = #{operateStatus},
+            </if>
+            <if test="operateTime != null  ">operate_time = #{operateTime},
+            </if>
+            <if test="register != null  and register != ''  ">register = #{register},
+            </if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},
+            </if>
+            <if test="createTime != null  ">create_time = #{createTime},
+            </if>
+            <if test="updateTime != null  ">update_time = #{updateTime},
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">del_flag = #{delFlag},
+            </if>
         </trim>
         where equipment_id = #{equipmentId}
     </update>
 
-    <delete id="deleteEquipmentById" parameterType="Long">
-        delete from mod_equipment where equipment_id = #{equipmentId}
-    </delete>
+    <update id="deleteEquipmentById" parameterType="Long">
+        update mod_equipment
+        set del_flag =1
+        where equipment_id = #{equipmentId}
+    </update>
 
-    <delete id="deleteEquipmentByIds" parameterType="String">
-        delete from mod_equipment where equipment_id in
+    <update id="deleteEquipmentByIds" parameterType="String">
+        update mod_equipment
+        set del_flag =1
+        where equipment_id in
         <foreach item="equipmentId" collection="array" open="(" separator="," close=")">
             #{equipmentId}
         </foreach>
-    </delete>
+    </update>
 
 </mapper>

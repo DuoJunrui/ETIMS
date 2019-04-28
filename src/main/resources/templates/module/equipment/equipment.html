@@ -19,11 +19,15 @@
                         </li>
 
                         <li>
-                            入库操作人：<input type="text" name="inputUser"/>
+                            操作状态：<select name="operateStatus" th:with="type=${@dict.getType('mod_equipment_operate_status')}">
+                            <option value="">所有状态</option>
+                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+                                    th:value="${dict.dictValue}"></option>
+                        </select>
                         </li>
 
                         <li>
-                            出库操作人：<input type="text" name="outputUser"/>
+                            登记人：<input type="text" name="register"/>
                         </li>
 
                         <li>
@@ -39,20 +43,20 @@
 
         <div class="btn-group-sm" id="toolbar" role="group">
             <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="module:equipment:add">
-                <i class="fa fa-plus"></i> 设备入库
+                <i class="fa fa-plus"></i> 出入库
             </a>
             <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()"
                shiro:hasPermission="module:equipment:edit">
-                <i class="fa fa-edit"></i> 入库信息修改
+                <i class="fa fa-edit"></i> 信息修改
             </a>
             <a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
                shiro:hasPermission="module:equipment:remove">
-                <i class="fa fa-remove"></i> 设备仓储信息删除
+                <i class="fa fa-remove"></i> 仓储信息删除
             </a>
-            <!--<a class="btn btn-warning" onclick="$.table.exportExcel()"-->
-               <!--shiro:hasPermission="module:equipment:export">-->
-                <!--<i class="fa fa-download"></i> 导出-->
-            <!--</a>-->
+            <a class="btn btn-warning" onclick="$.table.exportExcel()"
+               shiro:hasPermission="module:equipment:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
         </div>
         <div class="col-sm-12 select-table table-striped">
             <table id="bootstrap-table" data-mobile-responsive="true"></table>
@@ -61,9 +65,9 @@
 </div>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    //var editFlag = [[${@permission.hasPermi('module:equipment:edit')}]];
-    var outputFlag = [[${@permission.hasPermi('module:equipment:output')}]];
-    var inputFlag = [[${@permission.hasPermi('module:equipment:inputFlag')}]];
+    var editFlag = [[${@permission.hasPermi('module:equipment:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('module:equipment:remove')}]];
+    var operateStatus = [[${@dict.getType('mod_equipment_operate_status')}]];
     var prefix = ctx + "module/equipment";
 
     $(function () {
@@ -112,44 +116,27 @@
                     sortable: true
                 },
                 {
-                    field: 'inputTime',
-                    title: '入库时间',
-                    sortable: true
-                },
-                {
-                    field: 'inputUser',
-                    title: '入库操作人',
-                    sortable: true
-                },
-                {
-                    field: 'intputRemark',
-                    title: '入库备注',
-                    sortable: true
-                },
-                {
-                    field: 'outputTime',
-                    title: '出库时间',
-                    sortable: true
-                },
-                {
-                    field: 'outputUser',
-                    title: '出库操作人',
-                    sortable: true
-                },
-                {
-                    field: 'outputRemark',
-                    title: '出库备注',
-                    sortable: true
-                },
-                {
-                    title: '操作',
-                    align: 'center',
+                    field: 'operateStatus',
+                    title: '操作状态',
+                    sortable: true,
                     formatter: function (value, row, index) {
-                        var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + outputFlag + '" href="#" onclick="$.operate.edit(\'' + row.equipmentId + '\')"><i class="fa fa-edit"></i>出库登记</a> ');
-                        actions.push('<a class="btn btn-primary btn-xs ' + inputFlag + '" href="#" onclick="$.operate.edit(\'' + row.equipmentId + '\')"><i class="fa fa-edit"></i>归还登记</a>');
-                        return actions.join('');
+                        return $.table.selectDictLabel(operateStatus, value);
                     }
+                },
+                {
+                    field: 'operateTime',
+                    title: '出入库时间',
+                    sortable: true
+                },
+                {
+                    field: 'register',
+                    title: '登记人',
+                    sortable: true
+                },
+                {
+                    field: 'remark',
+                    title: '出入库备注',
+                    sortable: true
                 }]
         };
         $.table.init(options);

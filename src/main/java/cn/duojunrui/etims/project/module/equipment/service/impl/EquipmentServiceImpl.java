@@ -1,24 +1,21 @@
 package cn.duojunrui.etims.project.module.equipment.service.impl;
 
 import java.util.List;
-import java.util.UUID;
 
 import cn.duojunrui.etims.common.utils.DateUtils;
 import cn.duojunrui.etims.common.utils.security.ShiroUtils;
-import cn.duojunrui.etims.project.module.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cn.duojunrui.etims.project.module.equipment.mapper.EquipmentMapper;
 import cn.duojunrui.etims.project.module.equipment.domain.Equipment;
 import cn.duojunrui.etims.project.module.equipment.service.IEquipmentService;
 import cn.duojunrui.etims.common.utils.text.Convert;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 实验室设备 服务层实现
  *
  * @author Duojunrui
- * @date 2019-04-27
+ * @date 2019-04-28
  */
 @Service
 public class EquipmentServiceImpl implements IEquipmentService {
@@ -54,10 +51,9 @@ public class EquipmentServiceImpl implements IEquipmentService {
      * @return 结果
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public int insertEquipment(Equipment equipment) {
-        equipment.setInputTime(DateUtils.getNowDate());
-        equipment.setInputUser(ShiroUtils.getUserName());
+        equipment.setOperateTime(DateUtils.getNowDate());
+        equipment.setRegister(ShiroUtils.getUserName());
         equipment.setCreateTime(DateUtils.getNowDate());
         equipment.setDelFlag("0");
         return equipmentMapper.insertEquipment(equipment);
@@ -71,6 +67,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
      */
     @Override
     public int updateEquipment(Equipment equipment) {
+        equipment.setUpdateTime(DateUtils.getNowDate());
         return equipmentMapper.updateEquipment(equipment);
     }
 
