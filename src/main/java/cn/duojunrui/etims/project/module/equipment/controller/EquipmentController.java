@@ -21,7 +21,7 @@ import cn.duojunrui.etims.framework.web.page.TableDataInfo;
 import cn.duojunrui.etims.framework.web.domain.AjaxResult;
 
 /**
- * 实验室设备信息操作处理
+ * 实验室设备操作处理
  *
  * @author Duojunrui
  * @date 2019-04-27
@@ -66,7 +66,7 @@ public class EquipmentController extends BaseController {
     }
 
     /**
-     * 新增实验室设备
+     * 新增实验室设备（设备入库）
      */
     @GetMapping("/add")
     public String add() {
@@ -74,7 +74,7 @@ public class EquipmentController extends BaseController {
     }
 
     /**
-     * 新增保存实验室设备
+     * 新增保存实验室设备（设备入库）
      */
     @RequiresPermissions("module:equipment:add")
     @Log(title = "实验室设备", businessType = BusinessType.INSERT)
@@ -85,7 +85,7 @@ public class EquipmentController extends BaseController {
     }
 
     /**
-     * 修改实验室设备
+     * 修改实验室设备（入库信息修改）
      */
     @GetMapping("/edit/{equipmentId}")
     public String edit(@PathVariable("equipmentId") Long equipmentId, ModelMap mmap) {
@@ -95,7 +95,7 @@ public class EquipmentController extends BaseController {
     }
 
     /**
-     * 修改保存实验室设备
+     * 修改保存实验室设备（入库信息修改）
      */
     @RequiresPermissions("module:equipment:edit")
     @Log(title = "实验室设备", businessType = BusinessType.UPDATE)
@@ -106,7 +106,29 @@ public class EquipmentController extends BaseController {
     }
 
     /**
-     * 删除实验室设备
+     * 修改保存实验室设备（出库登记）
+     */
+    @RequiresPermissions("module:equipment:output")
+    @Log(title = "实验室设备", businessType = BusinessType.UPDATE)
+    @PostMapping("/output")
+    @ResponseBody
+    public AjaxResult outputSave(Equipment equipment) {
+        return toAjax(equipmentService.updateEquipment(equipment));
+    }
+
+    /**
+     * 修改保存实验室设备（归还登记）
+     */
+    @RequiresPermissions("module:equipment:input")
+    @Log(title = "实验室设备", businessType = BusinessType.UPDATE)
+    @PostMapping("/input")
+    @ResponseBody
+    public AjaxResult inputSave(Equipment equipment) {
+        return toAjax(equipmentService.updateEquipment(equipment));
+    }
+
+    /**
+     * 删除实验室设备（仓储设备信息删除）
      */
     @RequiresPermissions("module:equipment:remove")
     @Log(title = "实验室设备", businessType = BusinessType.DELETE)

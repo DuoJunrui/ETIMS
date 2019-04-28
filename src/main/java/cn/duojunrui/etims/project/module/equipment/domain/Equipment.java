@@ -12,6 +12,7 @@ import java.util.Date;
  * @date 2019-04-27
  */
 public class Equipment extends BaseEntity {
+
     private static final long serialVersionUID = 1L;
 
     /**
