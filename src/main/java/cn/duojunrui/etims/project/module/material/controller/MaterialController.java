@@ -18,12 +18,13 @@ import cn.duojunrui.etims.project.module.material.service.IMaterialService;
 import cn.duojunrui.etims.framework.web.controller.BaseController;
 import cn.duojunrui.etims.framework.web.page.TableDataInfo;
 import cn.duojunrui.etims.framework.web.domain.AjaxResult;
+import cn.duojunrui.etims.common.utils.poi.ExcelUtil;
 
 /**
  * 教学资源信息操作处理
  *
  * @author Duojunrui
- * @date 2019-04-24
+ * @date 2019-04-29
  */
 @Controller
 @RequestMapping("/module/material")
@@ -51,6 +52,19 @@ public class MaterialController extends BaseController {
         return getDataTable(list);
     }
 
+
+    /**
+     * 导出教学资源列表
+     */
+    @RequiresPermissions("module:material:export")
+    @PostMapping("/export")
+    @ResponseBody
+    public AjaxResult export(Material material) {
+        List<Material> list = materialService.selectMaterialList(material);
+        ExcelUtil<Material> util = new ExcelUtil<Material>(Material.class);
+        return util.exportExcel(list, "material");
+    }
+
     /**
      * 新增教学资源
      */
@@ -63,7 +77,7 @@ public class MaterialController extends BaseController {
      * 新增保存教学资源
      */
     @RequiresPermissions("module:material:add")
-    @Log(title = "教学资源" , businessType = BusinessType.INSERT)
+    @Log(title = "教学资源", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(Material material) {
@@ -76,7 +90,7 @@ public class MaterialController extends BaseController {
     @GetMapping("/edit/{materialId}")
     public String edit(@PathVariable("materialId") Long materialId, ModelMap mmap) {
         Material material = materialService.selectMaterialById(materialId);
-        mmap.put("material" , material);
+        mmap.put("material", material);
         return prefix + "/edit";
     }
 
@@ -84,7 +98,7 @@ public class MaterialController extends BaseController {
      * 修改保存教学资源
      */
     @RequiresPermissions("module:material:edit")
-    @Log(title = "教学资源" , businessType = BusinessType.UPDATE)
+    @Log(title = "教学资源", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(Material material) {
@@ -95,7 +109,7 @@ public class MaterialController extends BaseController {
      * 删除教学资源
      */
     @RequiresPermissions("module:material:remove")
-    @Log(title = "教学资源" , businessType = BusinessType.DELETE)
+    @Log(title = "教学资源", businessType = BusinessType.DELETE)
     @PostMapping("/remove")
     @ResponseBody
     public AjaxResult remove(String ids) {

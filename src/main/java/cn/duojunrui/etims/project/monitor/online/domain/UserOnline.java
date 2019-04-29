@@ -29,6 +29,11 @@ public class UserOnline extends BaseEntity {
     private String deptName;
 
     /**
+     * 用户姓名
+     */
+    private String userName;
+
+    /**
      * 登录名称
      */
     private String loginName;
@@ -84,6 +89,14 @@ public class UserOnline extends BaseEntity {
 
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getDeptName() {
@@ -179,6 +192,7 @@ public class UserOnline extends BaseEntity {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("sessionId" , getSessionId())
                 .append("loginName" , getLoginName())
+                .append("userName" , getUserName())
                 .append("deptName" , getDeptName())
                 .append("ipaddr" , getIpaddr())
                 .append("loginLocation" , getLoginLocation())

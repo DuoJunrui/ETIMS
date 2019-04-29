@@ -85,11 +85,24 @@
             },
                 {
                     field: 'infoId',
-                    title: '访问编号'
+                    title: '访问编号',
+                    visible: false
+                },
+                {
+                    field: 'id',
+                    title: '序号',
+                    formatter: function (value, row, index) {
+                        return index + 1;
+                    }
                 },
                 {
                     field: 'loginName',
-                    title: '登录名称',
+                    title: '登录账号',
+                    sortable: true
+                },
+                {
+                    field: 'userName',
+                    title: '用户姓名',
                     sortable: true
                 },
                 {

@@ -13,7 +13,7 @@ import cn.duojunrui.etims.common.utils.text.Convert;
  * 教学资源 服务层实现
  *
  * @author Duojunrui
- * @date 2019-04-24
+ * @date 2019-04-29
  */
 @Service
 public class MaterialServiceImpl implements IMaterialService {

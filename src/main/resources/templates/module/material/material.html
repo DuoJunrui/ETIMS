@@ -16,7 +16,7 @@
 
                         <li>
                             资料分类：<select name="category" th:with="type=${@dict.getType('mod_material_category')}">
-                            <option value="">所有学习资料</option>
+                            <option value="">所有资料</option>
                             <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
                                     th:value="${dict.dictValue}"></option>
                         </select>
@@ -29,7 +29,6 @@
                         <li>
                             上传者：<input type="text" name="uploader"/>
                         </li>
-
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
                                     class="fa fa-search"></i>&nbsp;搜索</a>
@@ -43,11 +42,19 @@
 
         <div class="btn-group-sm" id="toolbar" role="group">
             <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="module:material:add">
-                <i class="fa fa-plus"></i> 上传资料
+                <i class="fa fa-plus"></i> 上传
+            </a>
+            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()"
+               shiro:hasPermission="module:material:edit">
+                <i class="fa fa-edit"></i> 修改
             </a>
             <a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
                shiro:hasPermission="module:material:remove">
-                <i class="fa fa-remove"></i> 批量删除
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-warning" onclick="$.table.exportExcel()"
+               shiro:hasPermission="module:material:export">
+                <i class="fa fa-download"></i> 导出
             </a>
         </div>
         <div class="col-sm-12 select-table table-striped">
@@ -69,11 +76,17 @@
             createUrl: prefix + "/add",
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
             modalName: "教学资源",
             showExport: true,
             columns: [{
                 checkbox: true
             },
+                {
+                    field: 'materialId',
+                    title: '教学资源表ID主键',
+                    visible: false
+                },
                 {
                     field: 'id',
                     title: '序号',
@@ -135,7 +148,7 @@
                     align: 'center',
                     formatter: function (value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.materialId + '\')"><i class="fa fa-edit"></i>修改</a> ');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.materialId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.materialId + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }

@@ -24,6 +24,11 @@ public class OnlineSession extends SimpleSession {
     private String loginName;
 
     /**
+     * 用户姓名
+     */
+    private String userName;
+
+    /**
      * 部门名称
      */
     private String deptName;
@@ -93,6 +98,14 @@ public class OnlineSession extends SimpleSession {
 
     public void setLoginName(String loginName) {
         this.loginName = loginName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getDeptName() {

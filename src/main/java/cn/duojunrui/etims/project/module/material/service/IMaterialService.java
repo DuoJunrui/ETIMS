@@ -8,7 +8,7 @@ import java.util.List;
  * 教学资源 服务层
  *
  * @author Duojunrui
- * @date 2019-04-24
+ * @date 2019-04-29
  */
 public interface IMaterialService {
     /**

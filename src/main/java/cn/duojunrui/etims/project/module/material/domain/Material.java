@@ -1,14 +1,14 @@
 package cn.duojunrui.etims.project.module.material.domain;
 
-import cn.duojunrui.etims.framework.web.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import cn.duojunrui.etims.framework.web.domain.BaseEntity;
 
 /**
  * 教学资源表 mod_material
  *
  * @author Duojunrui
- * @date 2019-04-24
+ * @date 2019-04-29
  */
 public class Material extends BaseEntity {
     private static final long serialVersionUID = 1L;
@@ -30,6 +30,10 @@ public class Material extends BaseEntity {
      */
     private String fileName;
     /**
+     * 资料上传者
+     */
+    private String uploader;
+    /**
      * 文件大小
      */
     private String fileSize;
@@ -42,25 +46,13 @@ public class Material extends BaseEntity {
      */
     private String downloadCount;
     /**
-     * 资料上传者
-     */
-    private String uploader;
-    /**
      * 文件磁盘路径
      */
     private String filePath;
     /**
-     * 删除标志（0代表存在 2代表删除）
+     * 删除标志（0代表存在 1代表删除）
      */
     private String delFlag;
-
-    public String getCourse() {
-        return course;
-    }
-
-    public void setCourse(String course) {
-        this.course = course;
-    }
 
     public void setMaterialId(Long materialId) {
         this.materialId = materialId;
@@ -68,6 +60,14 @@ public class Material extends BaseEntity {
 
     public Long getMaterialId() {
         return materialId;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public String getCourse() {
+        return course;
     }
 
     public void setCategory(String category) {
@@ -84,6 +84,14 @@ public class Material extends BaseEntity {
 
     public String getFileName() {
         return fileName;
+    }
+
+    public void setUploader(String uploader) {
+        this.uploader = uploader;
+    }
+
+    public String getUploader() {
+        return uploader;
     }
 
     public void setFileSize(String fileSize) {
@@ -110,14 +118,6 @@ public class Material extends BaseEntity {
         return downloadCount;
     }
 
-    public void setUploader(String uploader) {
-        this.uploader = uploader;
-    }
-
-    public String getUploader() {
-        return uploader;
-    }
-
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
@@ -134,16 +134,16 @@ public class Material extends BaseEntity {
         return delFlag;
     }
 
-    @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("materialId", getMaterialId())
+                .append("course", getCourse())
                 .append("category", getCategory())
                 .append("fileName", getFileName())
+                .append("uploader", getUploader())
                 .append("fileSize", getFileSize())
                 .append("fileType", getFileType())
                 .append("downloadCount", getDownloadCount())
-                .append("uploader", getUploader())
                 .append("filePath", getFilePath())
                 .append("createTime", getCreateTime())
                 .append("updateTime", getUpdateTime())

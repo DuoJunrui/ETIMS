@@ -5,6 +5,7 @@
     <resultMap type="UserOnline" id="UserOnlineResult">
         <id property="sessionId" column="sessionId"/>
         <result property="loginName" column="login_name"/>
+        <result property="userName" column="user_name"/>
         <result property="deptName" column="dept_name"/>
         <result property="ipaddr" column="ipaddr"/>
         <result property="loginLocation" column="login_location"/>
@@ -25,7 +26,7 @@
     </resultMap>
 
     <sql id="selectOnlineVo">
-        select sessionId, login_name, dept_name, ipaddr, login_location, browser, os, status, status, start_timestamp,
+        select sessionId, login_name, user_name, dept_name, ipaddr, login_location, browser, os, status, status, start_timestamp,
         last_access_time, expire_time
         from sys_user_online
     </sql>
@@ -36,9 +37,9 @@
     </select>
 
     <insert id="saveOnline" parameterType="UserOnline">
-        replace into sys_user_online(sessionId, login_name, dept_name, ipaddr, login_location, browser, os, status,
+        replace into sys_user_online(sessionId, login_name, user_name, dept_name, ipaddr, login_location, browser, os, status,
         start_timestamp, last_access_time, expire_time)
-        values (#{sessionId}, #{loginName}, #{deptName}, #{ipaddr}, #{loginLocation}, #{browser}, #{os}, #{status},
+        values (#{sessionId}, #{loginName}, #{userName}, #{deptName}, #{ipaddr}, #{loginLocation}, #{browser}, #{os}, #{status},
         #{startTimestamp}, #{lastAccessTime}, #{expireTime})
     </insert>
 
