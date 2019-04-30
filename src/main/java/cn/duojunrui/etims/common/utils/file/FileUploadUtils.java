@@ -50,7 +50,8 @@ public class FileUploadUtils {
     }
 
     /**
-     * 以默认配置进行文件上传
+     * 以默认配置进行文件上传（上传jpg图片）
+     * 头像的上传
      *
      * @param file 上传的文件
      * @return 文件名称

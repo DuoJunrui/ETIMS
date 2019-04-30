@@ -89,6 +89,7 @@ shiro:
   user:
     # 登录地址
     loginUrl: /login
+    #loginUrl: /labcenter/index
     # 权限认证失败地址
     unauthorizedUrl: /unauth
     # 首页地址
@@ -96,7 +97,7 @@ shiro:
     # 验证码开关
     captchaEnabled: true
     # 验证码类型 math 数组计算 char 字符
-    captchaType: math
+    captchaType: char
   cookie:
     # 设置Cookie的域名 默认空，即当前访问的域名
     domain:
@@ -121,7 +122,7 @@ xss:
   # 排除链接（多个用逗号分隔）
   excludes: /system/notice/*
   # 匹配链接
-  urlPatterns: /system/*,/monitor/*,/tool/*,/experiment/*
+  urlPatterns: /system/*,/monitor/*,/tool/*,/labcenter/*
 
 # module代码生成
 gen:

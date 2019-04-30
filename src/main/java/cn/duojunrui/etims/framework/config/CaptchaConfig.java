@@ -32,17 +32,17 @@ public class CaptchaConfig {
         // 验证码图片高度  默认为50
         properties.setProperty("kaptcha.image.height" , "60");
         // 验证码文本字符大小  默认为40
-        properties.setProperty("kaptcha.textproducer.font.size" , "30");
+        properties.setProperty("kaptcha.textproducer.font.size" , "40");
         // KAPTCHA_SESSION_KEY
         properties.setProperty("kaptcha.session.key" , "kaptchaCode");
         // 验证码文本字符间距  默认为2
-        properties.setProperty("kaptcha.textproducer.char.space" , "3");
+        properties.setProperty("kaptcha.textproducer.char.space" , "4");
         // 验证码文本字符长度  默认为5
-        properties.setProperty("kaptcha.textproducer.char.length" , "5");
+        properties.setProperty("kaptcha.textproducer.char.length" , "4");
         // 验证码文本字体样式  默认为new Font("Arial", 1, fontSize), new Font("Courier", 1, fontSize)
         properties.setProperty("kaptcha.textproducer.font.names" , "Arial,Courier");
         // 验证码噪点颜色   默认为Color.BLACK
-        properties.setProperty("kaptcha.noise.color" , "white");
+        properties.setProperty("kaptcha.noise.color" , "black");
         Config config = new Config(properties);
         defaultKaptcha.setConfig(config);
         return defaultKaptcha;

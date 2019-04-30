@@ -6,7 +6,7 @@
 */
 /** 蓝色主题 skin-blue **/
 .skin-blue .navbar {
-    background-color: #3c8dbc
+    background-color: #004c88
 }
 
 .skin-blue .navbar .nav > li > a {
@@ -56,13 +56,13 @@
 }
 
 .skin-blue .logo {
-    background-color: #367fa9;
+    background-color: #054477;
     color: #fff;
     border-bottom: 0 solid transparent
 }
 
 .skin-blue .logo:hover {
-    background-color: #357ca5
+    background-color: #004c88
 }
 
 .skin-blue li.user-header {

@@ -1,10 +1,10 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>桂林电子科技大学信息科技学院实验教学中心-首页</title>
-    <link rel="stylesheet" href="../../static/css/style1.css" type="text/css" media="all"/>
-    <script src="../../static/js/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" th:href="@{../../static/css/style1.css}" type="text/css" media="all"/>
+    <script th:src="@{../../static/js/jquery-1.8.3.min.js}"></script>
     <script type="text/javascript">
         //图片滚动 调用方法 imgscroll({speed: 30,amount: 1,dir: "up"});
         $.fn.imgscroll = function (o) {
