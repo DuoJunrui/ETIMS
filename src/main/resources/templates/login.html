@@ -52,7 +52,7 @@
         </div>
         <div class="col-sm-5">
             <form id="signupForm">
-                <h4 class="no-margins">登录：</h4>
+                <h4 class="no-margins" style="color: black">登 录：</h4>
                 <!--<p class="m-t-md">你若不离不弃，我必生死相依</p>-->
                 <input type="text" name="username" class="form-control uname" placeholder="用户名" value="etims"/>
                 <input type="password" name="password" class="form-control pword" placeholder="密码" value="123456"/>
@@ -67,8 +67,14 @@
                         </a>
                     </div>
                 </div>
-                <div class="checkbox-custom" th:classappend="${captchaEnabled==false} ? 'm-t'">
-                    <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">记住我</label>
+                <div class="m-b-xl">
+                    <div class="col-xs-6 checkbox-custom" th:classappend="${captchaEnabled==false} ? 'm-t'">
+                        <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme"
+                                                                                         style="color: black">记住我</label>
+                    </div>
+                    <div class="col-xs-6">
+                        <a href="labcenter/forgetpass.html">忘记密码?</a>
+                    </div>
                 </div>
                 <button class="btn btn-success btn-block" id="btnSubmit" data-loading="正在验证登录，请稍后...">登录</button>
             </form>

@@ -3,9 +3,8 @@ html {
 }
 
 body.signin {
-    background: #18c8f6;
     height: auto;
-    background: url("../img/background_login.jpg") no-repeat center fixed;
+    background: url(../img/background_login.jpg) no-repeat center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -22,7 +21,7 @@ body.signin {
     float: none;
     width: auto;
     padding: 0;
-    background: 0
+    background: 0 0
 }
 
 .signinpanel .signin-info ul {
@@ -49,7 +48,7 @@ body.signin {
 .signinpanel .code {
     background: #fff no-repeat 95% center;
     color: #333;
-    margin: 0 0 15px 0
+    margin: 0 0 15px 0;
 }
 
 .signinpanel .btn {
@@ -57,7 +56,7 @@ body.signin {
 }
 
 .signinpanel form {
-    background: rgba(255, 255, 255, .2);
+    background: rgba(255, 255, 255, .5);
     border: 1px solid rgba(255, 255, 255, .3);
     -moz-box-shadow: 0 3px 0 rgba(12, 12, 12, .03);
     -webkit-box-shadow: 0 3px 0 rgba(12, 12, 12, .03);
@@ -106,23 +105,32 @@ body.signin {
     }
 }
 
+/*
+登录界面check样式
+*/
 .checkbox-custom {
     position: relative;
     padding: 0 15px 0 25px;
     margin-bottom: 7px;
-    display: inline-block
+    display: inline-block;
 }
 
+/*
+将初始的checkbox的样式改变
+*/
 .checkbox-custom input[type="checkbox"] {
-    opacity: 0;
+    opacity: 0; /*将初始的checkbox隐藏起来*/
     position: absolute;
     cursor: pointer;
     z-index: 2;
     margin: -6px 0 0 0;
     top: 50%;
-    left: 3px
+    left: 3px;
 }
 
+/*
+设计新的checkbox，位置
+*/
 .checkbox-custom label:before {
     content: '';
     position: absolute;
@@ -134,9 +142,12 @@ body.signin {
     display: inline-block;
     border-radius: 2px;
     border: 1px solid #bbb;
-    background: #fff
+    background: #fff;
 }
 
+/*
+点击初始的checkbox，将新的checkbox关联起来
+*/
 .checkbox-custom input[type="checkbox"]:checked + label:after {
     position: absolute;
     display: inline-block;
@@ -149,13 +160,13 @@ body.signin {
     line-height: 1;
     width: 16px;
     height: 16px;
-    color: #333
+    color: #333;
 }
 
 .checkbox-custom label {
     cursor: pointer;
     line-height: 1.2;
-    font-weight: normal;
+    font-weight: normal; /*改变了rememberme的字体*/
     margin-bottom: 0;
-    text-align: left
+    text-align: left;
 }
