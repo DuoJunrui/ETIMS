@@ -2,12 +2,17 @@ package cn.duojunrui.etims.project.module.material.service.impl;
 
 import java.util.List;
 
+import cn.duojunrui.etims.common.utils.DateUtils;
+import cn.duojunrui.etims.common.utils.file.FileUploadUtils;
+import cn.duojunrui.etims.common.utils.file.FileUtils;
+import cn.duojunrui.etims.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cn.duojunrui.etims.project.module.material.mapper.MaterialMapper;
 import cn.duojunrui.etims.project.module.material.domain.Material;
 import cn.duojunrui.etims.project.module.material.service.IMaterialService;
 import cn.duojunrui.etims.common.utils.text.Convert;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 教学资源 服务层实现
@@ -50,6 +55,11 @@ public class MaterialServiceImpl implements IMaterialService {
      */
     @Override
     public int insertMaterial(Material material) {
+
+        material.setUploader(ShiroUtils.getUserName());
+        material.setDownloadCount("0");
+        material.setCreateTime(DateUtils.getNowDate());
+        material.setDelFlag("0");
         return materialMapper.insertMaterial(material);
     }
 

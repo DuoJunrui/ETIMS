@@ -1,16 +1,17 @@
 package cn.duojunrui.etims.project.module.material.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import cn.duojunrui.etims.common.utils.file.FileUploadUtils;
+import cn.duojunrui.etims.common.utils.file.FileUtils;
+import cn.duojunrui.etims.framework.config.EtimsConfig;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import cn.duojunrui.etims.framework.aspectj.lang.annotation.Log;
 import cn.duojunrui.etims.framework.aspectj.lang.enums.BusinessType;
 import cn.duojunrui.etims.project.module.material.domain.Material;
@@ -19,6 +20,10 @@ import cn.duojunrui.etims.framework.web.controller.BaseController;
 import cn.duojunrui.etims.framework.web.page.TableDataInfo;
 import cn.duojunrui.etims.framework.web.domain.AjaxResult;
 import cn.duojunrui.etims.common.utils.poi.ExcelUtil;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 教学资源信息操作处理
@@ -80,7 +85,12 @@ public class MaterialController extends BaseController {
     @Log(title = "教学资源", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Material material) {
+    public AjaxResult addSave(MultipartFile file, Material material) throws IOException {
+        // 上传文件路径
+        String filePath = EtimsConfig.getUploadPath();
+        // 上传并返回新文件名称
+        String fileName = FileUploadUtils.upload(filePath, file);
+        material.setFilePath(fileName);
         return toAjax(materialService.insertMaterial(material));
     }
 
@@ -103,6 +113,23 @@ public class MaterialController extends BaseController {
     @ResponseBody
     public AjaxResult editSave(Material material) {
         return toAjax(materialService.updateMaterial(material));
+    }
+
+    /**
+     * 下载教学资源
+     */
+    @GetMapping("/downloadFile/{materialId}")
+    public void downloadFile(@PathVariable("materialId") Long materialId, HttpServletResponse response,
+                             HttpServletRequest request) throws Exception {
+        Material material = materialService.selectMaterialById(materialId);
+        String filePath = material.getFilePath();
+        String realFileName = material.getFileName() + filePath.substring(filePath.indexOf("."));
+        String path = EtimsConfig.getUploadPath() + material.getFilePath();
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("multipart/form-data");
+        response.setHeader("Content-Disposition",
+                "attachment;fileName=" + FileUtils.setFileDownloadHeader(request, realFileName));
+        FileUtils.writeBytes(path, response.getOutputStream());
     }
 
     /**
