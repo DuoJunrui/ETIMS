@@ -70,10 +70,6 @@
     var fileTypes = [[${@dict.getType('mod_material_file_type')}]];
     var prefix = ctx + "module/material";
 
-    function downloadFile(materialId){
-        window.location.href = ctx + "module/material/downloadFile/" + materialId;
-    }
-
     $(function () {
         var options = {
             url: prefix + "/list",
@@ -159,6 +155,10 @@
         };
         $.table.init(options);
     });
+
+    function downloadFile(materialId){
+        window.location.href = ctx + "module/material/downloadFile/" + materialId;
+    }
 </script>
 </body>
 </html>

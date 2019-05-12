@@ -85,7 +85,7 @@ public class MaterialController extends BaseController {
     @Log(title = "教学资源", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(MultipartFile file, Material material) throws IOException {
+    public AjaxResult addSave(@RequestParam("file") MultipartFile file, Material material) throws IOException {
         // 上传文件路径
         String filePath = EtimsConfig.getUploadPath();
         // 上传并返回新文件名称
