@@ -27,7 +27,11 @@
                         </li>
 
                         <li>
-                            申请审核状态：<input type="text" name="applyStatus"/>
+                            审核状态：<select name="applyStatus" th:with="type=${@dict.getType('mod_apply_status')}">
+                            <option value="">所有状态</option>
+                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+                                    th:value="${dict.dictValue}"></option>
+                        </select>
                         </li>
 
                         <li>
@@ -67,6 +71,7 @@
 <script th:inline="javascript">
     var editFlag = [[${@permission.hasPermi('module:store:edit')}]];
     var removeFlag = [[${@permission.hasPermi('module:store:remove')}]];
+    var applyStatus = [[${@dict.getType('mod_apply_status')}]];
     var prefix = ctx + "module/store";
 
     $(function () {
@@ -87,23 +92,19 @@
                     visible: false
                 },
                 {
+                    title: "序号",
+                    formatter: function (value, row, index) {
+                        return $.table.serialNumber(index);
+                    }
+                },
+                {
                     field: 'stuName',
                     title: '学生姓名',
                     sortable: true
                 },
                 {
-                    field: 'stuDepart',
-                    title: '学生系别',
-                    sortable: true
-                },
-                {
                     field: 'stuClass',
                     title: '学生班级',
-                    sortable: true
-                },
-                {
-                    field: 'stuNum',
-                    title: '学生学号',
                     sortable: true
                 },
                 {
@@ -143,8 +144,10 @@
                 },
                 {
                     field: 'applyStatus',
-                    title: '申请审核状态',
-                    sortable: true
+                    title: '审核状态',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(applyStatus, value);
+                    }
                 },
                 {
                     title: '操作',

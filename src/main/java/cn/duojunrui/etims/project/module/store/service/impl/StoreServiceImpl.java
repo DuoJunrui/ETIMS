@@ -2,6 +2,7 @@ package cn.duojunrui.etims.project.module.store.service.impl;
 
 import java.util.List;
 
+import cn.duojunrui.etims.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cn.duojunrui.etims.project.module.store.mapper.StoreMapper;
@@ -52,6 +53,10 @@ public class StoreServiceImpl implements IStoreService {
      */
     @Override
     public int insertStore(Store store) {
+        store.setApplyStatus(0);
+        store.setApplyTime(DateUtils.getNowDate());
+        store.setCreateTime(DateUtils.getNowDate());
+        store.setDelFlag("0");
         return storeMapper.insertStore(store);
     }
 
