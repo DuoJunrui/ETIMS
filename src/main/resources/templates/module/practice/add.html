@@ -12,12 +12,20 @@
                 <input id="studentName" name="studentName" class="form-control" type="text">
             </div>
         </div>
+
         <div class="form-group">
             <label class="col-sm-3 control-label">学生系别：</label>
             <div class="col-sm-8">
-                <input id="studentDepartment" name="studentDepartment" class="form-control" type="text">
+                <div class="input-group" style="width: 100%">
+                    <select name="studentDepartment" class="form-control m-b"
+                            th:with="type=${@dict.getType('mod_student_department')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+                                th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
             </div>
         </div>
+
         <div class="form-group">
             <label class="col-sm-3 control-label">学生班级：</label>
             <div class="col-sm-8">
@@ -43,21 +51,21 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">实习实践岗位：</label>
+            <label class="col-sm-3 control-label">实习岗位：</label>
             <div class="col-sm-8">
                 <input id="position" name="position" class="form-control" type="text">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">实习开始时间：</label>
+            <label class="col-sm-3 control-label">开始时间：</label>
             <div class="col-sm-8">
-                <input id="startTime" name="startTime" class="form-control" type="text">
+                <input id="startTime" name="startTime" class="form-control" type="date">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">实习结束时间：</label>
+            <label class="col-sm-3 control-label">结束时间：</label>
             <div class="col-sm-8">
-                <input id="endTime" name="endTime" class="form-control" type="text">
+                <input id="endTime" name="endTime" class="form-control" type="date">
             </div>
         </div>
         <div class="form-group">
@@ -75,43 +83,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">申请文件材料：</label>
             <div class="col-sm-8">
-                <input id="filePath" name="filePath" class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">审核状态(0表示已提交，1表示审核中，2表示审核通过，3表示审核不通过)：</label>
-            <div class="col-sm-8">
-                <input id="applyStatus" name="applyStatus" class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">提交时间：</label>
-            <div class="col-sm-8">
-                <input id="applyTime" name="applyTime" class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">驳回反馈：</label>
-            <div class="col-sm-8">
-                <input id="applyReply" name="applyReply" class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">创建时间：</label>
-            <div class="col-sm-8">
-                <input id="createTime" name="createTime" class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">更新时间：</label>
-            <div class="col-sm-8">
-                <input id="updateTime" name="updateTime" class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">删除标志（0代表存在 1代表删除）：</label>
-            <div class="col-sm-8">
-                <input id="delFlag" name="delFlag" class="form-control" type="text">
+                <input id="filePath" name="filePath" class="form-control" type="file">
             </div>
         </div>
     </form>

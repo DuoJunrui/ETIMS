@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.duojunrui.etims.project.module.program.mapper.ProgramMapper">
+
+    <resultMap type="Program" id="ProgramResult">
+        <result property="programId" column="program_id"/>
+        <result property="teachId" column="teach_id"/>
+        <result property="teachName" column="teach_name"/>
+        <result property="semester" column="semester"/>
+        <result property="courseId" column="course_id"/>
+        <result property="courseName" column="course_name"/>
+        <result property="courseCredit" column="course_credit"/>
+        <result property="setDepart" column="set_depart"/>
+        <result property="setMajor" column="set_major"/>
+        <result property="usualScoreRatio" column="usual_score_ratio"/>
+        <result property="examScoreRatio" column="exam_score_ratio"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+
+    <sql id="selectProgramVo">
+        select program_id, teach_id, teach_name, semester, course_id, course_name, course_credit, set_depart, set_major, usual_score_ratio, exam_score_ratio, create_time, update_time, del_flag        from mod_program
+    </sql>
+
+    <select id="selectProgramList" parameterType="Program" resultMap="ProgramResult">
+        <include refid="selectProgramVo"/>
+        <where>
+            <if test="programId != null ">and program_id = #{programId}
+            </if>
+            <if test="teachId != null  and teachId != '' ">and teach_id = #{teachId}
+            </if>
+            <if test="teachName != null  and teachName != '' ">and teach_name = #{teachName}
+            </if>
+            <if test="semester != null  and semester != '' ">and semester = #{semester}
+            </if>
+            <if test="courseId != null  and courseId != '' ">and course_id = #{courseId}
+            </if>
+            <if test="courseName != null  and courseName != '' ">and course_name = #{courseName}
+            </if>
+            <if test="courseCredit != null ">and course_credit = #{courseCredit}
+            </if>
+            <if test="setDepart != null  and setDepart != '' ">and set_depart = #{setDepart}
+            </if>
+            <if test="setMajor != null  and setMajor != '' ">and set_major = #{setMajor}
+            </if>
+            <if test="usualScoreRatio != null ">and usual_score_ratio = #{usualScoreRatio}
+            </if>
+            <if test="examScoreRatio != null ">and exam_score_ratio = #{examScoreRatio}
+            </if>
+            <if test="createTime != null ">and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null ">and update_time = #{updateTime}
+            </if>
+            <if test="delFlag != null  and delFlag != '' ">and del_flag = #{delFlag}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectProgramById" parameterType="Long" resultMap="ProgramResult">
+        <include refid="selectProgramVo"/>
+        where program_id = #{programId}
+    </select>
+
+    <insert id="insertProgram" parameterType="Program">
+        insert into mod_program
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="programId != null  ">program_id,
+            </if>
+            <if test="teachId != null  and teachId != ''  ">teach_id,
+            </if>
+            <if test="teachName != null  and teachName != ''  ">teach_name,
+            </if>
+            <if test="semester != null  and semester != ''  ">semester,
+            </if>
+            <if test="courseId != null  and courseId != ''  ">course_id,
+            </if>
+            <if test="courseName != null  and courseName != ''  ">course_name,
+            </if>
+            <if test="courseCredit != null  ">course_credit,
+            </if>
+            <if test="setDepart != null  and setDepart != ''  ">set_depart,
+            </if>
+            <if test="setMajor != null  and setMajor != ''  ">set_major,
+            </if>
+            <if test="usualScoreRatio != null  ">usual_score_ratio,
+            </if>
+            <if test="examScoreRatio != null  ">exam_score_ratio,
+            </if>
+            <if test="createTime != null  ">create_time,
+            </if>
+            <if test="updateTime != null  ">update_time,
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="programId != null  ">#{programId},
+            </if>
+            <if test="teachId != null  and teachId != ''  ">#{teachId},
+            </if>
+            <if test="teachName != null  and teachName != ''  ">#{teachName},
+            </if>
+            <if test="semester != null  and semester != ''  ">#{semester},
+            </if>
+            <if test="courseId != null  and courseId != ''  ">#{courseId},
+            </if>
+            <if test="courseName != null  and courseName != ''  ">#{courseName},
+            </if>
+            <if test="courseCredit != null  ">#{courseCredit},
+            </if>
+            <if test="setDepart != null  and setDepart != ''  ">#{setDepart},
+            </if>
+            <if test="setMajor != null  and setMajor != ''  ">#{setMajor},
+            </if>
+            <if test="usualScoreRatio != null  ">#{usualScoreRatio},
+            </if>
+            <if test="examScoreRatio != null  ">#{examScoreRatio},
+            </if>
+            <if test="createTime != null  ">#{createTime},
+            </if>
+            <if test="updateTime != null  ">#{updateTime},
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">#{delFlag},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateProgram" parameterType="Program">
+        update mod_program
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teachId != null  and teachId != ''  ">teach_id = #{teachId},
+            </if>
+            <if test="teachName != null  and teachName != ''  ">teach_name = #{teachName},
+            </if>
+            <if test="semester != null  and semester != ''  ">semester = #{semester},
+            </if>
+            <if test="courseId != null  and courseId != ''  ">course_id = #{courseId},
+            </if>
+            <if test="courseName != null  and courseName != ''  ">course_name = #{courseName},
+            </if>
+            <if test="courseCredit != null  ">course_credit = #{courseCredit},
+            </if>
+            <if test="setDepart != null  and setDepart != ''  ">set_depart = #{setDepart},
+            </if>
+            <if test="setMajor != null  and setMajor != ''  ">set_major = #{setMajor},
+            </if>
+            <if test="usualScoreRatio != null  ">usual_score_ratio = #{usualScoreRatio},
+            </if>
+            <if test="examScoreRatio != null  ">exam_score_ratio = #{examScoreRatio},
+            </if>
+            <if test="createTime != null  ">create_time = #{createTime},
+            </if>
+            <if test="updateTime != null  ">update_time = #{updateTime},
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">del_flag = #{delFlag},
+            </if>
+        </trim>
+        where program_id = #{programId}
+    </update>
+
+    <delete id="deleteProgramById" parameterType="Long">
+        delete from mod_program where program_id = #{programId}
+    </delete>
+
+    <delete id="deleteProgramByIds" parameterType="String">
+        delete from mod_program where program_id in
+        <foreach item="programId" collection="array" open="(" separator="," close=")">
+            #{programId}
+        </foreach>
+    </delete>
+
+</mapper>

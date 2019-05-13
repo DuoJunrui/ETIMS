@@ -2,6 +2,7 @@ package cn.duojunrui.etims.project.module.practice.service.impl;
 
 import java.util.List;
 
+import cn.duojunrui.etims.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cn.duojunrui.etims.project.module.practice.mapper.PracticeMapper;
@@ -52,6 +53,10 @@ public class PracticeServiceImpl implements IPracticeService {
      */
     @Override
     public int insertPractice(Practice practice) {
+        practice.setApplyStatus(0);
+        practice.setApplyTime(DateUtils.getNowDate());
+        practice.setCreateTime(DateUtils.getNowDate());
+        practice.setDelFlag("0");
         return practiceMapper.insertPractice(practice);
     }
 

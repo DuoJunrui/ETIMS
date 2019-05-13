@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('顶岗实习列表')"/>
+    <th:block th:include="include :: header('教学计划列表')"/>
 </head>
 <body class="gray-bg">
 <div class="container-div">
@@ -10,26 +10,26 @@
             <form id="formId">
                 <div class="select-list">
                     <ul>
+
                         <li>
-                            学生姓名：<input type="text" name="studentName"/>
+                            教师姓名：<input type="text" name="teachName"/>
                         </li>
 
                         <li>
-                            学生系别：<select name="studentDepartment" th:with="type=${@dict.getType('mod_student_department')}">
+                            开设学期：<input type="text" name="semester"/>
+                        </li>
+
+                        <li>
+                            课程名称：<input type="text" name="courseName"/>
+                        </li>
+
+                        <li>
+                            开设院系：<select name="setDepart" th:with="type=${@dict.getType('mod_student_department')}">
                             <option value="">所有系别</option>
                             <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
                                     th:value="${dict.dictValue}"></option>
                         </select>
                         </li>
-
-                        <li>
-                            审核状态：<select name="applyStatus" th:with="type=${@dict.getType('mod_apply_status')}">
-                            <option value="">所有状态</option>
-                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
-                                    th:value="${dict.dictValue}"></option>
-                        </select>
-                        </li>
-
 
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
@@ -43,21 +43,21 @@
         </div>
 
         <div class="btn-group-sm" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="module:practice:add">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="module:program:add">
                 <i class="fa fa-plus"></i> 添加
             </a>
             <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()"
-               shiro:hasPermission="module:practice:edit">
-                <i class="fa fa-edit"></i> 审核
+               shiro:hasPermission="module:program:edit">
+                <i class="fa fa-edit"></i> 修改
             </a>
             <a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
-               shiro:hasPermission="module:practice:remove">
+               shiro:hasPermission="module:program:remove">
                 <i class="fa fa-remove"></i> 删除
             </a>
-            <!--<a class="btn btn-warning" onclick="$.table.exportExcel()"-->
-               <!--shiro:hasPermission="module:practice:export">-->
-                <!--<i class="fa fa-download"></i> 导出-->
-            <!--</a>-->
+            <a class="btn btn-warning" onclick="$.table.exportExcel()"
+               shiro:hasPermission="module:program:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
         </div>
         <div class="col-sm-12 select-table table-striped">
             <table id="bootstrap-table" data-mobile-responsive="true"></table>
@@ -66,11 +66,9 @@
 </div>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('module:practice:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('module:practice:remove')}]];
-    var applyStatus = [[${@dict.getType('mod_apply_status')}]];
-    var depType = [[${@dict.getType('mod_student_department')}]];
-    var prefix = ctx + "module/practice";
+    var editFlag = [[${@permission.hasPermi('module:program:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('module:program:remove')}]];
+    var prefix = ctx + "module/program";
 
     $(function () {
         var options = {
@@ -79,14 +77,14 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
-            modalName: "顶岗实习",
+            modalName: "教学计划",
             showExport: true,
             columns: [{
                 checkbox: true
             },
                 {
-                    field: 'practiceId',
-                    title: '实习单位材料',
+                    field: 'programId',
+                    title: '课程计划管理',
                     visible: false
                 },
                 {
@@ -96,52 +94,53 @@
                     }
                 },
                 {
-                    field: 'studentDepartment',
-                    title: '系别',
-                    formatter: function (value, row, index) {
-                        return $.table.selectDictLabel(depType, value);
-                    }
-                },
-                {
-                    field: 'studentName',
-                    title: '学生姓名',
+                    field: 'teachId',
+                    title: '教师工号',
                     sortable: true
                 },
                 {
-                    field: 'studentNumber',
-                    title: '学号',
+                    field: 'teachName',
+                    title: '教师姓名',
                     sortable: true
                 },
                 {
-                    field: 'companyName',
-                    title: '企业名称',
+                    field: 'semester',
+                    title: '开设学期',
                     sortable: true
                 },
                 {
-                    field: 'position',
-                    title: '实习岗位',
+                    field: 'courseId',
+                    title: '课程序号',
                     sortable: true
                 },
                 {
-                    field: 'startTime',
-                    title: '开始时间',
+                    field: 'courseName',
+                    title: '课程名称',
                     sortable: true
                 },
                 {
-                    field: 'endTime',
-                    title: '结束时间',
+                    field: 'courseCredit',
+                    title: '课程学分',
                     sortable: true
                 },
                 {
-                    field: 'applyStatus',
-                    title: '审核状态',
-                    formatter: function (value, row, index) {
-                        return $.table.selectDictLabel(applyStatus, value);
-                    }
+                    field: 'setDepart',
+                    title: '开设院系',
+                    sortable: true
                 },
                 {
-                    field: 'applyTime',
-                    title: '提交时间',
+                    field: 'setMajor',
+                    title: '开设专业',
+                    sortable: true
+                },
+                {
+                    field: 'usualScoreRatio',
+                    title: '平时成绩占比',
+                    sortable: true
+                },
+                {
+                    field: 'examScoreRatio',
+                    title: '考核成绩占比',
                     sortable: true
                 },
                 {
@@ -149,7 +148,8 @@
                     align: 'center',
                     formatter: function (value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.practiceId + '\')"><i class="fa fa-edit"></i>详情</a> ');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.programId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.programId + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }]
