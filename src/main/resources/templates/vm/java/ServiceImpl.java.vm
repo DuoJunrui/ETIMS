@@ -17,7 +17,7 @@ import cn.duojunrui.etims.common.utils.text.Convert;
  */
 @Service
 public class ${className}ServiceImpl implements I${className}Service {
-    @Autowired
+    @Resource
     private ${className}Mapper ${classname}Mapper;
 
     /**

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('顶岗实习列表')"/>
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            学生姓名：<input type="text" name="studentName"/>
+                        </li>
+
+                        <li>
+                            学生系别：<input type="text" name="studentDepartment"/>
+                        </li>
+
+                        <li>
+                            学生班级：<input type="text" name="studentClass"/>
+                        </li>
+
+                        <li>
+                            学生学号：<input type="text" name="studentNumber"/>
+                        </li>
+
+                        <li>
+                            企业名称：<input type="text" name="companyName"/>
+                        </li>
+
+                        <li>
+                            公司地址：<input type="text" name="companyAddress"/>
+                        </li>
+
+                        <li>
+                            实习实践岗位：<input type="text" name="position"/>
+                        </li>
+
+                        <li>
+                            实习开始时间：<input type="text" name="startTime"/>
+                        </li>
+
+                        <li>
+                            实习结束时间：<input type="text" name="endTime"/>
+                        </li>
+
+                        <li>
+                            企业负责人姓名：<input type="text" name="principalName"/>
+                        </li>
+
+                        <li>
+                            企业负责人电话：<input type="text" name="principalTel"/>
+                        </li>
+
+                        <li>
+                            申请文件材料：<input type="text" name="filePath"/>
+                        </li>
+
+                        <li>
+                            审核状态(0表示已提交，1表示审核中，2表示审核通过，3表示审核不通过)：<input type="text" name="applyStatus"/>
+                        </li>
+
+                        <li>
+                            提交时间：<input type="text" name="applyTime"/>
+                        </li>
+
+                        <li>
+                            驳回反馈：<input type="text" name="applyReply"/>
+                        </li>
+
+                        <li>
+                            创建时间：<input type="text" name="createTime"/>
+                        </li>
+
+                        <li>
+                            更新时间：<input type="text" name="updateTime"/>
+                        </li>
+
+                        <li>
+                            删除标志（0代表存在 1代表删除）：<input type="text" name="delFlag"/>
+                        </li>
+
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                    class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                    class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="module:practice:add">
+                <i class="fa fa-plus"></i> 添加
+            </a>
+            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()"
+               shiro:hasPermission="module:practice:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
+               shiro:hasPermission="module:practice:remove">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+            <a class="btn btn-warning" onclick="$.table.exportExcel()"
+               shiro:hasPermission="module:practice:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
+        </div>
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+        </div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('module:practice:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('module:practice:remove')}]];
+    var prefix = ctx + "module/practice";
+
+    $(function () {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
+            modalName: "顶岗实习",
+            showExport: true,
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field: 'practiceId',
+                    title: '实习单位材料',
+                    visible: false
+                },
+                {
+                    field: 'studentName',
+                    title: '学生姓名',
+                    sortable: true
+                },
+                {
+                    field: 'studentDepartment',
+                    title: '学生系别',
+                    sortable: true
+                },
+                {
+                    field: 'studentClass',
+                    title: '学生班级',
+                    sortable: true
+                },
+                {
+                    field: 'studentNumber',
+                    title: '学生学号',
+                    sortable: true
+                },
+                {
+                    field: 'companyName',
+                    title: '企业名称',
+                    sortable: true
+                },
+                {
+                    field: 'companyAddress',
+                    title: '公司地址',
+                    sortable: true
+                },
+                {
+                    field: 'position',
+                    title: '实习实践岗位',
+                    sortable: true
+                },
+                {
+                    field: 'startTime',
+                    title: '实习开始时间',
+                    sortable: true
+                },
+                {
+                    field: 'endTime',
+                    title: '实习结束时间',
+                    sortable: true
+                },
+                {
+                    field: 'principalName',
+                    title: '企业负责人姓名',
+                    sortable: true
+                },
+                {
+                    field: 'principalTel',
+                    title: '企业负责人电话',
+                    sortable: true
+                },
+                {
+                    field: 'filePath',
+                    title: '申请文件材料',
+                    sortable: true
+                },
+                {
+                    field: 'applyStatus',
+                    title: '审核状态(0表示已提交，1表示审核中，2表示审核通过，3表示审核不通过)',
+                    sortable: true
+                },
+                {
+                    field: 'applyTime',
+                    title: '提交时间',
+                    sortable: true
+                },
+                {
+                    field: 'applyReply',
+                    title: '驳回反馈',
+                    sortable: true
+                },
+                {
+                    field: 'createTime',
+                    title: '创建时间',
+                    sortable: true
+                },
+                {
+                    field: 'updateTime',
+                    title: '更新时间',
+                    sortable: true
+                },
+                {
+                    field: 'delFlag',
+                    title: '删除标志（0代表存在 1代表删除）',
+                    sortable: true
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.practiceId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.practiceId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    });
+</script>
+</body>
+</html>

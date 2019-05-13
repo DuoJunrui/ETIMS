@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.duojunrui.etims.project.module.practice.mapper.PracticeMapper">
+
+    <resultMap type="Practice" id="PracticeResult">
+        <result property="practiceId" column="practice_id"/>
+        <result property="studentName" column="student_name"/>
+        <result property="studentDepartment" column="student_department"/>
+        <result property="studentClass" column="student_class"/>
+        <result property="studentNumber" column="student_number"/>
+        <result property="companyName" column="company_name"/>
+        <result property="companyAddress" column="company_address"/>
+        <result property="position" column="position"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="principalName" column="principal_name"/>
+        <result property="principalTel" column="principal_tel"/>
+        <result property="filePath" column="file_path"/>
+        <result property="applyStatus" column="apply_status"/>
+        <result property="applyTime" column="apply_time"/>
+        <result property="applyReply" column="apply_reply"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+
+    <sql id="selectPracticeVo">
+        select practice_id, student_name, student_department, student_class, student_number, company_name, company_address, position, start_time, end_time, principal_name, principal_tel, file_path, apply_status, apply_time, apply_reply, create_time, update_time, del_flag        from mod_practice
+    </sql>
+
+    <select id="selectPracticeList" parameterType="Practice" resultMap="PracticeResult">
+        <include refid="selectPracticeVo"/>
+        <where>
+            <if test="practiceId != null ">and practice_id = #{practiceId}
+            </if>
+            <if test="studentName != null  and studentName != '' ">and student_name = #{studentName}
+            </if>
+            <if test="studentDepartment != null  and studentDepartment != '' ">and student_department =
+                #{studentDepartment}
+            </if>
+            <if test="studentClass != null  and studentClass != '' ">and student_class = #{studentClass}
+            </if>
+            <if test="studentNumber != null  and studentNumber != '' ">and student_number = #{studentNumber}
+            </if>
+            <if test="companyName != null  and companyName != '' ">and company_name = #{companyName}
+            </if>
+            <if test="companyAddress != null  and companyAddress != '' ">and company_address = #{companyAddress}
+            </if>
+            <if test="position != null  and position != '' ">and position = #{position}
+            </if>
+            <if test="startTime != null ">and start_time = #{startTime}
+            </if>
+            <if test="endTime != null ">and end_time = #{endTime}
+            </if>
+            <if test="principalName != null  and principalName != '' ">and principal_name = #{principalName}
+            </if>
+            <if test="principalTel != null  and principalTel != '' ">and principal_tel = #{principalTel}
+            </if>
+            <if test="filePath != null  and filePath != '' ">and file_path = #{filePath}
+            </if>
+            <if test="applyStatus != null ">and apply_status = #{applyStatus}
+            </if>
+            <if test="applyTime != null ">and apply_time = #{applyTime}
+            </if>
+            <if test="applyReply != null  and applyReply != '' ">and apply_reply = #{applyReply}
+            </if>
+            <if test="createTime != null ">and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null ">and update_time = #{updateTime}
+            </if>
+            <if test="delFlag != null  and delFlag != '' ">and del_flag = #{delFlag}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectPracticeById" parameterType="Long" resultMap="PracticeResult">
+        <include refid="selectPracticeVo"/>
+        where practice_id = #{practiceId}
+    </select>
+
+    <insert id="insertPractice" parameterType="Practice">
+        insert into mod_practice
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="practiceId != null  ">practice_id,
+            </if>
+            <if test="studentName != null  and studentName != ''  ">student_name,
+            </if>
+            <if test="studentDepartment != null  and studentDepartment != ''  ">student_department,
+            </if>
+            <if test="studentClass != null  and studentClass != ''  ">student_class,
+            </if>
+            <if test="studentNumber != null  and studentNumber != ''  ">student_number,
+            </if>
+            <if test="companyName != null  and companyName != ''  ">company_name,
+            </if>
+            <if test="companyAddress != null  and companyAddress != ''  ">company_address,
+            </if>
+            <if test="position != null  and position != ''  ">position,
+            </if>
+            <if test="startTime != null  ">start_time,
+            </if>
+            <if test="endTime != null  ">end_time,
+            </if>
+            <if test="principalName != null  and principalName != ''  ">principal_name,
+            </if>
+            <if test="principalTel != null  and principalTel != ''  ">principal_tel,
+            </if>
+            <if test="filePath != null  and filePath != ''  ">file_path,
+            </if>
+            <if test="applyStatus != null  ">apply_status,
+            </if>
+            <if test="applyTime != null  ">apply_time,
+            </if>
+            <if test="applyReply != null  and applyReply != ''  ">apply_reply,
+            </if>
+            <if test="createTime != null  ">create_time,
+            </if>
+            <if test="updateTime != null  ">update_time,
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="practiceId != null  ">#{practiceId},
+            </if>
+            <if test="studentName != null  and studentName != ''  ">#{studentName},
+            </if>
+            <if test="studentDepartment != null  and studentDepartment != ''  ">#{studentDepartment},
+            </if>
+            <if test="studentClass != null  and studentClass != ''  ">#{studentClass},
+            </if>
+            <if test="studentNumber != null  and studentNumber != ''  ">#{studentNumber},
+            </if>
+            <if test="companyName != null  and companyName != ''  ">#{companyName},
+            </if>
+            <if test="companyAddress != null  and companyAddress != ''  ">#{companyAddress},
+            </if>
+            <if test="position != null  and position != ''  ">#{position},
+            </if>
+            <if test="startTime != null  ">#{startTime},
+            </if>
+            <if test="endTime != null  ">#{endTime},
+            </if>
+            <if test="principalName != null  and principalName != ''  ">#{principalName},
+            </if>
+            <if test="principalTel != null  and principalTel != ''  ">#{principalTel},
+            </if>
+            <if test="filePath != null  and filePath != ''  ">#{filePath},
+            </if>
+            <if test="applyStatus != null  ">#{applyStatus},
+            </if>
+            <if test="applyTime != null  ">#{applyTime},
+            </if>
+            <if test="applyReply != null  and applyReply != ''  ">#{applyReply},
+            </if>
+            <if test="createTime != null  ">#{createTime},
+            </if>
+            <if test="updateTime != null  ">#{updateTime},
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">#{delFlag},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updatePractice" parameterType="Practice">
+        update mod_practice
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="studentName != null  and studentName != ''  ">student_name = #{studentName},
+            </if>
+            <if test="studentDepartment != null  and studentDepartment != ''  ">student_department =
+                #{studentDepartment},
+            </if>
+            <if test="studentClass != null  and studentClass != ''  ">student_class = #{studentClass},
+            </if>
+            <if test="studentNumber != null  and studentNumber != ''  ">student_number = #{studentNumber},
+            </if>
+            <if test="companyName != null  and companyName != ''  ">company_name = #{companyName},
+            </if>
+            <if test="companyAddress != null  and companyAddress != ''  ">company_address = #{companyAddress},
+            </if>
+            <if test="position != null  and position != ''  ">position = #{position},
+            </if>
+            <if test="startTime != null  ">start_time = #{startTime},
+            </if>
+            <if test="endTime != null  ">end_time = #{endTime},
+            </if>
+            <if test="principalName != null  and principalName != ''  ">principal_name = #{principalName},
+            </if>
+            <if test="principalTel != null  and principalTel != ''  ">principal_tel = #{principalTel},
+            </if>
+            <if test="filePath != null  and filePath != ''  ">file_path = #{filePath},
+            </if>
+            <if test="applyStatus != null  ">apply_status = #{applyStatus},
+            </if>
+            <if test="applyTime != null  ">apply_time = #{applyTime},
+            </if>
+            <if test="applyReply != null  and applyReply != ''  ">apply_reply = #{applyReply},
+            </if>
+            <if test="createTime != null  ">create_time = #{createTime},
+            </if>
+            <if test="updateTime != null  ">update_time = #{updateTime},
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">del_flag = #{delFlag},
+            </if>
+        </trim>
+        where practice_id = #{practiceId}
+    </update>
+
+    <delete id="deletePracticeById" parameterType="Long">
+        delete from mod_practice where practice_id = #{practiceId}
+    </delete>
+
+    <delete id="deletePracticeByIds" parameterType="String">
+        delete from mod_practice where practice_id in
+        <foreach item="practiceId" collection="array" open="(" separator="," close=")">
+            #{practiceId}
+        </foreach>
+    </delete>
+
+</mapper>
