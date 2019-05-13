@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.duojunrui.etims.project.module.grade.mapper.GradeMapper">
+
+    <resultMap type="Grade" id="GradeResult">
+        <result property="gradeId" column="grade_id"/>
+        <result property="stuId" column="stu_id"/>
+        <result property="stuName" column="stu_name"/>
+        <result property="semester" column="semester"/>
+        <result property="courseId" column="course_id"/>
+        <result property="courseName" column="course_name"/>
+        <result property="courseCredit" column="course_credit"/>
+        <result property="usualScore" column="usual_score"/>
+        <result property="examScore" column="exam_score"/>
+        <result property="totalScore" column="total_score"/>
+        <result property="checkType" column="check_type"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+
+    <sql id="selectGradeVo">
+        select grade_id, stu_id, stu_name, semester, course_id, course_name, course_credit, usual_score, exam_score, total_score, check_type, create_time, update_time, del_flag        from mod_grade
+    </sql>
+
+    <select id="selectGradeList" parameterType="Grade" resultMap="GradeResult">
+        <include refid="selectGradeVo"/>
+        <where>
+            <if test="gradeId != null ">and grade_id = #{gradeId}
+            </if>
+            <if test="stuId != null  and stuId != '' ">and stu_id = #{stuId}
+            </if>
+            <if test="stuName != null  and stuName != '' ">and stu_name = #{stuName}
+            </if>
+            <if test="semester != null  and semester != '' ">and semester = #{semester}
+            </if>
+            <if test="courseId != null  and courseId != '' ">and course_id = #{courseId}
+            </if>
+            <if test="courseName != null  and courseName != '' ">and course_name = #{courseName}
+            </if>
+            <if test="courseCredit != null ">and course_credit = #{courseCredit}
+            </if>
+            <if test="usualScore != null ">and usual_score = #{usualScore}
+            </if>
+            <if test="examScore != null ">and exam_score = #{examScore}
+            </if>
+            <if test="totalScore != null ">and total_score = #{totalScore}
+            </if>
+            <if test="checkType != null  and checkType != '' ">and check_type = #{checkType}
+            </if>
+            <if test="createTime != null ">and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null ">and update_time = #{updateTime}
+            </if>
+            <if test="delFlag != null  and delFlag != '' ">and del_flag = #{delFlag}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectGradeById" parameterType="Long" resultMap="GradeResult">
+        <include refid="selectGradeVo"/>
+        where grade_id = #{gradeId}
+    </select>
+
+    <insert id="insertGrade" parameterType="Grade">
+        insert into mod_grade
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="gradeId != null  ">grade_id,
+            </if>
+            <if test="stuId != null  and stuId != ''  ">stu_id,
+            </if>
+            <if test="stuName != null  and stuName != ''  ">stu_name,
+            </if>
+            <if test="semester != null  and semester != ''  ">semester,
+            </if>
+            <if test="courseId != null  and courseId != ''  ">course_id,
+            </if>
+            <if test="courseName != null  and courseName != ''  ">course_name,
+            </if>
+            <if test="courseCredit != null  ">course_credit,
+            </if>
+            <if test="usualScore != null  ">usual_score,
+            </if>
+            <if test="examScore != null  ">exam_score,
+            </if>
+            <if test="totalScore != null  ">total_score,
+            </if>
+            <if test="checkType != null  and checkType != ''  ">check_type,
+            </if>
+            <if test="createTime != null  ">create_time,
+            </if>
+            <if test="updateTime != null  ">update_time,
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="gradeId != null  ">#{gradeId},
+            </if>
+            <if test="stuId != null  and stuId != ''  ">#{stuId},
+            </if>
+            <if test="stuName != null  and stuName != ''  ">#{stuName},
+            </if>
+            <if test="semester != null  and semester != ''  ">#{semester},
+            </if>
+            <if test="courseId != null  and courseId != ''  ">#{courseId},
+            </if>
+            <if test="courseName != null  and courseName != ''  ">#{courseName},
+            </if>
+            <if test="courseCredit != null  ">#{courseCredit},
+            </if>
+            <if test="usualScore != null  ">#{usualScore},
+            </if>
+            <if test="examScore != null  ">#{examScore},
+            </if>
+            <if test="totalScore != null  ">#{totalScore},
+            </if>
+            <if test="checkType != null  and checkType != ''  ">#{checkType},
+            </if>
+            <if test="createTime != null  ">#{createTime},
+            </if>
+            <if test="updateTime != null  ">#{updateTime},
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">#{delFlag},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateGrade" parameterType="Grade">
+        update mod_grade
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stuId != null  and stuId != ''  ">stu_id = #{stuId},
+            </if>
+            <if test="stuName != null  and stuName != ''  ">stu_name = #{stuName},
+            </if>
+            <if test="semester != null  and semester != ''  ">semester = #{semester},
+            </if>
+            <if test="courseId != null  and courseId != ''  ">course_id = #{courseId},
+            </if>
+            <if test="courseName != null  and courseName != ''  ">course_name = #{courseName},
+            </if>
+            <if test="courseCredit != null  ">course_credit = #{courseCredit},
+            </if>
+            <if test="usualScore != null  ">usual_score = #{usualScore},
+            </if>
+            <if test="examScore != null  ">exam_score = #{examScore},
+            </if>
+            <if test="totalScore != null  ">total_score = #{totalScore},
+            </if>
+            <if test="checkType != null  and checkType != ''  ">check_type = #{checkType},
+            </if>
+            <if test="createTime != null  ">create_time = #{createTime},
+            </if>
+            <if test="updateTime != null  ">update_time = #{updateTime},
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">del_flag = #{delFlag},
+            </if>
+        </trim>
+        where grade_id = #{gradeId}
+    </update>
+
+    <delete id="deleteGradeById" parameterType="Long">
+        delete from mod_grade where grade_id = #{gradeId}
+    </delete>
+
+    <delete id="deleteGradeByIds" parameterType="String">
+        delete from mod_grade where grade_id in
+        <foreach item="gradeId" collection="array" open="(" separator="," close=")">
+            #{gradeId}
+        </foreach>
+    </delete>
+
+</mapper>

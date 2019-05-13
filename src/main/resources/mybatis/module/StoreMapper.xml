@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.duojunrui.etims.project.module.store.mapper.StoreMapper">
+
+    <resultMap type="Store" id="StoreResult">
+        <result property="storeId" column="store_id"/>
+        <result property="stuName" column="stu_name"/>
+        <result property="stuDepart" column="stu_depart"/>
+        <result property="stuClass" column="stu_class"/>
+        <result property="stuNum" column="stu_num"/>
+        <result property="shopName" column="shop_name"/>
+        <result property="shopAddress" column="shop_address"/>
+        <result property="businessScope" column="business_scope"/>
+        <result property="rentStartTime" column="rent_start_time"/>
+        <result property="rentEndTime" column="rent_end_time"/>
+        <result property="adviser" column="adviser"/>
+        <result property="filePath" column="file_path"/>
+        <result property="applyStatus" column="apply_status"/>
+        <result property="applyTime" column="apply_time"/>
+        <result property="applyReply" column="apply_reply"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+
+    <sql id="selectStoreVo">
+        select store_id, stu_name, stu_depart, stu_class, stu_num, shop_name, shop_address, business_scope, rent_start_time, rent_end_time, adviser, file_path, apply_status, apply_time, apply_reply, create_time, update_time, del_flag        from mod_store
+    </sql>
+
+    <select id="selectStoreList" parameterType="Store" resultMap="StoreResult">
+        <include refid="selectStoreVo"/>
+        <where>
+            <if test="storeId != null ">and store_id = #{storeId}
+            </if>
+            <if test="stuName != null  and stuName != '' ">and stu_name = #{stuName}
+            </if>
+            <if test="stuDepart != null  and stuDepart != '' ">and stu_depart = #{stuDepart}
+            </if>
+            <if test="stuClass != null  and stuClass != '' ">and stu_class = #{stuClass}
+            </if>
+            <if test="stuNum != null  and stuNum != '' ">and stu_num = #{stuNum}
+            </if>
+            <if test="shopName != null  and shopName != '' ">and shop_name = #{shopName}
+            </if>
+            <if test="shopAddress != null  and shopAddress != '' ">and shop_address = #{shopAddress}
+            </if>
+            <if test="businessScope != null  and businessScope != '' ">and business_scope = #{businessScope}
+            </if>
+            <if test="rentStartTime != null ">and rent_start_time = #{rentStartTime}
+            </if>
+            <if test="rentEndTime != null ">and rent_end_time = #{rentEndTime}
+            </if>
+            <if test="adviser != null  and adviser != '' ">and adviser = #{adviser}
+            </if>
+            <if test="filePath != null  and filePath != '' ">and file_path = #{filePath}
+            </if>
+            <if test="applyStatus != null ">and apply_status = #{applyStatus}
+            </if>
+            <if test="applyTime != null ">and apply_time = #{applyTime}
+            </if>
+            <if test="applyReply != null  and applyReply != '' ">and apply_reply = #{applyReply}
+            </if>
+            <if test="createTime != null ">and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null ">and update_time = #{updateTime}
+            </if>
+            <if test="delFlag != null  and delFlag != '' ">and del_flag = #{delFlag}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectStoreById" parameterType="Long" resultMap="StoreResult">
+        <include refid="selectStoreVo"/>
+        where store_id = #{storeId}
+    </select>
+
+    <insert id="insertStore" parameterType="Store" useGeneratedKeys="true" keyProperty="storeId">
+        insert into mod_store
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="stuName != null  and stuName != ''  ">stu_name,
+            </if>
+            <if test="stuDepart != null  and stuDepart != ''  ">stu_depart,
+            </if>
+            <if test="stuClass != null  and stuClass != ''  ">stu_class,
+            </if>
+            <if test="stuNum != null  and stuNum != ''  ">stu_num,
+            </if>
+            <if test="shopName != null  and shopName != ''  ">shop_name,
+            </if>
+            <if test="shopAddress != null  and shopAddress != ''  ">shop_address,
+            </if>
+            <if test="businessScope != null  and businessScope != ''  ">business_scope,
+            </if>
+            <if test="rentStartTime != null  ">rent_start_time,
+            </if>
+            <if test="rentEndTime != null  ">rent_end_time,
+            </if>
+            <if test="adviser != null  and adviser != ''  ">adviser,
+            </if>
+            <if test="filePath != null  and filePath != ''  ">file_path,
+            </if>
+            <if test="applyStatus != null  ">apply_status,
+            </if>
+            <if test="applyTime != null  ">apply_time,
+            </if>
+            <if test="applyReply != null  and applyReply != ''  ">apply_reply,
+            </if>
+            <if test="createTime != null  ">create_time,
+            </if>
+            <if test="updateTime != null  ">update_time,
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">del_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="stuName != null  and stuName != ''  ">#{stuName},
+            </if>
+            <if test="stuDepart != null  and stuDepart != ''  ">#{stuDepart},
+            </if>
+            <if test="stuClass != null  and stuClass != ''  ">#{stuClass},
+            </if>
+            <if test="stuNum != null  and stuNum != ''  ">#{stuNum},
+            </if>
+            <if test="shopName != null  and shopName != ''  ">#{shopName},
+            </if>
+            <if test="shopAddress != null  and shopAddress != ''  ">#{shopAddress},
+            </if>
+            <if test="businessScope != null  and businessScope != ''  ">#{businessScope},
+            </if>
+            <if test="rentStartTime != null  ">#{rentStartTime},
+            </if>
+            <if test="rentEndTime != null  ">#{rentEndTime},
+            </if>
+            <if test="adviser != null  and adviser != ''  ">#{adviser},
+            </if>
+            <if test="filePath != null  and filePath != ''  ">#{filePath},
+            </if>
+            <if test="applyStatus != null  ">#{applyStatus},
+            </if>
+            <if test="applyTime != null  ">#{applyTime},
+            </if>
+            <if test="applyReply != null  and applyReply != ''  ">#{applyReply},
+            </if>
+            <if test="createTime != null  ">#{createTime},
+            </if>
+            <if test="updateTime != null  ">#{updateTime},
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">#{delFlag},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateStore" parameterType="Store">
+        update mod_store
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stuName != null  and stuName != ''  ">stu_name = #{stuName},
+            </if>
+            <if test="stuDepart != null  and stuDepart != ''  ">stu_depart = #{stuDepart},
+            </if>
+            <if test="stuClass != null  and stuClass != ''  ">stu_class = #{stuClass},
+            </if>
+            <if test="stuNum != null  and stuNum != ''  ">stu_num = #{stuNum},
+            </if>
+            <if test="shopName != null  and shopName != ''  ">shop_name = #{shopName},
+            </if>
+            <if test="shopAddress != null  and shopAddress != ''  ">shop_address = #{shopAddress},
+            </if>
+            <if test="businessScope != null  and businessScope != ''  ">business_scope = #{businessScope},
+            </if>
+            <if test="rentStartTime != null  ">rent_start_time = #{rentStartTime},
+            </if>
+            <if test="rentEndTime != null  ">rent_end_time = #{rentEndTime},
+            </if>
+            <if test="adviser != null  and adviser != ''  ">adviser = #{adviser},
+            </if>
+            <if test="filePath != null  and filePath != ''  ">file_path = #{filePath},
+            </if>
+            <if test="applyStatus != null  ">apply_status = #{applyStatus},
+            </if>
+            <if test="applyTime != null  ">apply_time = #{applyTime},
+            </if>
+            <if test="applyReply != null  and applyReply != ''  ">apply_reply = #{applyReply},
+            </if>
+            <if test="createTime != null  ">create_time = #{createTime},
+            </if>
+            <if test="updateTime != null  ">update_time = #{updateTime},
+            </if>
+            <if test="delFlag != null  and delFlag != ''  ">del_flag = #{delFlag},
+            </if>
+        </trim>
+        where store_id = #{storeId}
+    </update>
+
+    <delete id="deleteStoreById" parameterType="Long">
+        delete from mod_store where store_id = #{storeId}
+    </delete>
+
+    <delete id="deleteStoreByIds" parameterType="String">
+        delete from mod_store where store_id in
+        <foreach item="storeId" collection="array" open="(" separator="," close=")">
+            #{storeId}
+        </foreach>
+    </delete>
+
+</mapper>

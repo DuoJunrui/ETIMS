@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('教学计划列表')"/>
+    <th:block th:include="include :: header('创业园店铺列表')"/>
 </head>
 <body class="gray-bg">
 <div class="container-div">
@@ -10,29 +10,24 @@
             <form id="formId">
                 <div class="select-list">
                     <ul>
-
                         <li>
-                            教师姓名：<input type="text" name="teachName"/>
+                            学生姓名：<input type="text" name="stuName"/>
                         </li>
 
                         <li>
-                            开设学期：<select name="semester" th:with="type=${@dict.getType('mod_term')}">
-                            <option value="">所有学期</option>
-                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
-                                    th:value="${dict.dictValue}"></option>
-                        </select>
+                            店铺名称：<input type="text" name="shopName"/>
                         </li>
 
                         <li>
-                            课程名称：<input type="text" name="courseName"/>
+                            店铺地址：<input type="text" name="shopAddress"/>
                         </li>
 
                         <li>
-                            开设院系：<select name="setDepart" th:with="type=${@dict.getType('mod_student_department')}">
-                            <option value="">所有系别</option>
-                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
-                                    th:value="${dict.dictValue}"></option>
-                        </select>
+                            指导老师：<input type="text" name="adviser"/>
+                        </li>
+
+                        <li>
+                            申请审核状态：<input type="text" name="applyStatus"/>
                         </li>
 
                         <li>
@@ -47,21 +42,21 @@
         </div>
 
         <div class="btn-group-sm" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="module:program:add">
+            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="module:store:add">
                 <i class="fa fa-plus"></i> 添加
             </a>
             <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()"
-               shiro:hasPermission="module:program:edit">
+               shiro:hasPermission="module:store:edit">
                 <i class="fa fa-edit"></i> 修改
             </a>
             <a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
-               shiro:hasPermission="module:program:remove">
+               shiro:hasPermission="module:store:remove">
                 <i class="fa fa-remove"></i> 删除
             </a>
-            <!--<a class="btn btn-warning" onclick="$.table.exportExcel()"-->
-               <!--shiro:hasPermission="module:program:export">-->
-                <!--<i class="fa fa-download"></i> 导出-->
-            <!--</a>-->
+            <a class="btn btn-warning" onclick="$.table.exportExcel()"
+               shiro:hasPermission="module:store:export">
+                <i class="fa fa-download"></i> 导出
+            </a>
         </div>
         <div class="col-sm-12 select-table table-striped">
             <table id="bootstrap-table" data-mobile-responsive="true"></table>
@@ -70,9 +65,9 @@
 </div>
 <div th:include="include :: footer"></div>
 <script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('module:program:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('module:program:remove')}]];
-    var prefix = ctx + "module/program";
+    var editFlag = [[${@permission.hasPermi('module:store:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('module:store:remove')}]];
+    var prefix = ctx + "module/store";
 
     $(function () {
         var options = {
@@ -81,72 +76,74 @@
             updateUrl: prefix + "/edit/{id}",
             removeUrl: prefix + "/remove",
             exportUrl: prefix + "/export",
-            sortName: "semester",
-            sortOrder: "desc",
-            modalName: "教学计划",
+            modalName: "创业园店铺",
             showExport: true,
             columns: [{
                 checkbox: true
             },
                 {
-                    field: 'programId',
-                    title: '课程计划管理',
+                    field: 'storeId',
+                    title: '创业园店铺管理',
                     visible: false
                 },
                 {
-                    title: "序号",
-                    formatter: function (value, row, index) {
-                        return $.table.serialNumber(index);
-                    }
-                },
-                {
-                    field: 'semester',
-                    title: '开设学期',
+                    field: 'stuName',
+                    title: '学生姓名',
                     sortable: true
                 },
                 {
-                    field: 'teachId',
-                    title: '教师工号',
+                    field: 'stuDepart',
+                    title: '学生系别',
                     sortable: true
                 },
                 {
-                    field: 'teachName',
-                    title: '教师姓名',
+                    field: 'stuClass',
+                    title: '学生班级',
                     sortable: true
                 },
                 {
-                    field: 'courseId',
-                    title: '课程序号',
-                    sortable: true,
-                },
-                {
-                    field: 'courseName',
-                    title: '课程名称',
+                    field: 'stuNum',
+                    title: '学生学号',
                     sortable: true
                 },
                 {
-                    field: 'courseCredit',
-                    title: '课程学分',
+                    field: 'shopName',
+                    title: '店铺名称',
                     sortable: true
                 },
                 {
-                    field: 'setDepart',
-                    title: '开设院系',
+                    field: 'shopAddress',
+                    title: '店铺地址',
                     sortable: true
                 },
                 {
-                    field: 'setMajor',
-                    title: '开设专业',
+                    field: 'businessScope',
+                    title: '经营范围',
                     sortable: true
                 },
                 {
-                    field: 'usualScoreRatio',
-                    title: '平时成绩占比',
+                    field: 'rentStartTime',
+                    title: '租约开始时间',
                     sortable: true
                 },
                 {
-                    field: 'examScoreRatio',
-                    title: '考核成绩占比',
+                    field: 'rentEndTime',
+                    title: '租约结束时间',
+                    sortable: true
+                },
+                {
+                    field: 'adviser',
+                    title: '指导老师',
+                    sortable: true
+                },
+                {
+                    field: 'applyTime',
+                    title: '申请提交时间',
+                    sortable: true
+                },
+                {
+                    field: 'applyStatus',
+                    title: '申请审核状态',
                     sortable: true
                 },
                 {
@@ -154,8 +151,8 @@
                     align: 'center',
                     formatter: function (value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.programId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.programId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.storeId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.storeId + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }
                 }]
