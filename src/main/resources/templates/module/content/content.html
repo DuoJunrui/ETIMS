@@ -15,15 +15,23 @@
                         </li>
 
                         <li>
-                            文章类型（1通知公告 2中心动态 3创新成果）：<input type="text" name="articleType"/>
+                            文章类型：<select name="articleType" th:with="type=${@dict.getType('mod_article_type')}">
+                            <option value="">所有状态</option>
+                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+                                    th:value="${dict.dictValue}"></option>
+                        </select>
                         </li>
 
                         <li>
-                            文章状态（0正常 1关闭）：<input type="text" name="status"/>
+                            文章状态：<select name="status" th:with="type=${@dict.getType('mod_article_status')}">
+                            <option value="">所有状态</option>
+                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+                                    th:value="${dict.dictValue}"></option>
+                        </select>
                         </li>
 
                         <li>
-                            创建者：<input type="text" name="createBy"/>
+                            发布者：<input type="text" name="createBy"/>
                         </li>
 
                         <li>
@@ -39,15 +47,15 @@
 
         <div class="btn-group-sm" id="toolbar" role="group">
             <a class="btn btn-success" onclick="$.operate.addFull()" shiro:hasPermission="module:content:add">
-                <i class="fa fa-plus"></i> 添加
+                <i class="fa fa-plus"></i> 发布内容
             </a>
             <a class="btn btn-primary btn-edit disabled" onclick="$.operate.editFull()"
                shiro:hasPermission="module:content:edit">
-                <i class="fa fa-edit"></i> 修改
+                <i class="fa fa-edit"></i> 修改内容
             </a>
             <a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
                shiro:hasPermission="module:content:remove">
-                <i class="fa fa-remove"></i> 删除
+                <i class="fa fa-remove"></i> 删除内容
             </a>
             <a class="btn btn-warning" onclick="$.table.exportExcel()"
                shiro:hasPermission="module:content:export">
@@ -63,7 +71,7 @@
 <script th:inline="javascript">
     var editFlag = [[${@permission.hasPermi('module:content:edit')}]];
     var removeFlag = [[${@permission.hasPermi('module:content:remove')}]];
-    var articleStatus = [[${@permission.hasPermi('mod_article_status')}]];
+    var articleStatus = [[${@dict.getType('mod_article_status')}]];
     var prefix = ctx + "module/content";
 
     $(function () {
@@ -96,26 +104,24 @@
                 },
                 {
                     field: 'articleType',
-                    title: '文章类型（1通知公告 2中心动态 3创新成果）',
-                    sortable: true
-                },
-                {
-                    field: 'articleContent',
-                    title: '文章内容',
+                    title: '文章类型',
                     sortable: true
                 },
                 {
                     field: 'status',
                     title: '文章状态',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(articleStatus, value);
+                    }
                 },
                 {
                     field: 'createBy',
-                    title: '创建者',
+                    title: '发布者',
                     sortable: true
                 },
                 {
                     field: 'createTime',
-                    title: '创建时间',
+                    title: '发布时间',
                     sortable: true
                 },
                 {
@@ -126,11 +132,6 @@
                 {
                     field: 'updateTime',
                     title: '更新时间',
-                    sortable: true
-                },
-                {
-                    field: 'remark',
-                    title: '备注',
                     sortable: true
                 },
                 {

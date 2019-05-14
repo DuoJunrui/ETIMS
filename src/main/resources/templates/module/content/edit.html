@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="include :: header('修改实验中心网站内容')"/>
+    <th:block th:include="include :: summernote-css"/>
 </head>
 <body class="white-bg">
 <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -15,78 +16,90 @@
                        class="form-control" type="text">
             </div>
         </div>
+
         <div class="form-group">
-            <label class="col-sm-3 control-label">文章类型（1通知公告 2中心动态 3创新成果）：</label>
+            <label class="col-sm-3 control-label">文章类型：</label>
             <div class="col-sm-8">
-                <input id="articleType" name="articleType" th:field="*{articleType}"
-                       class="form-control" type="text">
+                <select name="articleType" class="form-control m-b" th:with="type=${@dict.getType('mod_article_type')}">
+                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"
+                            th:field="*{articleType}"></option>
+                </select>
             </div>
         </div>
+
         <div class="form-group">
             <label class="col-sm-3 control-label">文章内容：</label>
             <div class="col-sm-8">
-                <input id="articleContent" name="articleContent" th:field="*{articleContent}"
-                       class="form-control" type="text">
+                <input id="articleContent" name="articleContent" th:field="*{articleContent}" type="hidden">
+                <div id="editor" class="summernote"></div>
             </div>
         </div>
+
         <div class="form-group">
-            <label class="col-sm-3 control-label">文章状态（0正常 1关闭）：</label>
+            <label class="col-sm-3 control-label">文章状态：</label>
             <div class="col-sm-8">
-                <input id="status" name="status" th:field="*{status}"
-                       class="form-control" type="text">
+                <div class="radio-box" th:each="dict : ${@dict.getType('mod_article_status')}">
+                    <input type="radio" th:id="${dict.dictCode}" name="status" th:value="${dict.dictValue}"
+                           th:field="*{status}">
+                    <label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">创建者：</label>
-            <div class="col-sm-8">
-                <input id="createBy" name="createBy" th:field="*{createBy}"
-                       class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">创建时间：</label>
-            <div class="col-sm-8">
-                <input id="createTime" name="createTime" th:field="*{createTime}"
-                       class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">更新者：</label>
-            <div class="col-sm-8">
-                <input id="updateBy" name="updateBy" th:field="*{updateBy}"
-                       class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">更新时间：</label>
-            <div class="col-sm-8">
-                <input id="updateTime" name="updateTime" th:field="*{updateTime}"
-                       class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">备注：</label>
-            <div class="col-sm-8">
-                <input id="remark" name="remark" th:field="*{remark}"
-                       class="form-control" type="text">
-            </div>
-        </div>
+
     </form>
 </div>
-<div th:include="include::footer"></div>
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: summernote-js"/>
 <script type="text/javascript">
     var prefix = ctx + "module/content";
-    $("#form-content-edit").validate({
-        rules: {
-            xxxx: {
-                required: true,
+
+    $(function () {
+        $('.summernote').summernote({
+            height: '220px',
+            lang: 'zh-CN',
+            callbacks: {
+                onImageUpload: function (files) {
+                    sendFile(files[0], this);
+                }
+            }
+        });
+        var content = $("#articleContent").val();
+        $('#editor').summernote('code', content);
+    });
+
+    // 上传文件
+    function sendFile(file, obj) {
+        var data = new FormData();
+        data.append("file", file);
+        $.ajax({
+            type: "POST",
+            url: ctx + "common/upload",
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            success: function (result) {
+                if (result.code == web_status.SUCCESS) {
+                    $(obj).summernote('editor.insertImage', result.url, result.fileName);
+                } else {
+                    $.modal.alertError(result.msg);
+                }
             },
-        },
+            error: function (error) {
+                $.modal.alertWarning("图片上传失败。");
+            }
+        });
+    }
+
+    $("#form-content-edit").validate({
         focusCleanup: true
     });
 
     function submitHandler() {
         if ($.validate.form()) {
+            var sHTML = $('.summernote').summernote('code');
+            $("#articleContent").val(sHTML);
             $.operate.save(prefix + "/edit", $('#form-content-edit').serialize());
         }
     }

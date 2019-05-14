@@ -26,7 +26,7 @@
         <where>
             <if test="contentId != null ">and content_id = #{contentId}
             </if>
-            <if test="articleTitle != null  and articleTitle != '' ">and article_title = #{articleTitle}
+            <if test="articleTitle != null  and articleTitle != '' ">and article_title like '%${articleTitle}%'
             </if>
             <if test="articleType != null  and articleType != '' ">and article_type = #{articleType}
             </if>

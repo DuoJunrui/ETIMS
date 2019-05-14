@@ -2,6 +2,8 @@ package cn.duojunrui.etims.project.module.content.service.impl;
 
 import java.util.List;
 
+import cn.duojunrui.etims.common.utils.DateUtils;
+import cn.duojunrui.etims.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cn.duojunrui.etims.project.module.content.mapper.ContentMapper;
@@ -52,6 +54,8 @@ public class ContentServiceImpl implements IContentService {
      */
     @Override
     public int insertContent(Content content) {
+        content.setCreateBy(ShiroUtils.getUserName());
+        content.setCreateTime(DateUtils.getNowDate());
         return contentMapper.insertContent(content);
     }
 
@@ -63,6 +67,8 @@ public class ContentServiceImpl implements IContentService {
      */
     @Override
     public int updateContent(Content content) {
+        content.setUpdateBy(ShiroUtils.getUserName());
+        content.setUpdateTime(DateUtils.getNowDate());
         return contentMapper.updateContent(content);
     }
 
