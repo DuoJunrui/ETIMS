@@ -32,7 +32,7 @@
             </if>
             <if test="category != null  and category != '' ">and category = #{category}
             </if>
-            <if test="fileName != null  and fileName != '' ">and file_name = #{fileName}
+            <if test="fileName != null  and fileName != '' ">and file_name like '%${fileName}%'
             </if>
             <if test="uploader != null  and uploader != '' ">and uploader = #{uploader}
             </if>
