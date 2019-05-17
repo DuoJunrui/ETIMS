@@ -16,7 +16,7 @@ public class Material extends BaseEntity {
     /**
      * 教学资源表ID主键
      */
-    private Long materialId;
+    private Integer materialId;
     /**
      * 课程类别（如计算机组成原理）
      */
@@ -54,11 +54,11 @@ public class Material extends BaseEntity {
      */
     private String delFlag;
 
-    public void setMaterialId(Long materialId) {
+    public void setMaterialId(Integer materialId) {
         this.materialId = materialId;
     }
 
-    public Long getMaterialId() {
+    public Integer getMaterialId() {
         return materialId;
     }
 

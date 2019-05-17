@@ -72,6 +72,7 @@
 <script th:inline="javascript">
     var editFlag = [[${@permission.hasPermi('module:grade:edit')}]];
     var removeFlag = [[${@permission.hasPermi('module:grade:remove')}]];
+    var checkTypes = [[${@dict.getType('mod_exam_type')}]];
     var prefix = ctx + "module/grade";
 
     $(function () {
@@ -145,14 +146,16 @@
                 {
                     field: 'checkType',
                     title: '考核类型',
-                    sortable: true
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(checkTypes, value);
+                    }
                 },
                 {
                     title: '操作',
                     align: 'center',
                     formatter: function (value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.gradeId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.gradeId + '\')"><i class="fa fa-edit"></i>修改</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.gradeId + '\')"><i class="fa fa-remove"></i>删除</a>');
                         return actions.join('');
                     }

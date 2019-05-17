@@ -89,7 +89,7 @@ public class MaterialController extends BaseController {
         // 上传文件路径
         String filePath = EtimsConfig.getUploadPath();
         // 上传并返回新文件名称
-        String fileName = FileUploadUtils.upload(filePath, file);
+        String fileName = FileUploadUtils.upload(filePath,file);
         material.setFilePath(fileName);
         return toAjax(materialService.insertMaterial(material));
     }
@@ -98,7 +98,7 @@ public class MaterialController extends BaseController {
      * 修改教学资源
      */
     @GetMapping("/edit/{materialId}")
-    public String edit(@PathVariable("materialId") Long materialId, ModelMap mmap) {
+    public String edit(@PathVariable("materialId") Integer materialId, ModelMap mmap) {
         Material material = materialService.selectMaterialById(materialId);
         mmap.put("material", material);
         return prefix + "/edit";
@@ -119,7 +119,7 @@ public class MaterialController extends BaseController {
      * 下载教学资源
      */
     @GetMapping("/downloadFile/{materialId}")
-    public void downloadFile(@PathVariable("materialId") Long materialId, HttpServletResponse response,
+    public void downloadFile(@PathVariable("materialId") Integer materialId, HttpServletResponse response,
                              HttpServletRequest request) throws Exception {
         Material material = materialService.selectMaterialById(materialId);
         String filePath = material.getFilePath();

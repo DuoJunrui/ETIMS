@@ -17,7 +17,7 @@ public interface IMaterialService {
      * @param materialId 教学资源ID
      * @return 教学资源信息
      */
-    public Material selectMaterialById(Long materialId);
+    public Material selectMaterialById(Integer materialId);
 
     /**
      * 查询教学资源列表

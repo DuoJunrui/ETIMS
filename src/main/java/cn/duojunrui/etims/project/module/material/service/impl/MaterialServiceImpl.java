@@ -32,7 +32,7 @@ public class MaterialServiceImpl implements IMaterialService {
      * @return 教学资源信息
      */
     @Override
-    public Material selectMaterialById(Long materialId) {
+    public Material selectMaterialById(Integer materialId) {
         return materialMapper.selectMaterialById(materialId);
     }
 
