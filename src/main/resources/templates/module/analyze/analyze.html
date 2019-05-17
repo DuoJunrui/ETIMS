@@ -5,161 +5,126 @@
 </head>
 <body class="gray-bg">
 <div class="container-div">
+
     <div class="row">
-        <div class="col-sm-12 search-collapse">
-            <form id="formId">
-                <div class="select-list">
-                    <ul>
-                        <li>
-                            统计分析标题：<input type="text" name="analyzeTitle"/>
-                        </li>
-
-                        <li>
-                            统计分析类型：<input type="text" name="analyzeType"/>
-                        </li>
-
-                        <li>
-                            统计分析内容：<input type="text" name="analyzeContent"/>
-                        </li>
-
-                        <li>
-                            统计分析状态（0正常 1关闭）：<input type="text" name="status"/>
-                        </li>
-
-                        <li>
-                            创建者：<input type="text" name="createBy"/>
-                        </li>
-
-                        <li>
-                            创建时间：<input type="text" name="createTime"/>
-                        </li>
-
-                        <li>
-                            更新者：<input type="text" name="updateBy"/>
-                        </li>
-
-                        <li>
-                            更新时间：<input type="text" name="updateTime"/>
-                        </li>
-
-                        <li>
-                            备注：<input type="text" name="remark"/>
-                        </li>
-
-                        <li>
-                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
-                                    class="fa fa-search"></i>&nbsp;搜索</a>
-                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
-                                    class="fa fa-refresh"></i>&nbsp;重置</a>
-                        </li>
-                    </ul>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">月</span>
+                    <h5>教学资源</h5>
                 </div>
-            </form>
+                <div class="ibox-content">
+                    <h1 class="no-margins">208</h1>
+                    <div class="stat-percent font-bold text-success">25% <i class="fa fa-level-up"></i>
+                    </div>
+                    <small>新上传</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-info pull-right">月</span>
+                    <h5>设备出入库</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">310</h1>
+                    <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
+                    </div>
+                    <small>新记录</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">本学期</span>
+                    <h5>教学计划</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">2,120</h1>
+                    <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>
+                    </div>
+                    <small>总计划</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-danger pull-right">最近一个月</span>
+                    <h5>访客</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">1,600</h1>
+                    <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i>
+                    </div>
+                    <small>5月</small>
+                </div>
+            </div>
         </div>
 
-        <div class="btn-group-sm" id="toolbar" role="group">
-            <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="module:analyze:add">
-                <i class="fa fa-plus"></i> 添加
-            </a>
-            <a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()"
-               shiro:hasPermission="module:analyze:edit">
-                <i class="fa fa-edit"></i> 修改
-            </a>
-            <a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
-               shiro:hasPermission="module:analyze:remove">
-                <i class="fa fa-remove"></i> 删除
-            </a>
-            <a class="btn btn-warning" onclick="$.table.exportExcel()"
-               shiro:hasPermission="module:analyze:export">
-                <i class="fa fa-download"></i> 导出
-            </a>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">月</span>
+                    <h5>教学资源</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">208</h1>
+                    <div class="stat-percent font-bold text-success">25% <i class="fa fa-level-up"></i>
+                    </div>
+                    <small>新上传</small>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-12 select-table table-striped">
-            <table id="bootstrap-table" data-mobile-responsive="true"></table>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-info pull-right">月</span>
+                    <h5>设备出入库</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">310</h1>
+                    <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
+                    </div>
+                    <small>新记录</small>
+                </div>
+            </div>
         </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">本学期</span>
+                    <h5>教学计划</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">2,120</h1>
+                    <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>
+                    </div>
+                    <small>总计划</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-danger pull-right">最近一个月</span>
+                    <h5>访客</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">1,600</h1>
+                    <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i>
+                    </div>
+                    <small>5月</small>
+                </div>
+            </div>
+        </div>
+
     </div>
+
 </div>
 <div th:include="include :: footer"></div>
-<script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('module:analyze:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('module:analyze:remove')}]];
-    var prefix = ctx + "module/analyze";
 
-    $(function () {
-        var options = {
-            url: prefix + "/list",
-            createUrl: prefix + "/add",
-            updateUrl: prefix + "/edit/{id}",
-            removeUrl: prefix + "/remove",
-            exportUrl: prefix + "/export",
-            modalName: "统计分析",
-            showExport: true,
-            columns: [{
-                checkbox: true
-            },
-                {
-                    field: 'analyzeId',
-                    title: '统计分析管理ID',
-                    visible: false
-                },
-                {
-                    field: 'analyzeTitle',
-                    title: '统计分析标题',
-                    sortable: true
-                },
-                {
-                    field: 'analyzeType',
-                    title: '统计分析类型',
-                    sortable: true
-                },
-                {
-                    field: 'analyzeContent',
-                    title: '统计分析内容',
-                    sortable: true
-                },
-                {
-                    field: 'status',
-                    title: '统计分析状态（0正常 1关闭）',
-                    sortable: true
-                },
-                {
-                    field: 'createBy',
-                    title: '创建者',
-                    sortable: true
-                },
-                {
-                    field: 'createTime',
-                    title: '创建时间',
-                    sortable: true
-                },
-                {
-                    field: 'updateBy',
-                    title: '更新者',
-                    sortable: true
-                },
-                {
-                    field: 'updateTime',
-                    title: '更新时间',
-                    sortable: true
-                },
-                {
-                    field: 'remark',
-                    title: '备注',
-                    sortable: true
-                },
-                {
-                    title: '操作',
-                    align: 'center',
-                    formatter: function (value, row, index) {
-                        var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.analyzeId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.analyzeId + '\')"><i class="fa fa-remove"></i>删除</a>');
-                        return actions.join('');
-                    }
-                }]
-        };
-        $.table.init(options);
-    });
-</script>
 </body>
 </html>

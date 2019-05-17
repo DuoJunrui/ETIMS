@@ -5,17 +5,17 @@
 <mapper namespace="cn.duojunrui.etims.project.module.analyze.mapper.AnalyzeMapper">
 
     <resultMap type="Analyze" id="AnalyzeResult">
-                    <result property="analyzeId" column="analyze_id"/>
-                    <result property="analyzeTitle" column="analyze_title"/>
-                    <result property="analyzeType" column="analyze_type"/>
-                    <result property="analyzeContent" column="analyze_content"/>
-                    <result property="status" column="status"/>
-                    <result property="createBy" column="create_by"/>
-                    <result property="createTime" column="create_time"/>
-                    <result property="updateBy" column="update_by"/>
-                    <result property="updateTime" column="update_time"/>
-                    <result property="remark" column="remark"/>
-            </resultMap>
+        <result property="analyzeId" column="analyze_id"/>
+        <result property="analyzeTitle" column="analyze_title"/>
+        <result property="analyzeType" column="analyze_type"/>
+        <result property="analyzeContent" column="analyze_content"/>
+        <result property="status" column="status"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
 
     <sql id="selectAnalyzeVo">
         select analyze_id, analyze_title, analyze_type, analyze_content, status, create_by, create_time, update_by, update_time, remark        from mod_analyze
@@ -24,27 +24,27 @@
     <select id="selectAnalyzeList" parameterType="Analyze" resultMap="AnalyzeResult">
         <include refid="selectAnalyzeVo"/>
         <where>
-                            <if test="analyzeId != null ">and analyze_id = #{analyzeId}
-                </if>
-                            <if test="analyzeTitle != null  and analyzeTitle != '' ">and analyze_title = #{analyzeTitle}
-                </if>
-                            <if test="analyzeType != null  and analyzeType != '' ">and analyze_type = #{analyzeType}
-                </if>
-                            <if test="analyzeContent != null  and analyzeContent != '' ">and analyze_content = #{analyzeContent}
-                </if>
-                            <if test="status != null  and status != '' ">and status = #{status}
-                </if>
-                            <if test="createBy != null  and createBy != '' ">and create_by = #{createBy}
-                </if>
-                            <if test="createTime != null ">and create_time = #{createTime}
-                </if>
-                            <if test="updateBy != null  and updateBy != '' ">and update_by = #{updateBy}
-                </if>
-                            <if test="updateTime != null ">and update_time = #{updateTime}
-                </if>
-                            <if test="remark != null  and remark != '' ">and remark = #{remark}
-                </if>
-                    </where>
+            <if test="analyzeId != null ">and analyze_id = #{analyzeId}
+            </if>
+            <if test="analyzeTitle != null  and analyzeTitle != '' ">and analyze_title = #{analyzeTitle}
+            </if>
+            <if test="analyzeType != null  and analyzeType != '' ">and analyze_type = #{analyzeType}
+            </if>
+            <if test="analyzeContent != null  and analyzeContent != '' ">and analyze_content = #{analyzeContent}
+            </if>
+            <if test="status != null  and status != '' ">and status = #{status}
+            </if>
+            <if test="createBy != null  and createBy != '' ">and create_by = #{createBy}
+            </if>
+            <if test="createTime != null ">and create_time = #{createTime}
+            </if>
+            <if test="updateBy != null  and updateBy != '' ">and update_by = #{updateBy}
+            </if>
+            <if test="updateTime != null ">and update_time = #{updateTime}
+            </if>
+            <if test="remark != null  and remark != '' ">and remark = #{remark}
+            </if>
+        </where>
     </select>
 
     <select id="selectAnalyzeById" parameterType="Integer" resultMap="AnalyzeResult">
@@ -52,72 +52,72 @@
         where analyze_id = #{analyzeId}
     </select>
 
-    <insert id="insertAnalyze" parameterType="Analyze"            useGeneratedKeys="true" keyProperty="analyzeId">
+    <insert id="insertAnalyze" parameterType="Analyze" useGeneratedKeys="true" keyProperty="analyzeId">
         insert into mod_analyze
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                                                                            <if test="analyzeTitle != null  and analyzeTitle != ''  ">analyze_title,
-                    </if>
-                                                                <if test="analyzeType != null  and analyzeType != ''  ">analyze_type,
-                    </if>
-                                                                <if test="analyzeContent != null  and analyzeContent != ''  ">analyze_content,
-                    </if>
-                                                                <if test="status != null  and status != ''  ">status,
-                    </if>
-                                                                <if test="createBy != null  and createBy != ''  ">create_by,
-                    </if>
-                                                                <if test="createTime != null  ">create_time,
-                    </if>
-                                                                <if test="updateBy != null  and updateBy != ''  ">update_by,
-                    </if>
-                                                                <if test="updateTime != null  ">update_time,
-                    </if>
-                                                                <if test="remark != null  and remark != ''  ">remark,
-                    </if>
-                                    </trim>
+            <if test="analyzeTitle != null  and analyzeTitle != ''  ">analyze_title,
+            </if>
+            <if test="analyzeType != null  and analyzeType != ''  ">analyze_type,
+            </if>
+            <if test="analyzeContent != null  and analyzeContent != ''  ">analyze_content,
+            </if>
+            <if test="status != null  and status != ''  ">status,
+            </if>
+            <if test="createBy != null  and createBy != ''  ">create_by,
+            </if>
+            <if test="createTime != null  ">create_time,
+            </if>
+            <if test="updateBy != null  and updateBy != ''  ">update_by,
+            </if>
+            <if test="updateTime != null  ">update_time,
+            </if>
+            <if test="remark != null  and remark != ''  ">remark,
+            </if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                                                                            <if test="analyzeTitle != null  and analyzeTitle != ''  ">#{analyzeTitle},
-                    </if>
-                                                                <if test="analyzeType != null  and analyzeType != ''  ">#{analyzeType},
-                    </if>
-                                                                <if test="analyzeContent != null  and analyzeContent != ''  ">#{analyzeContent},
-                    </if>
-                                                                <if test="status != null  and status != ''  ">#{status},
-                    </if>
-                                                                <if test="createBy != null  and createBy != ''  ">#{createBy},
-                    </if>
-                                                                <if test="createTime != null  ">#{createTime},
-                    </if>
-                                                                <if test="updateBy != null  and updateBy != ''  ">#{updateBy},
-                    </if>
-                                                                <if test="updateTime != null  ">#{updateTime},
-                    </if>
-                                                                <if test="remark != null  and remark != ''  ">#{remark},
-                    </if>
-                                    </trim>
+            <if test="analyzeTitle != null  and analyzeTitle != ''  ">#{analyzeTitle},
+            </if>
+            <if test="analyzeType != null  and analyzeType != ''  ">#{analyzeType},
+            </if>
+            <if test="analyzeContent != null  and analyzeContent != ''  ">#{analyzeContent},
+            </if>
+            <if test="status != null  and status != ''  ">#{status},
+            </if>
+            <if test="createBy != null  and createBy != ''  ">#{createBy},
+            </if>
+            <if test="createTime != null  ">#{createTime},
+            </if>
+            <if test="updateBy != null  and updateBy != ''  ">#{updateBy},
+            </if>
+            <if test="updateTime != null  ">#{updateTime},
+            </if>
+            <if test="remark != null  and remark != ''  ">#{remark},
+            </if>
+        </trim>
     </insert>
 
     <update id="updateAnalyze" parameterType="Analyze">
         update mod_analyze
         <trim prefix="SET" suffixOverrides=",">
-                                                                            <if test="analyzeTitle != null  and analyzeTitle != ''  ">analyze_title = #{analyzeTitle},
-                    </if>
-                                                                <if test="analyzeType != null  and analyzeType != ''  ">analyze_type = #{analyzeType},
-                    </if>
-                                                                <if test="analyzeContent != null  and analyzeContent != ''  ">analyze_content = #{analyzeContent},
-                    </if>
-                                                                <if test="status != null  and status != ''  ">status = #{status},
-                    </if>
-                                                                <if test="createBy != null  and createBy != ''  ">create_by = #{createBy},
-                    </if>
-                                                                <if test="createTime != null  ">create_time = #{createTime},
-                    </if>
-                                                                <if test="updateBy != null  and updateBy != ''  ">update_by = #{updateBy},
-                    </if>
-                                                                <if test="updateTime != null  ">update_time = #{updateTime},
-                    </if>
-                                                                <if test="remark != null  and remark != ''  ">remark = #{remark},
-                    </if>
-                                    </trim>
+            <if test="analyzeTitle != null  and analyzeTitle != ''  ">analyze_title = #{analyzeTitle},
+            </if>
+            <if test="analyzeType != null  and analyzeType != ''  ">analyze_type = #{analyzeType},
+            </if>
+            <if test="analyzeContent != null  and analyzeContent != ''  ">analyze_content = #{analyzeContent},
+            </if>
+            <if test="status != null  and status != ''  ">status = #{status},
+            </if>
+            <if test="createBy != null  and createBy != ''  ">create_by = #{createBy},
+            </if>
+            <if test="createTime != null  ">create_time = #{createTime},
+            </if>
+            <if test="updateBy != null  and updateBy != ''  ">update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null  ">update_time = #{updateTime},
+            </if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},
+            </if>
+        </trim>
         where analyze_id = #{analyzeId}
     </update>
 

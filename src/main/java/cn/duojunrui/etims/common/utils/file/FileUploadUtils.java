@@ -7,6 +7,7 @@ import cn.duojunrui.etims.common.utils.DateUtils;
 import cn.duojunrui.etims.common.utils.Md5Utils;
 import cn.duojunrui.etims.framework.config.EtimsConfig;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -36,33 +37,6 @@ public class FileUploadUtils {
      */
     private static String defaultBaseDir = EtimsConfig.getProfile();
 
-    /**
-     * 图片文件类型
-     */
-    public static final String[] IMAGE_EXTENSION = {
-            "bmp", "gif", "jpg", "jpeg", "png"
-    };
-
-    public static final String[] FLASH_EXTENSION = {
-            "swf", "flv"
-    };
-
-    public static final String[] MEDIA_EXTENSION = {
-            "swf", "flv", "mp3", "wav", "wma", "wmv", "mid", "avi", "mpg", "asf", "rm", "rmvb"
-    };
-
-    public static final String[] DEFAULT_ALLOWED_EXTENSION = {
-            //图片
-            "bmp", "gif", "jpg", "jpeg", "png",
-            //word excel powerpoint
-            "doc", "docx", "xls", "xlsx", "ppt", "pptx",
-            "html", "htm", "txt",
-            //压缩文件
-            "rar", "zip", "gz", "bz2",
-            //pdf
-            "pdf"
-    };
-
     private static int counter = 0;
 
     public static void setDefaultBaseDir(String defaultBaseDir) {
@@ -82,7 +56,7 @@ public class FileUploadUtils {
      */
     public static final String upload(MultipartFile file) throws IOException {
         try {
-            return upload(getDefaultBaseDir(), file, DEFAULT_ALLOWED_EXTENSION);
+            return upload(getDefaultBaseDir(), file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
         } catch (Exception e) {
             throw new IOException(e.getMessage(), e);
         }
@@ -98,7 +72,7 @@ public class FileUploadUtils {
      */
     public static final String upload(String baseDir, MultipartFile file) throws IOException {
         try {
-            return upload(baseDir, file, DEFAULT_ALLOWED_EXTENSION);
+            return upload(baseDir, file, MimeTypeUtils.DEFAULT_ALLOWED_EXTENSION);
         } catch (Exception e) {
             throw new IOException(e.getMessage(), e);
         }
@@ -142,6 +116,7 @@ public class FileUploadUtils {
 
 
     private static final File getAbsoluteFile(String uploadDir, String filename) throws IOException {
+
         File desc = new File(File.separator + filename);
 
         if (!desc.getParentFile().exists()) {
@@ -178,13 +153,14 @@ public class FileUploadUtils {
         }
 
         String filename = file.getOriginalFilename();
-        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+        String extension = getExtension(file);
+//        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
         if (allowedExtension != null && !isAllowedExtension(extension, allowedExtension)) {
-            if (allowedExtension == IMAGE_EXTENSION) {
+            if (allowedExtension == MimeTypeUtils.IMAGE_EXTENSION) {
                 throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension, extension, filename);
-            } else if (allowedExtension == FLASH_EXTENSION) {
+            } else if (allowedExtension == MimeTypeUtils.FLASH_EXTENSION) {
                 throw new InvalidExtensionException.InvalidFlashExtensionException(allowedExtension, extension, filename);
-            } else if (allowedExtension == MEDIA_EXTENSION) {
+            } else if (allowedExtension == MimeTypeUtils.MEDIA_EXTENSION) {
                 throw new InvalidExtensionException.InvalidMediaExtensionException(allowedExtension, extension, filename);
             } else {
                 throw new InvalidExtensionException(allowedExtension, extension, filename);
@@ -206,6 +182,20 @@ public class FileUploadUtils {
             }
         }
         return false;
+    }
+
+    /**
+     * 获取文件名的后缀
+     *
+     * @param file 表单文件
+     * @return 后缀名
+     */
+    public static final String getExtension(MultipartFile file) {
+        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+        if (StringUtils.isEmpty(extension)) {
+            extension = MimeTypeUtils.getExtension(file.getContentType());
+        }
+        return extension;
     }
 
 
