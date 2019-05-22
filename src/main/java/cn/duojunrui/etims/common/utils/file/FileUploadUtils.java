@@ -81,9 +81,9 @@ public class FileUploadUtils {
     /**
      * 文件上传
      *
-     * @param baseDir          相对应用的基目录
-     * @param file             上传的文件
-     * @param allowedExtension 上传文件类型
+     * @param baseDir   相对应用的基目录
+     * @param file      上传的文件
+     * @param extension 上传文件类型
      * @return 返回上传成功的文件名
      * @throws FileSizeLimitExceededException       如果超出最大大小
      * @throws FileNameLengthLimitExceededException 文件名太长
@@ -91,8 +91,8 @@ public class FileUploadUtils {
      * @throws InvalidExtensionException            文件校验异常
      */
     public static final String upload(String baseDir, MultipartFile file, String[] allowedExtension)
-            throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException, InvalidExtensionException {
-
+            throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
+            InvalidExtensionException {
         int fileNamelength = file.getOriginalFilename().length();
         if (fileNamelength > FileUploadUtils.DEFAULT_FILE_NAME_LENGTH) {
             throw new FileNameLengthLimitExceededException(FileUploadUtils.DEFAULT_FILE_NAME_LENGTH);
@@ -107,17 +107,18 @@ public class FileUploadUtils {
         return fileName;
     }
 
+    /**
+     * 编码文件名
+     */
     public static final String extractFilename(MultipartFile file) {
         String filename = file.getOriginalFilename();
-        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        filename = DateUtils.datePath() + File.separator + encodingFilename(filename) + "." + extension;
+        String extension = getExtension(file);
+        filename = DateUtils.datePath() + "/" + encodingFilename(filename) + "." + extension;
         return filename;
     }
 
-
     private static final File getAbsoluteFile(String uploadDir, String filename) throws IOException {
-
-        File desc = new File(File.separator + filename);
+        File desc = new File(uploadDir + File.separator + filename);
 
         if (!desc.getParentFile().exists()) {
             desc.getParentFile().mkdirs();
@@ -143,7 +144,7 @@ public class FileUploadUtils {
      * @param file 上传的文件
      * @return
      * @throws FileSizeLimitExceededException 如果超出最大大小
-     * @throws InvalidExtensionException      文件校验异常
+     * @throws InvalidExtensionException
      */
     public static final void assertAllowed(MultipartFile file, String[] allowedExtension)
             throws FileSizeLimitExceededException, InvalidExtensionException {
@@ -154,18 +155,21 @@ public class FileUploadUtils {
 
         String filename = file.getOriginalFilename();
         String extension = getExtension(file);
-//        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
         if (allowedExtension != null && !isAllowedExtension(extension, allowedExtension)) {
             if (allowedExtension == MimeTypeUtils.IMAGE_EXTENSION) {
-                throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension, extension, filename);
+                throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension, extension,
+                        filename);
             } else if (allowedExtension == MimeTypeUtils.FLASH_EXTENSION) {
-                throw new InvalidExtensionException.InvalidFlashExtensionException(allowedExtension, extension, filename);
+                throw new InvalidExtensionException.InvalidFlashExtensionException(allowedExtension, extension,
+                        filename);
             } else if (allowedExtension == MimeTypeUtils.MEDIA_EXTENSION) {
-                throw new InvalidExtensionException.InvalidMediaExtensionException(allowedExtension, extension, filename);
+                throw new InvalidExtensionException.InvalidMediaExtensionException(allowedExtension, extension,
+                        filename);
             } else {
                 throw new InvalidExtensionException(allowedExtension, extension, filename);
             }
         }
+
     }
 
     /**
@@ -197,6 +201,5 @@ public class FileUploadUtils {
         }
         return extension;
     }
-
 
 }
